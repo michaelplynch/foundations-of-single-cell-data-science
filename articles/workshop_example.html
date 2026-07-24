@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An Example Workshop • foundationsSCDS</title>
+<title>scRNA-seq analysis workshop • foundationsSCDS</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="An Example Workshop">
+<script src="../pkgdown.js"></script><meta property="og:title" content="scRNA-seq analysis workshop">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -52,7 +52,7 @@
       <a href="../articles/HOWTO_BUILD_WORKSHOP.html">How To Build A Workshop Package</a>
     </li>
     <li>
-      <a href="../articles/workshop_example.html">An Example Workshop</a>
+      <a href="../articles/workshop_example.html">scRNA-seq analysis workshop</a>
     </li>
   </ul>
 </li>
@@ -77,8 +77,8 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>An Example Workshop</h1>
-                        <h4 data-toc-skip class="author">Sean Davis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+      <h1 data-toc-skip>scRNA-seq analysis workshop</h1>
+                        <h4 data-toc-skip class="author">Michael Lynch<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
 </h4>
             
       
@@ -90,10 +90,9 @@
     
     
 <div class="section level2">
-<h2 id="workshop-title">Workshop Title<a class="anchor" aria-label="anchor" href="#workshop-title"></a>
+<h2 id="single-cell-rna-seq-and-bioconductor-workshop">Single-cell RNA-seq and Bioconductor workshop<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq-and-bioconductor-workshop"></a>
 </h2>
-<p>Authors: Author Name<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, Another Author<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. <br> Last modified:
-14 May, 2018.</p>
+<p>Authors: Michael Lynch<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <br> Last modified: 24th July, 2026.</p>
 <div class="section level3">
 <h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h3>
@@ -111,36 +110,35 @@ workshop.</p>
 <div class="section level4">
 <h4 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
 </h4>
-<p>List any workshop prerequisites, for example:</p>
 <ul>
 <li>Basic knowledge of R syntax</li>
-<li>Familiarity with the GenomicRanges class</li>
-<li>Familiarity with xyz vignette (provide link)</li>
+<li>Basic machine learning and statistics</li>
+<li>Some previous data science experience</li>
 </ul>
-<p>List relevant background reading for the workshop, including any
-theoretical background you expect students to have.</p>
+</div>
+<div class="section level4">
+<h4 id="useful-resources">Useful resources<a class="anchor" aria-label="anchor" href="#useful-resources"></a>
+</h4>
 <ul>
-<li>List any textbooks, papers, or other reading that students should be
-familiar with. Include direct links where possible.</li>
+<li><a href="https://bioconductor.org/books/release/OSCA/" class="external-link uri">https://bioconductor.org/books/release/OSCA/</a></li>
+<li><a href="https://bioconductor.org/books/release/OSTA/" class="external-link uri">https://bioconductor.org/books/release/OSTA/</a></li>
 </ul>
 </div>
 <div class="section level4">
 <h4 id="participation">Participation<a class="anchor" aria-label="anchor" href="#participation"></a>
 </h4>
-<p>Describe how students will be expected to participate in the
-workshop.</p>
+<p>Interactive discussion, follow-along coding, reflection.</p>
 </div>
 <div class="section level4">
 <h4 id="r-bioconductor-packages-used">
 <em>R</em> / <em>Bioconductor</em> packages used<a class="anchor" aria-label="anchor" href="#r-bioconductor-packages-used"></a>
 </h4>
-<p>List any <em>R</em> / <em>Bioconductor</em> packages that will be
-explicitly covered.</p>
+<p>scran, scater</p>
 </div>
 <div class="section level4">
 <h4 id="time-outline">Time outline<a class="anchor" aria-label="anchor" href="#time-outline"></a>
 </h4>
-<p>An example for a 45-minute workshop:</p>
+<p>2 hours workshop??</p>
 <table class="table">
 <thead><tr class="header">
 <th>Activity</th>
@@ -148,20 +146,20 @@ explicitly covered.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Packages</td>
-<td>15m</td>
+<td>Analysis plan</td>
+<td>30m</td>
 </tr>
 <tr class="even">
-<td>Package Development</td>
-<td>15m</td>
+<td>scRNA-seq workflow</td>
+<td>45m</td>
 </tr>
 <tr class="odd">
-<td>Contributing to Bioconductor</td>
-<td>5m</td>
+<td>Ecosystem</td>
+<td>15m</td>
 </tr>
 <tr class="even">
-<td>Best Practices</td>
-<td>10m</td>
+<td>Reflection &amp; Best Practices</td>
+<td>30m</td>
 </tr>
 </tbody>
 </table>
@@ -187,16 +185,17 @@ others.</p>
 </h4>
 <p>Some examples:</p>
 <ul>
-<li>describe how to…</li>
-<li>identify methods for…</li>
-<li>understand the difference between…</li>
+<li>Understand single-cell data importance and application.</li>
+<li>Apply data science principles to analyse new data types.</li>
+<li>Understand the role of Bioconductor infrastructure in research
+space.</li>
 </ul>
 </div>
 <div class="section level4">
 <h4 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
 </h4>
 <ul>
-<li>analyze xyz data to produce…</li>
+<li>Discuss developing analysis plan for single-cell data.</li>
 <li>create xyz plots</li>
 <li>evaluate xyz data for artifacts</li>
 </ul>
@@ -215,9 +214,8 @@ the material that you present.</p>
 <div class="footnotes footnotes-end-of-document">
 <hr>
 <ol>
-<li id="fn1"><p><a href="mailto:seandavi@gmail.com" class="email">seandavi@gmail.com</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Institution<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>Another Institution<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p><a href="mailto:michael.lynch@ul.ie" class="email">michael.lynch@ul.ie</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>University of Limerick<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>
