@@ -1,9 +1,9 @@
 ---
-title: "An Example Workshop"
-author: Sean Davis^[seandavi@gmail.com]
+title: "scRNA-seq analysis workshop"
+author: Michael Lynch^[michael.lynch@ul.ie]
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An Example Workshop}
+  %\VignetteIndexEntry{scRNA-seq workshop}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,13 +16,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Workshop Title
+# Single-cell RNA-seq and Bioconductor workshop
 
 Authors:
-    Author Name^[Institution],
-    Another Author^[Another Institution].
+    Michael Lynch^[University of Limerick]
     <br/>
-Last modified: 14 May, 2018.
+Last modified: 24th July, 2026.
 
 ## Overview
 
@@ -37,36 +36,33 @@ notes that can be read and understood outside of the workshop.
 
 ### Pre-requisites
 
-List any workshop prerequisites, for example:
-
 * Basic knowledge of R syntax
-* Familiarity with the GenomicRanges class
-* Familiarity with xyz vignette (provide link)
+* Basic machine learning and statistics
+* Some previous data science experience
 
-List relevant background reading for the workshop, including any
-theoretical background you expect students to have.
+### Useful resources
 
-* List any textbooks, papers, or other reading that students should be
-  familiar with. Include direct links where possible.
+- https://bioconductor.org/books/release/OSCA/
+- https://bioconductor.org/books/release/OSTA/
 
 ### Participation
 
-Describe how students will be expected to participate in the workshop.
+Interactive discussion, follow-along coding, reflection.
 
 ### _R_ / _Bioconductor_ packages used
 
-List any _R_ / _Bioconductor_ packages that will be explicitly covered.
+scran, scater
 
 ### Time outline
 
-An example for a 45-minute workshop:
+2 hours workshop??
 
 | Activity                     | Time |
 |------------------------------|------|
-| Packages                     | 15m  |
-| Package Development          | 15m  |
-| Contributing to Bioconductor | 5m   |
-| Best Practices               | 10m  |
+| Analysis plan                | 30m  |
+| scRNA-seq workflow           | 45m  |
+| Ecosystem                    | 15m   |
+| Reflection & Best Practices  | 30m  |
 
 ### Workshop goals and objectives
 
@@ -88,13 +84,13 @@ are others.
 
 Some examples:
 
-* describe how to...
-* identify methods for...
-* understand the difference between...
+* Understand single-cell data importance and application.
+* Apply data science principles to analyse new data types.
+* Understand the role of Bioconductor infrastructure in research space.
 
 ### Learning objectives
 
-* analyze xyz data to produce...
+* Discuss developing analysis plan for single-cell data.
 * create xyz plots
 * evaluate xyz data for artifacts
 
