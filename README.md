@@ -1,52 +1,39 @@
-# BuildABiocWorkshop
+# Foundations of single-cell data science
 
-This package is a template for building a Bioconductor workshop. The package
-includes Github actions to:
+This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop.
 
-1. Set up bioconductor/bioconductor_docker:devel on Github resources
-2. Install package dependencies for your package (based on the `DESCRIPTION` file)
-3. Run `rcmdcheck::rcmdcheck`
-4. Build a pkgdown website and push it to github pages
-5. Build a docker image with the installed package and dependencies and deploy to [the Github Container Repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry#pulling-container-images) at the name `ghcr.io/gihub_user/repo_name`, all lowercase. 
+## Map:
 
-## Responsibilities
+### How might a data scientist approach this problem?
 
-Package authors are primarily responsible for:
+1. Understand how the data was generated.
+2. Understand the type of analysis (exploratory, hypothesis generation, vs. hypothesis testing).
+3. Check the data structure, quality.
+4. Decide on a clear and defensible modelling strategy.
+5. Validate outputs. Big difference between 'an output' and 'a correct output'. Use domain expertise, independent datasets, stability and reproducibility checks.
+6. Communicate clearly. What claims can you make, and what claims can't you make, based on the data?
 
-1. Creating a landing site of their choosing for their workshops (a website). This website should be listed in the `DESCRIPTION` file as the `URL`.
-2. Creating a docker image that will contain workshop materials and the installed packages necessary to run those materials. The name of the resulting docker image, including "tag" if desired, should be listed in a non-standard tag, `DockerImage:` in the `DESCRIPTION` file. 
+### Foundations
 
-Both of those tasks can be accomplished using the Github actions included in this template package. The vignette accompanying this package describes how to accomplish both of these tasks.
-
-## Details
-
-For detailed instructions, see the `How to build a workshop` article/vignette.
-
-## Results of successful deployment
-
-- A working docker image that contains the installed package and dependencies.
-- An up-to-date `pkgdown` website at https://YOURUSERNAME.github.io/YOURREPOSITORYNAME/
-- Docker image will be tagged with `latest`, `sha-XXXXXX` where `XXXXXX` is the hash of the current `master` commit, and `master`. 
-
-## To use the resulting image:
-
-```sh
-docker run -e PASSWORD=<choose_a_password_for_rstudio> -p 8787:8787 YOURDOCKERIMAGENAME
-```
-Once running, navigate to http://localhost:8787/ and then login with `rstudio`:`yourchosenpassword`. 
-
-To try with **this** repository docker image:
-
-```sh
-docker run -e PASSWORD=abc -p 8787:8787 ghcr.io/bioconductor/buildabiocworkshop
-```
-
-*NOTE*: Running docker that uses the password in plain text like above exposes the password to others 
-in a multi-user system (like a shared workstation or compute node). In practice, consider using an environment 
-variable instead of plain text to pass along passwords and other secrets in docker command lines. 
-
-
-## Whatcha get
-
-- https://bioconductor.github.io/BuildABiocWorkshop
-- A Docker image that you can run locally, in the cloud, or (usually) even as a singularity container on HPC systems. 
+- Statistical thinking
+  - Data distributions
+  - Independence
+  - Multiple testing
+  - Assumptions
+- Computational thinking
+  - Scaling
+  - Seeds, reproducibility
+  - Algorithms
+- Communication, visualisation
+  - Model assumptions
+  - Uncertainty
+  - Informative vs. misleading
+- Tooling
+  - Choice of ecosystem
+  - Version control
+  - Documentation
+  - Dependency management (note to check number of packages used).
+- Ethics, integrity
+  - Reproducibility (again).
+  - Choice of reference.
+  - Patient privacy and consent.
