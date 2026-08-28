@@ -20,6 +20,63 @@ knitr::opts_chunk$set(
 
 ````{r}
 
-
+library(muscData)
+sce<-Kang18_8vs8()
 
 ````
+
+The SingleCellExperiment object keeps the different types of data relevant to our analysis neatly organised in one object.
+Each data point is associated with a feature and an observation, but we might also want to keep other information, for example: 
+- each feature (gene) can be named using different conventions, or have different aliases.
+- each observation (cell) might need its patient ID, sequencing batch, quality metrics or cluster ID attached.
+
+````{r}
+
+sce
+
+counts(sce)[1:4,1:4]
+
+head(colData(sce))
+
+head(rowData(sce))
+
+````
+For convenience, column data (about the cells) can be accessed using the '$' operator.
+
+````{r}
+
+table(sce$cluster)
+
+table(sce$ind,sce$stim)
+
+````
+
+
+We can also store transformations of the raw data, e.g. normalised counts.
+
+````{r}
+
+assays(sce)
+sce<-logNormCounts(sce)
+assays(sce)
+````
+We can also store embeddings of the data, such as from PCA, TSNE or UMAP.
+
+````{r}
+
+reducedDimNames(sce)
+
+````
+
+Finally, we can store alternative experiments, or modalities, which were measured on the same cells.
+For example, [CITE-seq](https://emea.illumina.com/techniques/sequencing/rna-sequencing/cite-seq.html) data measures gene and surface protein expression simultaneously.
+
+Why might we want to treat these separately?
+
+````{r}
+
+altExpNames(sce)
+
+````
+
+
