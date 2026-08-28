@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 
 ````{r}
-
+library(scuttle)
 library(muscData)
 sce<-Kang18_8vs8()
 
