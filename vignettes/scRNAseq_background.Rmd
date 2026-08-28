@@ -1,5 +1,17 @@
 ---
-title: "scRNAseq_background"
-output: html_document
+title: "scRNA-seq background"
+author: Michael Lynch^[michael.lynch@ul.ie]
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{scRNA-seq background}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
