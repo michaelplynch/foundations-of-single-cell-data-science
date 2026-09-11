@@ -41,6 +41,7 @@ head(colData(sce))
 head(rowData(sce))
 
 ````
+
 For convenience, column data (about the cells) can be accessed using the '$' operator.
 
 ````{r}
