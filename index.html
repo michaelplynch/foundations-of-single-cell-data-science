@@ -50,13 +50,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/scRNAseq_background.html">scRNA-seq background</a>
+      <a href="articles/S00_scRNAseq_background.html">scRNA-seq background</a>
     </li>
     <li>
-      <a href="articles/scRNAseq_workflow.html">scRNA-seq analysis workshop</a>
+      <a href="articles/S01_singlecellexperiment_object.html">Getting to know the SingleCellExperiment Object</a>
     </li>
     <li>
-      <a href="articles/singlecellexperiment_object.html">singlecellexperiment_object</a>
+      <a href="articles/S02_single_sample_workflow.html">scRNA-seq analysis workshop</a>
     </li>
   </ul>
 </li>
@@ -83,7 +83,76 @@
 <div class="section level1">
 <div class="page-header"><h1 id="foundations-of-single-cell-data-science">Foundations of single-cell data science<a class="anchor" aria-label="anchor" href="#foundations-of-single-cell-data-science"></a>
 </h1></div>
-<p>This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop.</p>
+<p>This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop. An emphasis will be placed on the how and why, not just the what, of each step.</p>
+<div class="section level2">
+<h2 id="this-is">This is<a class="anchor" aria-label="anchor" href="#this-is"></a>
+</h2>
+<ul>
+<li>A crash course in the key steps of a single-cell RNA-seq analyses.</li>
+<li>a discussion on how to approach new problems generally in DS.</li>
+<li>considerations for effective analyses.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="this-isnt">This isn’t<a class="anchor" aria-label="anchor" href="#this-isnt"></a>
+</h2>
+<ul>
+<li>A deep dive of single-cell biology/immunology.</li>
+<li>A demonstration of the only/best way to complete a single-cell analysis.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="workshop-breakdown">Workshop breakdown<a class="anchor" aria-label="anchor" href="#workshop-breakdown"></a>
+</h2>
+<table class="table">
+<thead><tr>
+<th>Activity</th>
+<th>Time</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Setting up the environment</td>
+<td>10m</td>
+</tr>
+<tr>
+<td>Planning an analysis</td>
+<td>15m</td>
+</tr>
+<tr>
+<td>Bioconductor ecosystem</td>
+<td>15m</td>
+</tr>
+<tr>
+<td>Single-sample workflow</td>
+<td>45m</td>
+</tr>
+<tr>
+<td>Multi-sample workflow</td>
+<td>20m</td>
+</tr>
+<tr>
+<td>Reflection &amp; Best Practices</td>
+<td>15m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation:<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/" class="external-link">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/repositories.html" class="external-link">repositories</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"michaelplynch/foundations-of-single-cell-data-science"</span><span class="op">)</span></span></code></pre></div>
+<p>Tested on R Version 4.5.2.</p>
+</div>
+<div class="section level2">
+<h2 id="below-to-be-movedtidied-up-pre-workshop">Below to be moved/tidied up pre workshop<a class="anchor" aria-label="anchor" href="#below-to-be-movedtidied-up-pre-workshop"></a>
+</h2>
+</div>
 <div class="section level2">
 <h2 id="map">Map:<a class="anchor" aria-label="anchor" href="#map"></a>
 </h2>
