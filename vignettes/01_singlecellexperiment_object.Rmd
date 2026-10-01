@@ -1,0 +1,129 @@
+---
+title: "Getting to know the SingleCellExperiment Object"
+author: Michael Lynch^[michael.lynch@ul.ie]
+output: 
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{singlecellexperiment object}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+````{r message=F, warning=F}
+
+library(SingleCellExperiment)
+library(scuttle)
+library(muscData)
+
+````
+
+## Bioconductor
+
+[Bioconductor](https://www.bioconductor.org/) is a project which aims to develop and share open-source software for precise and repeatable analysis of biological data.
+They foster an inclusive and collaborative community of developers and data scientists.
+
+## Why Bioconductor?
+
+- Analysis workflows are long and complex, an ecosystem for R packages for genomics data analysis facilitates reuse.
+- Common data structures allow interoperability between packages.
+- Package build system automates testing, ensures compatability, and improves reprehensibility.
+- Community events and forums improve collaboration.
+
+You can:
+
+- Use high-quality, interoperable, and well-documented Bioconductor R packages.
+- Develop and [contribute](https://contributions.bioconductor.org/bioconductor-package-submissions.html) your own R packages for genomics analysis.
+
+## Accessing Bioconductor packages
+
+You might typically install a package from CRAN through `install.packages()`. 
+Bioconductor packages are hosted elsewhere and have a different mechanism for installing.
+
+First, we'll install BiocManager from CRAN, and we can then use BiocManager to install packages from Bioconductor.
+
+````{r eval=F}
+
+install.packages('BiocManager')
+BiocManager::install('SingleCellExperiment')
+````
+
+As well as hosting, testing, and distributing packages, Bioconductor also ships some core infrastructure which improves interoperability between packages.
+These usually come in the form of data structures for storing different types of data.
+In this workshop, we'll use the SingleCellExperiment class.
+
+````{r}
+
+sce<-Kang18_8vs8()
+
+````
+
+The SingleCellExperiment object keeps the different types of data relevant to our analysis neatly organised in one object.
+Each data point is associated with a feature and an observation, but we might also want to keep other information, for example: 
+
+- each feature (gene) can be named using different conventions, or have different aliases.
+- each observation (cell) might need its patient ID, sequencing batch, quality metrics or cluster ID attached.
+
+````{r}
+
+class(sce)
+
+sce
+
+counts(sce)[1:4,1:4]
+
+head(colData(sce))
+
+head(rowData(sce))
+
+````
+
+For convenience, column data (data describing the cells) can be accessed using the '$' operator.
+
+````{r}
+
+table(sce$cluster)
+
+table(sce$ind,sce$stim)
+
+````
+
+
+We can also store transformations of the raw data, e.g. normalised counts.
+
+````{r}
+
+assays(sce)
+sce<-logNormCounts(sce)
+assays(sce)
+
+````
+Aaaand we can also store embeddings of the data, such as from PCA, TSNE or UMAP.
+
+````{r}
+
+reducedDimNames(sce)
+
+````
+
+Finally, we can store alternative experiments, or modalities, which were measured on the same cells.
+For example, [CITE-seq](https://emea.illumina.com/techniques/sequencing/rna-sequencing/cite-seq.html) data measures gene and surface protein expression simultaneously.
+
+Why might we want to treat these separately rather than appending them to the main counts?
+
+````{r}
+
+altExpNames(sce)
+
+````
+
+
