@@ -1,6 +1,9 @@
 ---
 title: "Getting to know the SingleCellExperiment Object"
-author: Michael Lynch^[michael.lynch@ul.ie]
+author:
+  - name: Michael Lynch
+    affiliation: School of Medicine, University of Limerick
+    email: michael.lynch@ul.ie
 output: 
   BiocStyle::html_document:
     toc: true

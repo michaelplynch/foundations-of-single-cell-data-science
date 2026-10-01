@@ -1,7 +1,13 @@
 ---
 title: "scRNA-seq analysis workshop"
-author: Michael Lynch^[michael.lynch@ul.ie]
-output: BiocStyle::html_document
+author:
+  - name: Michael Lynch
+    affiliation: School of Medicine, University of Limerick
+    email: michael.lynch@ul.ie
+output: 
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
 vignette: >
   %\VignetteIndexEntry{scRNA-seq workshop}
   %\VignetteEngine{knitr::rmarkdown}
@@ -26,14 +32,10 @@ library(scuttle)
 library(scater)
 library(scran)
 library(bluster)
+
 ````
 
 # Single-cell RNA-seq in Bioconductor workshop
-
-Authors:
-    Michael Lynch^[University of Limerick]
-    <br/>
-Last modified: 20th August, 2026.
 
 ## Overview
 
@@ -118,7 +120,7 @@ work on the code independently -- do not be too ambitious in the
 material that you present.
 
 
-## Data Loading
+# Data Loading
 
 ````{r}
 
@@ -128,7 +130,7 @@ sce<-sce[,sce$ind==1488&sce$stim=='stim']
 
 ````
 
-## Quality Control
+# Quality Control
 
 ````{r}
 
@@ -164,7 +166,7 @@ dittoPlot(sce,c('qc_sum_log','qc_detected_log'),group.by='stim')
 
 ````
 
-## Dimension Reduction
+# Dimension Reduction
 
 ````{r}
 
@@ -184,7 +186,7 @@ sce$ind<-as.character(sce$ind)
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
 dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='stim',slot=2)
 ````
-## Clustering
+# Clustering
 
 ````{r}
 
@@ -212,14 +214,14 @@ head(rownames(sce))
 ````
 
 
-## Annotation
+# Annotation
 
 ````{r}
 
 markers<-list(
   T=c('CD3E','CD8A'),
   B=c('CD19','CD79A'),
-  NK=c('FCGR3A')
+  NK=c('FCGR3A'),
   Monocyte=c('CD14')
 )
 
