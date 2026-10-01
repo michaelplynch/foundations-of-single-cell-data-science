@@ -21,9 +21,12 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
+    BiocStyle,
     pkgdown,
     scuttle,
-    dittoSeq
+    dittoSeq,
+    SingleCellExperiment,
+    bluster
 URL: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 BugReports: https://github.com/michaelplynch/foundations-of-single-cell-data-science/issues/new/choose
 VignetteBuilder: knitr
