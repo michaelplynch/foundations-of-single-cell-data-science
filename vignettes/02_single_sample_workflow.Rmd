@@ -1,0 +1,234 @@
+---
+title: "scRNA-seq analysis workshop"
+author: Michael Lynch^[michael.lynch@ul.ie]
+output: BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{scRNA-seq workshop}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width="100%",
+  fig.width = 6,
+  fig.height=4
+)
+```
+
+````{r message=F, warning=F}
+
+library(dittoSeq)
+library(scuttle)
+library(scater)
+library(scran)
+library(bluster)
+````
+
+# Single-cell RNA-seq in Bioconductor workshop
+
+Authors:
+    Michael Lynch^[University of Limerick]
+    <br/>
+Last modified: 20th August, 2026.
+
+## Overview
+
+### Description
+
+This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to students with a background in data science, machine learning, and statistics.
+
+Along with the topic of your workshop, include how students can expect
+to spend their time. For the description may also include information
+about what type of workshop it is (e.g. instructor-led live demo, lab,
+lecture + lab, etc.). Instructors are strongly recommended to provide
+completely worked examples for lab sessions, and a set of stand-alone
+notes that can be read and understood outside of the workshop.
+
+### Pre-requisites
+
+* Basic knowledge of R syntax
+* Basic machine learning and statistics
+* Some previous data science/analysis experience
+
+### Useful resources
+
+- https://bioconductor.org/books/release/OSCA/
+- https://bioconductor.org/books/release/OSTA/
+
+### Participation
+
+Interactive discussion, follow-along coding, reflection.
+
+### _R_ / _Bioconductor_ packages used
+
+scran, scater
+
+### Time outline
+
+2 hours workshop??
+
+| Activity                     | Time |
+|------------------------------|------|
+| Analysis plan                | 15m  |
+| Working with SCEs            | 15m  |
+| Single-sample workflow       | 45m  |
+| multi-sample workflow        | 15m  |
+| Reflection & Best Practices  | 30m  |
+
+### Workshop goals and objectives
+
+List "big picture" student-centered workshop goals and learning
+objectives. Learning goals and objectives are related, but not the
+same thing. These goals and objectives will help some people to decide
+whether to attend the conference for training purposes, so please make
+these as precise and accurate as possible.
+
+*Learning goals* are high-level descriptions of what
+participants will learn and be able to do after the workshop is
+over. *Learning objectives*, on the other hand, describe in very
+specific and measurable terms specific skills or knowledge
+attained. The [Bloom's Taxonomy](#bloom) may be a useful framework
+for defining and describing your goals and objectives, although there
+are others.
+
+### Learning goals
+
+Some examples:
+
+* Understand single-cell data importance and application.
+* Apply data science principles to analyse new data types.
+* Understand the role of Bioconductor infrastructure in research space.
+
+### Learning objectives
+
+* Discuss developing analysis plan for single-cell data.
+* create xyz plots
+* evaluate xyz data for artifacts
+
+## Workshop
+
+Divide the workshop into sections (`## A Section`). Include
+fully-evaluated _R_ code chunks. Develop exercises and solutions, and
+anticipate that your audience will walk through the code with you, or
+work on the code independently -- do not be too ambitious in the
+material that you present.
+
+
+## Data Loading
+
+````{r}
+
+library(muscData)
+sce<-Kang18_8vs8()
+sce<-sce[,sce$ind==1488&sce$stim=='stim']
+
+````
+
+## Quality Control
+
+````{r}
+
+is.mito <- grep('^MT-',rownames(sce))
+rownames(sce)[is.mito]
+rowSums(counts(sce))[is.mito]
+
+sum(rowSums(counts(sce))==0)
+
+library(scuttle)
+df <- perCellQCMetrics(sce, subsets=list(Mito=is.mito))
+summary(df$sum)
+
+hist(df$subsets_Mito_sum)
+
+sce$qc_sum<-df$sum
+sce$qc_detected<-df$detected
+
+
+````
+
+````{r}
+
+dittoPlot(sce,c('qc_sum','qc_detected'),group.by='stim')
+
+````
+````{r}
+sce$qc_detected_log<-log(sce$qc_detected+1)
+sce$qc_sum_log<-log(sce$qc_sum+1)
+
+sce<-logNormCounts(sce)
+dittoPlot(sce,c('qc_sum_log','qc_detected_log'),group.by='stim')
+
+````
+
+## Dimension Reduction
+
+````{r}
+
+sce<-runPCA(sce, ncomponents=50,ntop=1000)
+sce<-runTSNE(sce,dimred='PCA')
+
+````
+
+````{r}
+
+sce$ind<-as.character(sce$ind)
+
+````
+
+````{r}
+
+dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
+dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='stim',slot=2)
+````
+## Clustering
+
+````{r}
+
+sce$nn<-clusterCells(sce,use.dimred = 'PCA', BLUSPARAM=NNGraphParam(k=20,cluster.fun = 'louvain',cluster.args = list(resolution=0.75)))
+sce$kmeans<-clusterCells(sce,use.dimred = 'PCA', BLUSPARAM=KmeansParam(centers=10))
+
+dittoDimPlot(sce,reduction.use = 'TSNE','nn')
+dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
+
+````
+
+````{r}
+
+table(sce$cluster,sce$nn)
+
+````
+
+````{r}
+genes<-c('CD4_ENSG00000010610','CD3E','CD8A','FCGR3A','CD19','CD79A_ENSG00000105369')
+
+genes %in% rownames(sce)
+
+multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
+head(rownames(sce))
+````
+
+
+## Annotation
+
+````{r}
+
+markers<-list(
+  T=c('CD3E','CD8A'),
+  B=c('CD19','CD79A'),
+  NK=c('FCGR3A')
+  Monocyte=c('CD14')
+)
+
+````
+
+
+
+````{r}
+
+sessionInfo()
+
+````
