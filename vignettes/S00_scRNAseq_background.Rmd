@@ -19,5 +19,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+Single-cell data
 
-s
+
+````{r echo = TRUE, fig.cap = "RNA extracted from single cells can be measured and analysed.", out.width = '100%'}
+
+knitr::include_graphics("../images/single_cell_data.png")
+
+````
+
+
+
