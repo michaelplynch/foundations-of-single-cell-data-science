@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 ## Single-cell RNA-seq
 
 - Single-cell data, as the name suggests, is RNA (gene expression) measured at the level of single cells.
-- The data is tabular, and is a count of how much of each RNA was measured in each cell when the experiment was carried outl
+- The data is tabular, and represents a count of how many of each RNA was measured in each cell when the experiment was carried outl
 - Cells are dynamic, so think of it as a snapshot of the cells state at a moment in time.
 - Cells differentiate and specialise, meaning they have a hierarhical structure.
 
@@ -42,3 +42,9 @@ Before diving into the hands-on coding, consider
 - What type of questions could you ask from the data?
 - How could you verify your interpretation of the data?
 
+
+````{r}
+
+sessionInfo()
+
+````
