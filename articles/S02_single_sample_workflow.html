@@ -104,136 +104,11 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MarioniLab/scran/" class="external-link">scran</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bluster</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="single-cell-rna-seq-in-bioconductor-workshop">Single-cell RNA-seq in Bioconductor workshop<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq-in-bioconductor-workshop"></a>
+<h2 id="single-cell-rna-seq-in-bioconductor">Single-cell RNA-seq in Bioconductor<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq-in-bioconductor"></a>
 </h2>
 <div class="section level3">
-<h3 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+<h3 id="data-loading">Data Loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
 </h3>
-<div class="section level4">
-<h4 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
-</h4>
-<p>This workshop introduces the basics of single-cell RNA sequencing
-(gene expression) and a minimal analysis workflow to students with a
-background in data science, machine learning, and statistics.</p>
-<p>Along with the topic of your workshop, include how students can
-expect to spend their time. For the description may also include
-information about what type of workshop it is (e.g. instructor-led live
-demo, lab, lecture + lab, etc.). Instructors are strongly recommended to
-provide completely worked examples for lab sessions, and a set of
-stand-alone notes that can be read and understood outside of the
-workshop.</p>
-</div>
-<div class="section level4">
-<h4 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
-</h4>
-<ul>
-<li>Basic knowledge of R syntax</li>
-<li>Basic machine learning and statistics</li>
-<li>Some previous data science/analysis experience</li>
-</ul>
-</div>
-<div class="section level4">
-<h4 id="useful-resources">Useful resources<a class="anchor" aria-label="anchor" href="#useful-resources"></a>
-</h4>
-<ul>
-<li><a href="https://bioconductor.org/books/release/OSCA/" class="external-link uri">https://bioconductor.org/books/release/OSCA/</a></li>
-<li><a href="https://bioconductor.org/books/release/OSTA/" class="external-link uri">https://bioconductor.org/books/release/OSTA/</a></li>
-</ul>
-</div>
-<div class="section level4">
-<h4 id="participation">Participation<a class="anchor" aria-label="anchor" href="#participation"></a>
-</h4>
-<p>Interactive discussion, follow-along coding, reflection.</p>
-</div>
-<div class="section level4">
-<h4 id="r-bioconductor-packages-used">
-<em>R</em> / <em>Bioconductor</em> packages used<a class="anchor" aria-label="anchor" href="#r-bioconductor-packages-used"></a>
-</h4>
-<p>scran, scater</p>
-</div>
-<div class="section level4">
-<h4 id="time-outline">Time outline<a class="anchor" aria-label="anchor" href="#time-outline"></a>
-</h4>
-<p>2 hours workshop??</p>
-<table class="table">
-<thead><tr class="header">
-<th>Activity</th>
-<th>Time</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Analysis plan</td>
-<td>15m</td>
-</tr>
-<tr class="even">
-<td>Working with SCEs</td>
-<td>15m</td>
-</tr>
-<tr class="odd">
-<td>Single-sample workflow</td>
-<td>45m</td>
-</tr>
-<tr class="even">
-<td>multi-sample workflow</td>
-<td>15m</td>
-</tr>
-<tr class="odd">
-<td>Reflection &amp; Best Practices</td>
-<td>30m</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section level4">
-<h4 id="workshop-goals-and-objectives">Workshop goals and objectives<a class="anchor" aria-label="anchor" href="#workshop-goals-and-objectives"></a>
-</h4>
-<p>List “big picture” student-centered workshop goals and learning
-objectives. Learning goals and objectives are related, but not the same
-thing. These goals and objectives will help some people to decide
-whether to attend the conference for training purposes, so please make
-these as precise and accurate as possible.</p>
-<p><em>Learning goals</em> are high-level descriptions of what
-participants will learn and be able to do after the workshop is over.
-<em>Learning objectives</em>, on the other hand, describe in very
-specific and measurable terms specific skills or knowledge attained. The
-<a href="#bloom">Bloom’s Taxonomy</a> may be a useful framework for
-defining and describing your goals and objectives, although there are
-others.</p>
-</div>
-<div class="section level4">
-<h4 id="learning-goals">Learning goals<a class="anchor" aria-label="anchor" href="#learning-goals"></a>
-</h4>
-<p>Some examples:</p>
-<ul>
-<li>Understand single-cell data importance and application.</li>
-<li>Apply data science principles to analyse new data types.</li>
-<li>Understand the role of Bioconductor infrastructure in research
-space.</li>
-</ul>
-</div>
-<div class="section level4">
-<h4 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
-</h4>
-<ul>
-<li>Discuss developing analysis plan for single-cell data.</li>
-<li>create xyz plots</li>
-<li>evaluate xyz data for artifacts</li>
-</ul>
-</div>
-</div>
-<div class="section level3">
-<h3 id="workshop">Workshop<a class="anchor" aria-label="anchor" href="#workshop"></a>
-</h3>
-<p>Divide the workshop into sections (<code>## A Section</code>).
-Include fully-evaluated <em>R</em> code chunks. Develop exercises and
-solutions, and anticipate that your audience will walk through the code
-with you, or work on the code independently – do not be too ambitious in
-the material that you present.</p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="data-loading">Data Loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
-</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HelenaLC/muscData" class="external-link">muscData</a></span><span class="op">)</span></span>
@@ -251,9 +126,9 @@ the material that you present.</p>
 <span><span class="co">#&gt; loading from cache</span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="va">sce</span><span class="op">[</span>,<span class="va">sce</span><span class="op">$</span><span class="va">ind</span><span class="op">==</span><span class="fl">1488</span><span class="op">&amp;</span><span class="va">sce</span><span class="op">$</span><span class="va">stim</span><span class="op">==</span><span class="st">'stim'</span><span class="op">]</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="quality-control">Quality Control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
-</h2>
+<div class="section level3">
+<h3 id="quality-control">Quality Control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">is.mito</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">'^MT-'</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span></span>
@@ -302,9 +177,9 @@ the material that you present.</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/dittoSeq/man/dittoPlot.html" class="external-link">dittoPlot</a></span><span class="op">(</span><span class="va">sce</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'qc_sum_log'</span>,<span class="st">'qc_detected_log'</span><span class="op">)</span>,group.by<span class="op">=</span><span class="st">'stim'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="S02_single_sample_workflow_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="100%"></p>
 </div>
-<div class="section level2">
-<h2 id="dimension-reduction">Dimension Reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
-</h2>
+<div class="section level3">
+<h3 id="dimension-reduction">Dimension Reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/BiocSingular/man/runPCA.html" class="external-link">runPCA</a></span><span class="op">(</span><span class="va">sce</span>, ncomponents<span class="op">=</span><span class="fl">50</span>,ntop<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
@@ -319,7 +194,7 @@ the material that you present.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dittoSeq/man/dittoPlot.html" class="external-link">dittoPlot</a></span><span class="op">(</span><span class="va">sce</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CD3E'</span>,<span class="st">'CD163'</span>,<span class="st">'CD19'</span><span class="op">)</span>,group.by<span class="op">=</span><span class="st">'stim'</span>,slot<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="S02_single_sample_workflow_files/figure-html/unnamed-chunk-9-2.png" class="r-plt" alt="" width="100%">
-# Clustering</p>
+## Clustering</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">$</span><span class="va">nn</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/scran/man/clusterCells.html" class="external-link">clusterCells</a></span><span class="op">(</span><span class="va">sce</span>,use.dimred <span class="op">=</span> <span class="st">'PCA'</span>, BLUSPARAM<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/bluster/man/NNGraphParam-class.html" class="external-link">NNGraphParam</a></span><span class="op">(</span>k<span class="op">=</span><span class="fl">20</span>,cluster.fun <span class="op">=</span> <span class="st">'louvain'</span>,cluster.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>resolution<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -364,9 +239,9 @@ the material that you present.</p>
 <span><span class="co">#&gt; [1] "MIR1302-10"   "FAM138A"      "OR4F5"        "RP11-34P13.7" "RP11-34P13.8"</span></span>
 <span><span class="co">#&gt; [6] "AL627309.1"</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="annotation">Annotation<a class="anchor" aria-label="anchor" href="#annotation"></a>
-</h2>
+<div class="section level3">
+<h3 id="annotation">Annotation<a class="anchor" aria-label="anchor" href="#annotation"></a>
+</h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">markers</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -375,6 +250,16 @@ the material that you present.</p>
 <span>  NK<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'FCGR3A'</span><span class="op">)</span>,</span>
 <span>  Monocyte<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CD14'</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="reflection">Reflection<a class="anchor" aria-label="anchor" href="#reflection"></a>
+</h3>
+<ul>
+<li>How could the analysis have been done differently?</li>
+<li>How does this impact the validity of the results?</li>
+<li>What would have changed if there were cells from multiple
+samples?</li>
+</ul>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -450,6 +335,7 @@ the material that you present.</p>
 <span><span class="co">#&gt;  [94] farver_2.1.2         memoise_2.0.1        htmltools_0.5.9     </span></span>
 <span><span class="co">#&gt;  [97] pkgdown_2.2.1        lifecycle_1.0.5      httr_1.4.9          </span></span>
 <span><span class="co">#&gt; [100] statmod_1.5.2        bit64_4.8.6</span></span></code></pre></div>
+</div>
 </div>
   </div>
 
