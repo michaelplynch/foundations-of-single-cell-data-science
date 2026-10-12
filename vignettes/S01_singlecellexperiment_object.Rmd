@@ -1,5 +1,5 @@
 ---
-title: "Getting to know the SingleCellExperiment Object"
+title: "The SingleCellExperiment Object and EDA"
 author:
   - name: Michael Lynch
     affiliation: School of Medicine, University of Limerick
@@ -129,4 +129,9 @@ altExpNames(sce)
 
 ````
 
+## Exercise
+
+- Can you extract basic summary statistics from the metadata?
+- Can you extract the counts data?
+- Can you describe the data?
 
