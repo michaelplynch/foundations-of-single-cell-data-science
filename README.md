@@ -5,7 +5,7 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## This is
 
-- A crash course in the key steps of a single-cell RNA-seq analyses.
+- a crash course in the key steps of a single-cell RNA-seq analyses.
 - a discussion on how to approach new problems generally in DS.
 - considerations for effective analyses.
 
@@ -21,8 +21,7 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 | Setting up the environment   | 10m  |
 | Planning an analysis         | 15m  |
 | Bioconductor ecosystem       | 15m  |
-| Single-sample workflow       | 45m  |
-| Multi-sample workflow        | 20m  |
+| Single-sample workflow       | 60m  |
 | Reflection & Best Practices  | 15m  |
 
 ## Installation:
