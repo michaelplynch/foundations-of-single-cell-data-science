@@ -11,8 +11,8 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## This isn't
 
-- A deep dive of single-cell biology/immunology.
-- A demonstration of the only/best way to complete a single-cell analysis.
+- a deep dive of single-cell biology/immunology.
+- a demonstration of the only/best way to complete a single-cell analysis.
 
 ## Workshop breakdown
 
@@ -37,6 +37,29 @@ remotes::install_github("michaelplynch/foundations-of-single-cell-data-science")
 ```
 
 Tested on R Version 4.5.2.
+
+
+### Description
+
+This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to students with a background in data science, machine learning, and statistics.
+
+### Pre-requisites
+
+* Basic knowledge of R syntax
+* Basic machine learning and statistics
+* Some previous data science/analysis experience
+
+### Useful resources
+
+- https://bioconductor.org/books/release/OSCA/
+- https://bioconductor.org/books/release/OSTA/
+
+### Participation
+
+Interactive discussion, follow-along coding, reflection.
+
+
+
 
 ## Below to be moved/tidied up pre workshop
 ## Map:
