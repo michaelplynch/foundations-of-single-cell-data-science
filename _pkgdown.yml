@@ -1,18 +1,11 @@
-url: https://seandavi.github.io/BuildABiocWorkshop
+url: https://michaelplynch.github.io/foundations-of-single-cell-data-science
 
 template:
-  params:
-    bootswatch: flatly
-    #ganalytics: UA-99999999-9
+  bootstrap: 5
+  bootswatch: flatly
 
 home:
-  title: "BuildABiocWorkshop"
-  type: inverse
-
+  title: "Bioconductor Single-cell"
 
 navbar:
-  right:
-   - icon: fa-github
-     href: https://github.com/seandavi/BuildABiocWorkshop
-     
-
+  bg: primary
