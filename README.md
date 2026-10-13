@@ -31,8 +31,8 @@ if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 options(repos = BiocManager::repositories())
-
-remotes::install_github("michaelplynch/foundations-of-single-cell-data-science")
+install.packages('remotes')
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=T)
 
 ```
 
