@@ -23,13 +23,13 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## Workshop breakdown
 
-| Activity                                              | Time |
-|-------------------------------------------------------|------|
-| Setting up the environment                            | 10m  |
-| Background and planning (a_background.Rmd)            | 15m  |
-| Bioc packages and object (b_ecosystem_object.Rmd)     | 15m  |
-| Single-sample workflow (c_singlesample_workflow.Rmd)  | 60m  |
-| Reflection & Best Practices                           | 15m  |
+| Activity                       |  Notebook                    | Time |
+|--------------------------------|------------------------------|------|
+| Setting up the environment     |                              | 10m  |
+| Background and planning        | a_background.Rmd             | 15m  |
+| Bioc packages and object       | b_ecosystem_object.Rmd       | 15m  |
+| Single-sample workflow         | c_singlesample_workflow.Rmd  | 60m  |
+| Reflection & Best Practices    |                              | 15m  |
 
 ## Installation:
 
@@ -57,6 +57,7 @@ usethis::use_course(
 )
 
 ## Pre-download the dataset and check everything loads
+sce <- TENxPBMCData("pbmc10k")
 sce <- muscData::Kang18_8vs8()
 pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scran",
           "bluster", "dittoSeq", "BiocStyle")
