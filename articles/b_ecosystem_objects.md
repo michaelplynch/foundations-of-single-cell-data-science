@@ -235,39 +235,38 @@ sessionInfo()
 #> [8] base     
 #> 
 #> other attached packages:
-#>  [1] muscData_1.27.1             ExperimentHub_3.3.2        
-#>  [3] AnnotationHub_4.3.2         BiocFileCache_3.3.0        
-#>  [5] dbplyr_2.6.0                scuttle_1.23.2             
-#>  [7] SingleCellExperiment_1.35.2 SummarizedExperiment_1.43.0
-#>  [9] Biobase_2.73.2              GenomicRanges_1.65.4       
-#> [11] Seqinfo_1.3.2               IRanges_2.47.5             
-#> [13] S4Vectors_0.51.10           BiocGenerics_0.59.12       
-#> [15] generics_0.1.4              MatrixGenerics_1.25.0      
-#> [17] matrixStats_1.5.0           BiocStyle_2.41.0           
+#>  [1] muscData_1.26.0             ExperimentHub_3.2.2        
+#>  [3] AnnotationHub_4.2.2         BiocFileCache_3.2.0        
+#>  [5] dbplyr_2.6.0                scuttle_1.22.0             
+#>  [7] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
+#>  [9] Biobase_2.72.0              GenomicRanges_1.64.0       
+#> [11] Seqinfo_1.2.0               IRanges_2.46.0             
+#> [13] S4Vectors_0.50.3            BiocGenerics_0.58.1        
+#> [15] generics_0.1.4              MatrixGenerics_1.24.0      
+#> [17] matrixStats_1.5.0           BiocStyle_2.40.0           
 #> 
 #> loaded via a namespace (and not attached):
 #>  [1] tidyselect_1.2.1     dplyr_1.2.1          blob_1.3.0          
-#>  [4] filelock_1.0.3       Biostrings_2.81.9    fastmap_1.2.0       
-#>  [7] digest_0.6.39        lifecycle_1.0.5      KEGGREST_1.53.6     
+#>  [4] filelock_1.0.3       Biostrings_2.80.2    fastmap_1.2.0       
+#>  [7] digest_0.6.39        lifecycle_1.0.5      KEGGREST_1.52.2     
 #> [10] RSQLite_3.53.3       magrittr_2.0.5       compiler_4.6.1      
 #> [13] rlang_1.3.0          sass_0.4.10          tools_4.6.1         
-#> [16] yaml_2.3.12          knitr_1.52           S4Arrays_1.13.2     
+#> [16] yaml_2.3.12          knitr_1.52           S4Arrays_1.12.1     
 #> [19] htmlwidgets_1.6.4    bit_4.6.0            curl_8.0.0          
-#> [22] DelayedArray_0.39.8  abind_1.4-8          BiocParallel_1.47.0 
+#> [22] DelayedArray_0.38.2  abind_1.4-8          BiocParallel_1.46.0 
 #> [25] withr_3.0.3          purrr_1.2.2          desc_1.4.3          
-#> [28] grid_4.6.1           beachmat_2.29.3      cli_3.6.6           
+#> [28] grid_4.6.1           beachmat_2.28.0      cli_3.6.6           
 #> [31] rmarkdown_2.32       crayon_1.5.3         ragg_1.5.2          
-#> [34] otel_0.2.0           httr_1.4.9           BiocBaseUtils_1.15.1
-#> [37] DBI_1.3.0            cachem_1.1.0         parallel_4.6.1      
-#> [40] AnnotationDbi_1.75.2 BiocManager_1.30.27  XVector_0.53.0      
-#> [43] vctrs_0.7.3          Matrix_1.7-6         jsonlite_2.0.0      
-#> [46] bookdown_0.48        bit64_4.8.6          systemfonts_1.3.2   
-#> [49] jquerylib_0.1.4      glue_1.8.1           pkgdown_2.2.1       
-#> [52] codetools_0.2-20     BiocVersion_3.24.0   tibble_3.3.1        
-#> [55] pillar_1.11.1        rappdirs_0.3.4       htmltools_0.5.9     
-#> [58] R6_2.6.1             httr2_1.3.0          textshaping_1.0.5   
-#> [61] evaluate_1.0.5       lattice_0.23-1       png_0.1-9           
-#> [64] memoise_2.0.1        bslib_0.12.0         Rcpp_1.1.2          
-#> [67] SparseArray_1.13.4   xfun_0.61            fs_2.1.0            
-#> [70] pkgconfig_2.0.3
+#> [34] otel_0.2.0           httr_1.4.9           DBI_1.3.0           
+#> [37] cachem_1.1.0         parallel_4.6.1       AnnotationDbi_1.74.0
+#> [40] BiocManager_1.30.27  XVector_0.52.0       vctrs_0.7.3         
+#> [43] Matrix_1.7-6         jsonlite_2.0.0       bookdown_0.48       
+#> [46] bit64_4.8.6          systemfonts_1.3.2    jquerylib_0.1.4     
+#> [49] glue_1.8.1           pkgdown_2.2.1        codetools_0.2-20    
+#> [52] BiocVersion_3.23.1   tibble_3.3.1         pillar_1.11.1       
+#> [55] rappdirs_0.3.4       htmltools_0.5.9      R6_2.6.1            
+#> [58] httr2_1.3.0          textshaping_1.0.5    evaluate_1.0.5      
+#> [61] lattice_0.22-9       png_0.1-9            memoise_2.0.1       
+#> [64] bslib_0.12.0         Rcpp_1.1.2           SparseArray_1.12.3  
+#> [67] xfun_0.61            fs_2.1.0             pkgconfig_2.0.3
 ```
