@@ -38,13 +38,24 @@ if (!require("BiocManager", quietly = TRUE))
 options(repos = BiocManager::repositories())
 
 ## install remotes
-install.packages('remotes')
+install.packages(c('remotes','usethis'))
 
 ## install workshop package (takes care of dependencies)
-remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=T)
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=TRUE, upgrade=always)
 
-## download course
-usethis::use_course("michaelplynch/foundations-of-single-cell-data-science")
+## Course notebooks (same release); answer the prompts, notebooks are in vignettes/
+usethis::use_course(
+  "https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/v1.0.0.zip",
+  destdir = "~"
+)
+
+## Pre-download the dataset and check everything loads
+sce <- muscData::Kang18_8vs8()
+pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scran",
+          "bluster", "dittoSeq", "BiocStyle")
+invisible(lapply(pkgs, library, character.only = TRUE))
+BiocManager::valid()
+message("Setup complete - see you at the workshop!")
 
 ```
 
