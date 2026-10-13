@@ -26,17 +26,30 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## Installation:
 
+Rendered pkgdown website available here: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
+
+Package note
+
 ```r
+## install BiocManager
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 options(repos = BiocManager::repositories())
+
+## install remotes
 install.packages('remotes')
+
+## install workshop package (takes care of dependencies)
 remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=T)
+
+## download course
+usethis::use_course("michaelplynch/foundations-of-single-cell-data-science")
 
 ```
 
-Tested on R Version 4.5.2.
+
+Tested on R Version 4.6.1.
 
 
 ### Description
