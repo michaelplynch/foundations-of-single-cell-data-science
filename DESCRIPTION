@@ -16,7 +16,8 @@ RoxygenNote: 7.1.0
 Depends: 
     scater,
     scran,
-    muscData
+    muscData,
+    TENxPBMCData
 Suggests: 
     knitr,
     rmarkdown,
