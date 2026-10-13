@@ -26,7 +26,8 @@ Suggests:
     scuttle,
     dittoSeq,
     SingleCellExperiment,
-    bluster
+    bluster,
+    scrapper
 URL: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 BugReports: https://github.com/michaelplynch/foundations-of-single-cell-data-science/issues/new/choose
 VignetteBuilder: knitr

@@ -33,7 +33,7 @@ library(scuttle)
 library(scater)
 library(scran)
 library(bluster)
-library(muscData)
+library(TENxPBMCData)
 
 ````
 
@@ -44,64 +44,70 @@ library(muscData)
 
 ````{r}
 
-BiocManager::install("TENxPBMCData")
-library(TENxPBMCData)
-sce <- TENxPBMCData("pbmc10k")
+sce <- TENxPBMCData("pbmc4k")
 
+````
+
+````{r}
+
+head(rowData(sce))
+
+
+head(colData(sce))
+
+table(sce$Individual)
+````
+
+````{r}
+
+rownames(sce)<-rowData(sce)$Symbol_TENx
+colnames(sce)<-sce$Barcode
 ````
 
 ## Quality Control
 
 ````{r}
 
-is.mito <- grep('^MT-',rownames(sce))
-rownames(sce)[is.mito]
-rowSums(counts(sce))[is.mito]
+is.mito <- grep('^MT-',rownames(sce),value = T)
+is.mito
 
-sum(rowSums(counts(sce))==0)
 
-library(scuttle)
+
+library(scrapper)
 df <- perCellQCMetrics(sce, subsets=list(Mito=is.mito))
 summary(df$sum)
 
-hist(df$subsets_Mito_sum)
-
-sce$qc_sum<-df$sum
-sce$qc_detected<-df$detected
-
+sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
 
 ````
 
 ````{r}
 
-dittoPlot(sce,c('qc_sum','qc_detected'),group.by='stim')
+multi_dittoPlot(sce,c('qc_sum','qc_detected','subset.proportion.mito'),group.by='Individual')
 
 ````
-
-
 ````{r}
-sce$qc_detected_log<-log(sce$qc_detected+1)
-sce$qc_sum_log<-log(sce$qc_sum+1)
 
-sce<-logNormCounts(sce)
-dittoPlot(sce,c('qc_sum_log','qc_detected_log'),group.by='stim')
+
 
 ````
 
 ## Dimension Reduction
 
 ````{r}
+
+sce<-normalizeRnaCounts.se(sce)
 set.seed(1)
-sce<-runPCA(sce, ncomponents=50,ntop=1000)
+sce<-runPca.se(sce, number =50,features =1000)
 
 set.seed(1)
-sce<-runTSNE(sce,dimred='PCA')
+sce<-runTsne.se(sce,reddim.type ='PCA')
 
 ````
 
 ````{r}
 
-sce$ind<-as.character(sce$ind)
+
 
 ````
 
