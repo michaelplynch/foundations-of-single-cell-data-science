@@ -49,7 +49,7 @@ usethis::use_course("michaelplynch/foundations-of-single-cell-data-science")
 ```
 
 
-Tested on R Version 4.6.1.
+Tested on Bioconductor 3.23 and R Version 4.6.x.
 
 
 ### Description
