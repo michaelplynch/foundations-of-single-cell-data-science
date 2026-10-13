@@ -3,7 +3,7 @@ name: Check, build, and push image
 on: [push, pull_request]
 
 env:
-  cache-version: v1
+  cache-version: v2
 
 jobs:
   r-build-and-check:
@@ -23,6 +23,7 @@ jobs:
         run: |
           options(repos = BiocManager::repositories(version = "3.23"))
           cat("Bioconductor version:", as.character(BiocManager::version()), "\n")
+          stopifnot(identical(as.character(BiocManager::version()), "3.23"))
           BiocManager::valid()
           BiocManager::install(c("remotes", "rcmdcheck"), version='3.23',ask = FALSE,update=FALSE)
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
