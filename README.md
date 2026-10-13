@@ -3,6 +3,13 @@
 This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop.
 An emphasis will be placed on the how and why, not just the what, of each step.
 
+## Broad Goals
+
+- Understand the structure of single-cell RNA-seq data.
+- Access the Bioconductor ecosystem.
+- Perform basic single-cell analysis.
+- Understand factors impacting analysis reliability.
+
 ## This is
 
 - a crash course in the key steps of a single-cell RNA-seq analyses.
@@ -16,13 +23,13 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## Workshop breakdown
 
-| Activity                     | Time |
-|------------------------------|------|
-| Setting up the environment   | 10m  |
-| Planning an analysis         | 15m  |
-| Bioconductor ecosystem       | 15m  |
-| Single-sample workflow       | 60m  |
-| Reflection & Best Practices  | 15m  |
+| Activity                                              | Time |
+|-------------------------------------------------------|------|
+| Setting up the environment                            | 10m  |
+| Background and planning (a_background.Rmd)            | 15m  |
+| Bioc packages and object (b_ecosystem_object.Rmd)     | 15m  |
+| Single-sample workflow (c_singlesample_workflow.Rmd)  | 60m  |
+| Reflection & Best Practices                           | 15m  |
 
 ## Installation:
 
@@ -59,9 +66,7 @@ message("Setup complete - see you at the workshop!")
 
 ```
 
-
 Tested on Bioconductor 3.23 and R Version 4.6.x.
-
 
 ### Description
 
@@ -80,44 +85,4 @@ This workshop introduces the basics of single-cell RNA sequencing (gene expressi
 
 ### Participation
 
-Interactive discussion, follow-along coding, reflection.
-
-
-
-
-## Below to be moved/tidied up pre workshop
-## Map:
-
-### How might a data scientist approach this problem?
-
-1. Understand how the data was generated.
-2. Understand the type of analysis (exploratory, hypothesis generation, vs. hypothesis testing).
-3. Check the data structure, quality.
-4. Decide on a clear and defensible modelling strategy.
-5. Validate outputs. Big difference between 'an output' and 'a correct output'. Use domain expertise, independent datasets, stability and reproducibility checks.
-6. Communicate clearly. What claims can you make, and what claims can't you make, based on the data?
-
-### Foundations
-
-- Statistical thinking
-  - Data distributions
-  - Independence
-  - Multiple testing
-  - Assumptions
-- Computational thinking
-  - Scaling
-  - Seeds, reproducibility
-  - Algorithms
-- Communication, visualisation
-  - Model assumptions
-  - Uncertainty
-  - Informative vs. misleading
-- Tooling
-  - Choice of ecosystem
-  - Version control
-  - Documentation
-  - Dependency management (note to check number of packages used).
-- Ethics, integrity
-  - Reproducibility (again).
-  - Choice of reference.
-  - Patient privacy and consent.
+Interactive discussion on analyis strategy and results, follow-along coding, reflection on analysis strengths and limitations.
