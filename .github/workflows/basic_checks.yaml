@@ -43,7 +43,7 @@ jobs:
             dependencies = TRUE,
             repos = BiocManager::repositories(version = "3.23"))
           BiocManager::install(version = "3.23", ask = FALSE, update = FALSE)
-shell: Rscript {0}
+        shell: Rscript {0}
 
       - name: Check
         env:
