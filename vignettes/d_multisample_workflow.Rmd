@@ -1,0 +1,56 @@
+---
+title: "scRNA-seq multi-sample analysis"
+author:
+  - name: Michael Lynch
+    affiliation: School of Medicine, University of Limerick
+    email: michael.lynch@ul.ie
+output: 
+  BiocStyle::html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{scRNA-seq workshop}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width="100%",
+  fig.width = 6,
+  fig.height=4
+)
+```
+
+````{r message=F, warning=F}
+
+library(dittoSeq)
+library(scuttle)
+library(scater)
+library(scran)
+library(bluster)
+library(muscData)
+
+````
+
+## Data loading
+
+````{r}
+
+sce<-Kang18_8vs8()
+
+````
+
+## Analysis
+
+The rest is up to you :) 
+
+````{r}
+
+
+
+````
