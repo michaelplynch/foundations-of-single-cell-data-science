@@ -14,10 +14,10 @@ Lynch M (2026). *foundationsSCDS: Single-cell & Bioconductor Workshop
 repo for Foundations in Data Science CRT*. R package version 0.0.1,
 <https://michaelplynch.github.io/foundations-of-single-cell-data-science/>.
 
-@Manual{,\
-  title = {foundationsSCDS: Single-cell & Bioconductor Workshop repo for Foundations in Data Science CRT},\
-  author = {Michael Lynch},\
-  year = {2026},\
-  note = {R package version 0.0.1},\
-  url = {https://michaelplynch.github.io/foundations-of-single-cell-data-science/},\
-}
+    @Manual{,
+      title = {foundationsSCDS: Single-cell & Bioconductor Workshop repo for Foundations in Data Science CRT},
+      author = {Michael Lynch},
+      year = {2026},
+      note = {R package version 0.0.1},
+      url = {https://michaelplynch.github.io/foundations-of-single-cell-data-science/},
+    }

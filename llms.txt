@@ -28,13 +28,15 @@ placed on the how and why, not just the what, of each step.
 
 ## Installation:
 
-\
-`if`` ``(``!`[`require`](https://rdrr.io/r/base/library.html)`(`[`"BiocManager"`](https://bioconductor.github.io/BiocManager/)`, quietly ``=`` ``TRUE``)``)`\
-`  `[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"BiocManager"``)`\
-\
-[`options`](https://rdrr.io/r/base/options.html)`(``repos ``=`` ``BiocManager``::`[`repositories`](https://bioconductor.github.io/BiocManager/reference/repositories.html)`(``)``)`\
-\
-`remotes``::`[`install_github`](https://remotes.r-lib.org/reference/install_github.html)`(``"michaelplynch/foundations-of-single-cell-data-science"``)`
+``` r
+
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+options(repos = BiocManager::repositories())
+
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science")
+```
 
 Tested on R Version 4.5.2.
 
