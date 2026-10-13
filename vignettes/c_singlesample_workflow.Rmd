@@ -34,7 +34,8 @@ library(scater)
 library(scran)
 library(bluster)
 library(TENxPBMCData)
-
+library(scrapper)
+library(mclust)
 ````
 
 # Single-cell RNA-seq in Bioconductor
@@ -42,26 +43,38 @@ library(TENxPBMCData)
 
 ## Data Loading
 
+We begin by loading in a public dataset from the TENxPBMCData Bioconductor package.
+The dataset contains approx. 4,000 cells from peripheral blood mononuclear cells (PBMCs).
+These are mostly immune cells.
+
 ````{r}
 
 sce <- TENxPBMCData("pbmc4k")
 
 ````
 
+Genes can be labelled in multiple different ways, including Ensembl IDs and Gene Symbols.
+We also have some column (cell level) data that the authors included.
+We can confirm from the metadata that each cell came from the same person.
+
 ````{r}
 
 head(rowData(sce))
-
 
 head(colData(sce))
 
 table(sce$Individual)
 ````
 
+The gene symbols are slightly more user friendly, so we'll use those.
+We'll also take the opportunity to add colnames to the SingleCellExperiment object.
+This is a requirement for the dittoSeq plotting functions.
+
 ````{r}
 
 rownames(sce)<-rowData(sce)$Symbol_TENx
 colnames(sce)<-sce$Barcode
+
 ````
 
 ## Quality Control
@@ -71,29 +84,31 @@ colnames(sce)<-sce$Barcode
 is.mito <- grep('^MT-',rownames(sce),value = T)
 is.mito
 
-
-
-library(scrapper)
-df <- perCellQCMetrics(sce, subsets=list(Mito=is.mito))
-summary(df$sum)
-
 sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
+sce<-sce[,sce$keep] ## suggested thresholds
 
 ````
+
+Cells might have high or low counts due to technical reasons, retaining them might skew the analysis.
 
 ````{r}
 
 multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Individual')
 
-````
-
-````{r}
-
-
+sce<-sce[,sce$subset.proportion.mito<0.1 & sce$sum<20000]
 
 ````
 
 ## Dimension Reduction
+
+This dataset contain information about 33694 genes.
+Many of these are uninformative, and other may correlate.
+Dimension reduction methods such as PCA compress the features space, reduce noise, and improve computational efficiency.
+
+Normalisation reduces the effect of sequencing depth.
+Log transformation compresses the data and prevents highly expressed genes from dominating downstream analysis.
+
+PCA is a linear transformatino, TSNE (and UMAP, not shown) is non-linear, and use mostly for visualising.
 
 ````{r}
 
@@ -110,19 +125,27 @@ sce<-runTsne.se(sce,reddim.type ='PCA')
 
 ````
 
-````{r}
-
-
-
-````
+From the PCA and TSNE, we expect similar cell types to group together.
+Sometimes, technical effects can outweight biological effects, such as [batch effects](https://bioconductor.posit.co/packages/release/bioc/vignettes/batchelor/inst/doc/correction.html), but we won't cover that today.
+We can confirm this using well-known gene markers CD3E (T cells), CD163 (myeloid cells) and CD19 (B cells).
 
 ````{r}
 
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
 dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='Individual',slot='logcounts')
+
 ````
 
 ## Clustering
+
+Cells are constantly adapting to their environment.
+They differentiate and specialise throughout their lifecycle.
+While not strictly true, it can be useful to think of them as falling into discrete states, or clusters.
+
+Clustering methods group similar cells which ideally represent a cell type or state.
+This helps understand the role of different groups of cells.
+
+As is often the case, there are many ways to perform clustering.
 
 ````{r}
 
@@ -134,9 +157,14 @@ dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 
 ````
 
+Here we compare two different clustering results.
+The adjusted rand index is pretty high, but there's still some noticable differences, which one do you trust?
+
 ````{r}
 
 table(sce$multilevel,sce$kmeans)
+
+adjustedRandIndex(sce$multilevel,sce$kmeans)
 
 ````
 
@@ -148,6 +176,11 @@ genes %in% rownames(sce)
 multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
 head(rownames(sce))
 ````
+
+## Unsupervised Annotation
+
+This method of annotation looks at genes with high effect sizes in one cluster vs. the rest.
+By comparing against the literature, the cell type and function can be understood.
 
 ````{r}
 
@@ -171,6 +204,8 @@ plotGroupedHeatmap(sce,
 ````
 
 ## Supervised Annotation
+
+This method of annotation uses pre-annotated data to label clusters or cells in a new dataset.
 
 ````{r}
 
@@ -201,6 +236,7 @@ dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 ## Reflection
 
 - What assumptions did we make?
+- What are the limitations of supervised vs. unsupervised annotation?
 - How could the analysis have been done differently?
 - How does this impact the validity of the results?
 - What would have changed if there were cells from multiple samples?
