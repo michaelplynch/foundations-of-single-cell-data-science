@@ -83,9 +83,10 @@ sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
 
 ````{r}
 
-multi_dittoPlot(sce,c('qc_sum','qc_detected','subset.proportion.mito'),group.by='Individual')
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Individual')
 
 ````
+
 ````{r}
 
 
@@ -97,8 +98,12 @@ multi_dittoPlot(sce,c('qc_sum','qc_detected','subset.proportion.mito'),group.by=
 ````{r}
 
 sce<-normalizeRnaCounts.se(sce)
+
 set.seed(1)
-sce<-runPca.se(sce, number =50,features =1000)
+sce <- chooseRnaHvgs.se(sce, top = 1000)
+
+set.seed(1)
+sce<-runPca.se(sce, features=rowData(sce)$hvg,number=100)
 
 set.seed(1)
 sce<-runTsne.se(sce,reddim.type ='PCA')
@@ -114,28 +119,29 @@ sce<-runTsne.se(sce,reddim.type ='PCA')
 ````{r}
 
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
-dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='stim',slot=2)
+dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='Individual',slot='logcounts')
 ````
+
 ## Clustering
 
 ````{r}
 
-sce$nn<-clusterCells(sce,use.dimred = 'PCA', BLUSPARAM=NNGraphParam(k=20,cluster.fun = 'louvain',cluster.args = list(resolution=0.75)))
-sce$kmeans<-clusterCells(sce,use.dimred = 'PCA', BLUSPARAM=KmeansParam(centers=10))
+sce<-clusterGraph.se(sce,reddim.type = 'PCA', num.neighbors = 20,output.name = 'multilevel')
+sce<-clusterKmeans.se(sce,reddim.type = 'PCA',k=10,output.name = 'kmeans')
 
-dittoDimPlot(sce,reduction.use = 'TSNE','nn')
+dittoDimPlot(sce,reduction.use = 'TSNE','multilevel')
 dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 
 ````
 
 ````{r}
 
-table(sce$cluster,sce$nn)
+table(sce$multilevel,sce$kmeans)
 
 ````
 
 ````{r}
-genes<-c('CD4_ENSG00000010610','CD3E','CD8A','FCGR3A','CD19','CD79A_ENSG00000105369')
+genes<-c('CD4','CD3E','CD8A','FCGR3A','CD19','CD79A')
 
 genes %in% rownames(sce)
 
@@ -143,17 +149,52 @@ multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
 head(rownames(sce))
 ````
 
+````{r}
 
-## Annotation
+markers<-scoreMarkers.se(sce,groups = sce$multilevel,order.by = TRUE)
+
+top_genes <- unique(unlist(lapply(markers, function(df) {
+  head(rownames(df)[order(df$cohens.d.mean, decreasing = TRUE)], 5)
+}), use.names = FALSE))
+
+top_genes
+
+plotGroupedHeatmap(sce,
+                   features     = top_genes,
+                   group        = 'multilevel',
+                   center       = TRUE,
+                   scale        = TRUE,
+                   zlim         = c(-2, 2),
+                   cluster_rows = FALSE,
+                   cluster_cols = FALSE)
+
+````
+
+## Supervised Annotation
 
 ````{r}
 
-markers<-list(
-  T=c('CD3E','CD8A'),
-  B=c('CD19','CD79A'),
-  NK=c('FCGR3A'),
-  Monocyte=c('CD14')
+library(UCell)
+counts(sce) <- as(counts(sce), "dgCMatrix")   # in-memory sparse; TENxPBMCData is HDF5-backed
+
+signatures <- list(
+  T_cell      = c("CD3D", "CD3E", "CD3G", "CD2", "TRAC"),
+  NK          = c("NKG7", "GNLY", "KLRD1", "KLRF1", "CD3D-", "CD3E-"),
+  B_cell      = c("MS4A1", "CD79A", "CD79B", "CD19", "BANK1"),
+  Plasma      = c("MZB1", "DERL3", "TNFRSF17", "XBP1", "MS4A1-"),
+  CD14_Mono   = c("CD14", "LYZ", "S100A8", "S100A9", "VCAN", "FCGR3A-"),
+  CD16_Mono   = c("FCGR3A", "MS4A7", "CDKN1C", "LST1", "CD14-", "NKG7-"),
+  cDC         = c("FCER1A", "CD1C", "CLEC10A", "CLEC9A", "CD14-"),
+  pDC         = c("LILRA4", "CLEC4C", "IL3RA", "PLD4"),
+  Platelet    = c("PPBP", "PF4", "GP9", "ITGA2B"),
+  Erythrocyte = c("HBB", "HBA1", "HBA2"),
+  HSPC        = c("CD34", "SPINK2")
 )
+
+sce <- ScoreSignatures_UCell(sce, features = signatures, assay = "counts", name = NULL)
+sc  <- assay(altExp(sce, "UCell"))            # signatures x cells
+sce$ucell <- rownames(sc)[apply(sc, 2, which.max)]
+dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 
 ````
 
