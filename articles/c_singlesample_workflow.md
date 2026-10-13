@@ -9,11 +9,18 @@ library(scater)
 library(scran)
 library(bluster)
 library(TENxPBMCData)
+library(scrapper)
+library(mclust)
 ```
 
 ## Single-cell RNA-seq in Bioconductor
 
 ### Data Loading
+
+We begin by loading in a public dataset from the TENxPBMCData
+Bioconductor package. The dataset contains approx. 4,000 cells from
+peripheral blood mononuclear cells (PBMCs). These are mostly immune
+cells.
 
 ``` r
 
@@ -22,6 +29,11 @@ sce <- TENxPBMCData("pbmc4k")
 #> see ?TENxPBMCData and browseVignettes('TENxPBMCData') for documentation
 #> loading from cache
 ```
+
+Genes can be labelled in multiple different ways, including Ensembl IDs
+and Gene Symbols. We also have some column (cell level) data that the
+authors included. We can confirm from the metadata that each cell came
+from the same person.
 
 ``` r
 
@@ -36,7 +48,6 @@ head(rowData(sce))
 #> ENSG00000238009 ENSG00000238009  RP11-34P13.7 LOC100996442
 #> ENSG00000239945 ENSG00000239945  RP11-34P13.8           NA
 #> ENSG00000239906 ENSG00000239906 RP11-34P13.14           NA
-
 
 head(colData(sce))
 #> DataFrame with 6 rows and 11 columns
@@ -71,6 +82,11 @@ table(sce$Individual)
 #>          4340
 ```
 
+The gene symbols are slightly more user friendly, so we’ll use those.
+We’ll also take the opportunity to add colnames to the
+SingleCellExperiment object. This is a requirement for the dittoSeq
+plotting functions.
+
 ``` r
 
 
@@ -88,32 +104,13 @@ is.mito
 #>  [1] "MT-ND1"  "MT-ND2"  "MT-CO1"  "MT-CO2"  "MT-ATP8" "MT-ATP6" "MT-CO3" 
 #>  [8] "MT-ND3"  "MT-ND4L" "MT-ND4"  "MT-ND5"  "MT-ND6"  "MT-CYB"
 
-
-
-library(scrapper)
-#> 
-#> Attaching package: 'scrapper'
-#> The following object is masked from 'package:scran':
-#> 
-#>     scoreMarkers
-#> The following objects are masked from 'package:scater':
-#> 
-#>     aggregateAcrossCells, normalizeCounts
-#> The following objects are masked from 'package:scuttle':
-#> 
-#>     aggregateAcrossCells, normalizeCounts
-df <- perCellQCMetrics(sce, subsets=list(Mito=is.mito))
-#> Warning in .per_cell_qc_metrics(assay(x, assay.type), subsets = subsets, : 'perCellQCMetrics' is deprecated.
-#> Use 'scrapper::computeRnaQcMetrics' instead.
-#> See help("Deprecated")
-#> using unknown matrix fallback for 'HDF5ArraySeed'
-summary(df$sum)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>    1386    3071    3866    4349    4906   48443
-
 sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
 #> using unknown matrix fallback for 'HDF5ArraySeed'
+sce<-sce[,sce$keep] ## suggested thresholds
 ```
+
+Cells might have high or low counts due to technical reasons, retaining
+them might skew the analysis.
 
 ``` r
 
@@ -123,7 +120,25 @@ multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Indiv
 
 ![](c_singlesample_workflow_files/figure-html/unnamed-chunk-7-1.png)
 
+``` r
+
+
+sce<-sce[,sce$subset.proportion.mito<0.1 & sce$sum<20000]
+```
+
 ### Dimension Reduction
+
+This dataset contain information about 33694 genes. Many of these are
+uninformative, and other may correlate. Dimension reduction methods such
+as PCA compress the features space, reduce noise, and improve
+computational efficiency.
+
+Normalisation reduces the effect of sequencing depth. Log transformation
+compresses the data and prevents highly expressed genes from dominating
+downstream analysis.
+
+PCA is a linear transformatino, TSNE (and UMAP, not shown) is
+non-linear, and use mostly for visualising.
 
 ``` r
 
@@ -143,22 +158,40 @@ set.seed(1)
 sce<-runTsne.se(sce,reddim.type ='PCA')
 ```
 
+From the PCA and TSNE, we expect similar cell types to group together.
+Sometimes, technical effects can outweight biological effects, such as
+[batch
+effects](https://bioconductor.posit.co/packages/release/bioc/vignettes/batchelor/inst/doc/correction.html),
+but we won’t cover that today. We can confirm this using well-known gene
+markers CD3E (T cells), CD163 (myeloid cells) and CD19 (B cells).
+
 ``` r
 
 
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-9-1.png)
 
 ``` r
 
 dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='Individual',slot='logcounts')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-9-2.png)
 
 ### Clustering
+
+Cells are constantly adapting to their environment. They differentiate
+and specialise throughout their lifecycle. While not strictly true, it
+can be useful to think of them as falling into discrete states, or
+clusters.
+
+Clustering methods group similar cells which ideally represent a cell
+type or state. This helps understand the role of different groups of
+cells.
+
+As is often the case, there are many ways to perform clustering.
 
 ``` r
 
@@ -169,30 +202,38 @@ sce<-clusterKmeans.se(sce,reddim.type = 'PCA',k=10,output.name = 'kmeans')
 dittoDimPlot(sce,reduction.use = 'TSNE','multilevel')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-1.png)
 
 ``` r
 
 dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-2.png)
+
+Here we compare two different clustering results. The adjusted rand
+index is pretty high, but there’s still some noticable differences,
+which one do you trust?
 
 ``` r
 
 
 table(sce$multilevel,sce$kmeans)
-#>    
-#>       1   2   3   4   5   6   7   8   9  10
-#>   1   7   0   0   0   0 332   0   0  72 538
-#>   2   0   0   2 436  39   0  85   0   1   0
-#>   3   0   0   0   1 230   0 968   0   0   0
-#>   4  34   3   0   0   0   0   0   0   0   0
-#>   5 103   1   0   0   0  17   0   0   2   0
-#>   6   0 608   1   1   0   0   1   0   1   0
-#>   7   0   1 514  25  16   0   7   5   0   0
-#>   8   0   0   2   0   0   0   0 174   1   0
-#>   9 104   0   0   0   0   6   0   0   2   0
+#>     
+#>        1   2   3   4   5   6   7   8   9  10
+#>   1  471   0   0   0   0  16   0   0 332   0
+#>   2    0   1   0 418  36   0  48   0   0  30
+#>   3    0   0   0   0  10   0 584   0   0 392
+#>   4    0   0   1   0   0 100   0   0  17   0
+#>   5    0   0 601   0   0   0   0   0   0   1
+#>   6    0 508   1  26  12   0   3   5   0   8
+#>   7    0   0   3   0   0  33   0   0   0   0
+#>   8    0   2   0   0   0   2   0 172   0   0
+#>   9    0   0   0   0   0  96   0   0   4   0
+#>   10   0   0   0   0 200   0   7   0   0   1
+
+adjustedRandIndex(sce$multilevel,sce$kmeans)
+#> [1] 0.7010487
 ```
 
 ``` r
@@ -205,7 +246,7 @@ genes %in% rownames(sce)
 multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-1.png)
 
 ``` r
 
@@ -213,6 +254,12 @@ head(rownames(sce))
 #> [1] "RP11-34P13.3"  "FAM138A"       "OR4F5"         "RP11-34P13.7" 
 #> [5] "RP11-34P13.8"  "RP11-34P13.14"
 ```
+
+### Unsupervised Annotation
+
+This method of annotation looks at genes with high effect sizes in one
+cluster vs. the rest. By comparing against the literature, the cell type
+and function can be understood.
 
 ``` r
 
@@ -225,13 +272,13 @@ top_genes <- unique(unlist(lapply(markers, function(df) {
 }), use.names = FALSE))
 
 top_genes
-#>  [1] "LYZ"      "FTL"      "S100A9"   "S100A8"   "TYROBP"   "TRAC"    
-#>  [7] "IL32"     "LTB"      "CD3D"     "IL7R"     "RPS27"    "RPS6"    
-#> [13] "RPL32"    "RPS29"    "RPLP2"    "JCHAIN"   "LILRA4"   "IRF7"    
-#> [19] "ITM2C"    "IRF8"     "HLA-DRA"  "HLA-DQA1" "CST3"     "HLA-DPB1"
-#> [25] "CD79A"    "CD79B"    "CD74"     "MS4A1"    "CCL5"     "NKG7"    
-#> [31] "CST7"     "GNLY"     "CTSW"     "GZMA"     "PRF1"     "AIF1"    
-#> [37] "LST1"     "SERPINA1" "FCGR3A"
+#>  [1] "LYZ"      "FTL"      "TYROBP"   "S100A9"   "CTSS"     "IL32"    
+#>  [7] "TRAC"     "LTB"      "CD3D"     "IL7R"     "RPS27"    "RPL32"   
+#> [13] "RPS29"    "RPS6"     "RPLP2"    "HLA-DRA"  "HLA-DQA1" "CST3"    
+#> [19] "HLA-DPB1" "CD79A"    "CD74"     "CD79B"    "MS4A1"    "CCL5"    
+#> [25] "NKG7"     "GZMA"     "JCHAIN"   "LILRA4"   "IRF7"     "C12orf75"
+#> [31] "IRF8"     "GNLY"     "CTSW"     "PRF1"     "LST1"     "AIF1"    
+#> [37] "FCGR3A"   "SERPINA1" "RPL21"
 
 plotGroupedHeatmap(sce,
                    features     = top_genes,
@@ -243,9 +290,12 @@ plotGroupedHeatmap(sce,
                    cluster_cols = FALSE)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-15-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
 
 ### Supervised Annotation
+
+This method of annotation uses pre-annotated data to label clusters or
+cells in a new dataset.
 
 ``` r
 
@@ -273,11 +323,12 @@ sce$ucell <- rownames(sc)[apply(sc, 2, which.max)]
 dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-16-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
 
 ### Reflection
 
 - What assumptions did we make?
+- What are the limitations of supervised vs. unsupervised annotation?
 - How could the analysis have been done differently?
 - How does this impact the validity of the results?
 - What would have changed if there were cells from multiple samples?
@@ -310,55 +361,55 @@ sessionInfo()
 #> [8] base     
 #> 
 #> other attached packages:
-#>  [1] UCell_2.17.1                scrapper_1.7.9             
-#>  [3] TENxPBMCData_1.31.0         HDF5Array_1.41.3           
-#>  [5] h5mread_1.5.3               rhdf5_2.57.20              
-#>  [7] DelayedArray_0.39.8         SparseArray_1.13.4         
-#>  [9] S4Arrays_1.13.2             abind_1.4-8                
-#> [11] Matrix_1.7-6                bluster_1.23.1             
-#> [13] scran_1.41.1                scater_1.41.2              
-#> [15] scuttle_1.23.2              SingleCellExperiment_1.35.2
-#> [17] SummarizedExperiment_1.43.0 Biobase_2.73.2             
-#> [19] GenomicRanges_1.65.4        Seqinfo_1.3.2              
-#> [21] IRanges_2.47.5              S4Vectors_0.51.10          
-#> [23] BiocGenerics_0.59.12        generics_0.1.4             
-#> [25] MatrixGenerics_1.25.0       matrixStats_1.5.0          
-#> [27] dittoSeq_1.25.0             ggplot2_4.0.3              
-#> [29] BiocStyle_2.41.0           
+#>  [1] UCell_2.17.1                mclust_6.1.3               
+#>  [3] scrapper_1.7.9              TENxPBMCData_1.31.0        
+#>  [5] HDF5Array_1.41.3            h5mread_1.5.3              
+#>  [7] rhdf5_2.57.20               DelayedArray_0.39.8        
+#>  [9] SparseArray_1.13.4          S4Arrays_1.13.2            
+#> [11] abind_1.4-8                 Matrix_1.7-6               
+#> [13] bluster_1.23.1              scran_1.41.1               
+#> [15] scater_1.41.2               scuttle_1.23.2             
+#> [17] SingleCellExperiment_1.35.2 SummarizedExperiment_1.43.0
+#> [19] Biobase_2.73.2              GenomicRanges_1.65.4       
+#> [21] Seqinfo_1.3.2               IRanges_2.47.5             
+#> [23] S4Vectors_0.51.10           BiocGenerics_0.59.12       
+#> [25] generics_0.1.4              MatrixGenerics_1.25.0      
+#> [27] matrixStats_1.5.0           dittoSeq_1.25.0            
+#> [29] ggplot2_4.0.3               BiocStyle_2.41.0           
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] DBI_1.3.0            httr2_1.3.0          gridExtra_2.3.1     
-#>   [4] rlang_1.3.0          magrittr_2.0.5       otel_0.2.0          
-#>   [7] RSQLite_3.53.3       ggridges_0.5.7       compiler_4.6.1      
-#>  [10] png_0.1-9            systemfonts_1.3.2    vctrs_0.7.3         
-#>  [13] crayon_1.5.3         pkgconfig_2.0.3      fastmap_1.2.0       
-#>  [16] dbplyr_2.6.0         XVector_0.53.0       labeling_0.4.3      
-#>  [19] rmarkdown_2.32       ggbeeswarm_0.7.3     ragg_1.5.2          
-#>  [22] purrr_1.2.2          bit_4.6.0            xfun_0.61           
-#>  [25] cachem_1.1.0         beachmat_2.29.3      jsonlite_2.0.0      
-#>  [28] blob_1.3.0           rhdf5filters_1.25.4  Rhdf5lib_2.1.0      
-#>  [31] BiocParallel_1.47.0  irlba_2.4.1          parallel_4.6.1      
-#>  [34] cluster_2.1.8.3      R6_2.6.1             bslib_0.12.0        
-#>  [37] RColorBrewer_1.1-3   limma_3.99.1         jquerylib_0.1.4     
-#>  [40] Rcpp_1.1.2           bookdown_0.48        knitr_1.52          
-#>  [43] BiocBaseUtils_1.15.1 igraph_2.3.4         tidyselect_1.2.1    
-#>  [46] yaml_2.3.12          viridis_0.6.5        codetools_0.2-20    
-#>  [49] curl_8.0.0           lattice_0.23-1       tibble_3.3.1        
-#>  [52] KEGGREST_1.53.6      withr_3.0.3          S7_0.2.2            
-#>  [55] evaluate_1.0.5       desc_1.4.3           BiocFileCache_3.3.0 
-#>  [58] Biostrings_2.81.9    ExperimentHub_3.3.2  filelock_1.0.3      
-#>  [61] pillar_1.11.1        BiocManager_1.30.27  BiocVersion_3.24.0  
-#>  [64] scales_1.4.0         glue_1.8.1           metapod_1.21.0      
-#>  [67] pheatmap_1.0.13      tools_4.6.1          AnnotationHub_4.3.2 
-#>  [70] data.table_1.18.6.1  BiocNeighbors_2.7.3  ScaledMatrix_1.21.0 
-#>  [73] locfit_1.5-9.12      fs_2.1.0             cowplot_1.2.0       
-#>  [76] grid_4.6.1           AnnotationDbi_1.75.2 edgeR_4.99.6        
-#>  [79] colorspace_2.1-4     beeswarm_0.4.0       BiocSingular_1.29.2 
-#>  [82] vipor_0.4.7          cli_3.6.6            rsvd_1.0.5          
-#>  [85] rappdirs_0.3.4       textshaping_1.0.5    viridisLite_0.4.3   
-#>  [88] dplyr_1.2.1          gtable_0.3.6         sass_0.4.10         
-#>  [91] digest_0.6.39        ggrepel_0.9.8        dqrng_0.4.1         
-#>  [94] htmlwidgets_1.6.4    farver_2.1.2         memoise_2.0.1       
-#>  [97] htmltools_0.5.9      pkgdown_2.2.1        lifecycle_1.0.5     
-#> [100] httr_1.4.9           statmod_1.5.2        bit64_4.8.6
+#>   [1] RColorBrewer_1.1-3   jsonlite_2.0.0       magrittr_2.0.5      
+#>   [4] ggbeeswarm_0.7.3     farver_2.1.2         rmarkdown_2.32      
+#>   [7] fs_2.1.0             ragg_1.5.2           vctrs_0.7.3         
+#>  [10] memoise_2.0.1        htmltools_0.5.9      BiocBaseUtils_1.15.1
+#>  [13] AnnotationHub_4.3.2  curl_8.0.0           BiocNeighbors_2.7.3 
+#>  [16] Rhdf5lib_2.1.0       sass_0.4.10          bslib_0.12.0        
+#>  [19] htmlwidgets_1.6.4    desc_1.4.3           httr2_1.3.0         
+#>  [22] cachem_1.1.0         igraph_2.3.4         lifecycle_1.0.5     
+#>  [25] pkgconfig_2.0.3      rsvd_1.0.5           R6_2.6.1            
+#>  [28] fastmap_1.2.0        digest_0.6.39        colorspace_2.1-4    
+#>  [31] AnnotationDbi_1.75.2 dqrng_0.4.1          irlba_2.4.1         
+#>  [34] ExperimentHub_3.3.2  textshaping_1.0.5    RSQLite_3.53.3      
+#>  [37] beachmat_2.29.3      filelock_1.0.3       labeling_0.4.3      
+#>  [40] httr_1.4.9           compiler_4.6.1       bit64_4.8.6         
+#>  [43] withr_3.0.3          S7_0.2.2             BiocParallel_1.47.0 
+#>  [46] viridis_0.6.5        DBI_1.3.0            rappdirs_0.3.4      
+#>  [49] tools_4.6.1          vipor_0.4.7          otel_0.2.0          
+#>  [52] beeswarm_0.4.0       glue_1.8.1           rhdf5filters_1.25.4 
+#>  [55] grid_4.6.1           cluster_2.1.8.3      gtable_0.3.6        
+#>  [58] data.table_1.18.6.1  BiocSingular_1.29.2  ScaledMatrix_1.21.0 
+#>  [61] metapod_1.21.0       XVector_0.53.0       ggrepel_0.9.8       
+#>  [64] BiocVersion_3.24.0   pillar_1.11.1        limma_3.99.1        
+#>  [67] dplyr_1.2.1          BiocFileCache_3.3.0  lattice_0.23-1      
+#>  [70] bit_4.6.0            tidyselect_1.2.1     locfit_1.5-9.12     
+#>  [73] Biostrings_2.81.9    knitr_1.52           gridExtra_2.3.1     
+#>  [76] bookdown_0.48        edgeR_4.99.6         xfun_0.61           
+#>  [79] statmod_1.5.2        pheatmap_1.0.13      yaml_2.3.12         
+#>  [82] evaluate_1.0.5       codetools_0.2-20     tibble_3.3.1        
+#>  [85] BiocManager_1.30.27  cli_3.6.6            systemfonts_1.3.2   
+#>  [88] jquerylib_0.1.4      Rcpp_1.1.2           dbplyr_2.6.0        
+#>  [91] png_0.1-9            parallel_4.6.1       pkgdown_2.2.1       
+#>  [94] blob_1.3.0           viridisLite_0.4.3    scales_1.4.0        
+#>  [97] ggridges_0.5.7       purrr_1.2.2          crayon_1.5.3        
+#> [100] rlang_1.3.0          cowplot_1.2.0        KEGGREST_1.53.6
 ```
