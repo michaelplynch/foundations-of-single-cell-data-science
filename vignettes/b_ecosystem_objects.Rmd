@@ -22,14 +22,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-````{r message=F, warning=F}
-
-library(SingleCellExperiment)
-library(scuttle)
-library(muscData)
-
-````
-
 ## Bioconductor
 
 [Bioconductor](https://www.bioconductor.org/) is a project which aims to develop and share open-source software for precise and repeatable analysis of biological data.
@@ -39,7 +31,7 @@ They foster an inclusive and collaborative community of developers and data scie
 
 - Analysis workflows are long and complex, an ecosystem for R packages for genomics data analysis facilitates reuse.
 - Common data structures allow interoperability between packages.
-- Package build system automates testing, ensures compatability, and improves reprehensibility.
+- Package build system automates testing, ensures compatibility, and improves reproducibility.
 - Community events and forums improve collaboration.
 
 You can:
@@ -56,8 +48,20 @@ First, we'll install BiocManager from CRAN, and we can then use BiocManager to i
 
 ````{r eval=F}
 
+## not required as packages installed through workshop package installation.
 install.packages('BiocManager')
 BiocManager::install('SingleCellExperiment')
+
+````
+
+You can then load packages as normal.
+
+````{r message=F, warning=F}
+
+library(SingleCellExperiment)
+library(scrapper)
+library(TENxPBMCData)
+
 ````
 
 As well as hosting, testing, and distributing packages, Bioconductor also ships some core infrastructure which improves interoperability between packages.
@@ -66,7 +70,7 @@ In this workshop, we'll use the SingleCellExperiment class.
 
 ````{r}
 
-sce<-Kang18_8vs8()
+sce<-TENxPBMCData::TENxPBMCData('pbmc4k')
 
 ````
 
@@ -94,9 +98,9 @@ For convenience, column data (data describing the cells) can be accessed using t
 
 ````{r}
 
-table(sce$cluster)
+table(sce$Individual)
 
-table(sce$ind,sce$stim)
+table(sce$Individual)
 
 ````
 
@@ -106,7 +110,7 @@ We can also store transformations of the raw data, e.g. normalised counts.
 ````{r}
 
 assays(sce)
-sce<-logNormCounts(sce)
+sce<-scrapper::normalizeRnaCounts.se(sce)
 assays(sce)
 
 ````
@@ -114,7 +118,7 @@ Aaaand we can also store embeddings of the data, such as from PCA, TSNE or UMAP.
 
 ````{r}
 
-reducedDimNames(sce)
+reducedDimNames(sce) ## empty for now but we'll add to it later.
 
 ````
 
@@ -125,7 +129,7 @@ Why might we want to treat these separately rather than appending them to the ma
 
 ````{r}
 
-altExpNames(sce)
+altExpNames(sce) ## also expected to be empty for this workshop.
 
 ````
 
@@ -133,7 +137,12 @@ altExpNames(sce)
 
 - Can you extract basic summary statistics from the metadata?
 - Can you extract the counts data?
-- Can you describe the data?
+- Can you describe the counts data (e.g. distribution, sparsity)?
+
+````{r}
+
+
+````
 
 
 ````{r}
