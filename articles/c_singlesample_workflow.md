@@ -106,16 +106,28 @@ is.mito
 
 sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
 #> using unknown matrix fallback for 'HDF5ArraySeed'
-sce<-sce[,sce$keep] ## suggested thresholds
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keep')
+```
+
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-6-1.png)
+
+``` r
+
+sce<-sce[,sce$keep] ## autosuggested thresholds
 ```
 
 Cells might have high or low counts due to technical reasons, retaining
 them might skew the analysis.
 
+You can also manually determine thresholds, and subset the object. In
+this case, cells with abnormally high counts (\>10,000 per cell) are
+removed.
+
 ``` r
 
 
-multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Individual')
+sce$manualkeep<-sce$sum>10000
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='manualkeep')
 ```
 
 ![](c_singlesample_workflow_files/figure-html/unnamed-chunk-7-1.png)
@@ -123,7 +135,7 @@ multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Indiv
 ``` r
 
 
-sce<-sce[,sce$subset.proportion.mito<0.1 & sce$sum<20000]
+sce<-sce[,!sce$manualkeep]
 ```
 
 ### Dimension Reduction
@@ -146,15 +158,11 @@ non-linear, and use mostly for visualising.
 sce<-normalizeRnaCounts.se(sce)
 #> using unknown matrix fallback for 'HDF5ArraySeed'
 
-set.seed(1)
 sce <- chooseRnaHvgs.se(sce, top = 1000)
 #> using unknown matrix fallback for 'HDF5ArraySeed'
-
-set.seed(1)
 sce<-runPca.se(sce, features=rowData(sce)$hvg,number=100)
 #> using unknown matrix fallback for 'HDF5ArraySeed'
 
-set.seed(1)
 sce<-runTsne.se(sce,reddim.type ='PCA')
 ```
 
@@ -171,14 +179,14 @@ markers CD3E (T cells), CD163 (myeloid cells) and CD19 (B cells).
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-9-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-1.png)
 
 ``` r
 
 dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='Individual',slot='logcounts')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-9-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-2.png)
 
 ### Clustering
 
@@ -202,14 +210,14 @@ sce<-clusterKmeans.se(sce,reddim.type = 'PCA',k=10,output.name = 'kmeans')
 dittoDimPlot(sce,reduction.use = 'TSNE','multilevel')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-1.png)
 
 ``` r
 
 dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
 
 Here we compare two different clustering results. The adjusted rand
 index is pretty high, but there’s still some noticable differences,
@@ -219,21 +227,20 @@ which one do you trust?
 
 
 table(sce$multilevel,sce$kmeans)
-#>     
-#>        1   2   3   4   5   6   7   8   9  10
-#>   1  480   0   1   0   0  18   0   0 331   0
-#>   2    0   0  17 509  16   0   0   3   0  10
-#>   3    0   0   0   0  13   0 557   0   0 416
-#>   4    0   1   0   0   0  99   0   0  11   0
-#>   5    0 602   0   0   0   0   0   0   0   2
-#>   6    0   0 398   2  50   0  43   0   0  54
-#>   7    0   3   0   0   0  33   0   0   0   0
-#>   8    0   0   0   3   0   0   0 174   0   0
-#>   9    0   0   0   1   0  95   0   0   2   0
-#>   10   0   0   0   0 188   0   8   0   0   1
+#>    
+#>       1   2   3   4   5   6   7   8   9  10
+#>   1 687   0   0   0   0   0 157   0   0   0
+#>   2   0  72   0   0  35 373   0   0   5   0
+#>   3   0 554   0   0  13   0   0   0 439   0
+#>   4   0   1 601   1   0   0   0   0   0   0
+#>   5   0   9   0 512  18  21   0   3   0   0
+#>   6   0   0   0   0   0   0   0   0   0  35
+#>   7   0   0   0   2   0   0   0 174   0   0
+#>   8   0   0   0   0 203   0   0   0  11   0
+#>   9   0   0   0   1   0   0  92   0   0   0
 
 adjustedRandIndex(sce$multilevel,sce$kmeans)
-#> [1] 0.689375
+#> [1] 0.7381909
 ```
 
 ``` r
@@ -246,7 +253,7 @@ genes %in% rownames(sce)
 multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
 
 ``` r
 
@@ -272,13 +279,13 @@ top_genes <- unique(unlist(lapply(markers, function(df) {
 }), use.names = FALSE))
 
 top_genes
-#>  [1] "LYZ"      "FTL"      "TYROBP"   "S100A9"   "CTSS"     "CCL5"    
-#>  [7] "IL32"     "NKG7"     "CD3D"     "CST7"     "RPS27"    "RPL32"   
-#> [13] "RPS29"    "RPS6"     "RPL34"    "HLA-DRA"  "HLA-DQA1" "CST3"    
-#> [19] "HLA-DPB1" "CD79A"    "CD74"     "CD79B"    "MS4A1"    "TRAC"    
-#> [25] "LTB"      "IL7R"     "JCHAIN"   "LILRA4"   "IRF7"     "IRF8"    
-#> [31] "C12orf75" "GNLY"     "CTSW"     "GZMA"     "HOPX"     "LST1"    
-#> [37] "AIF1"     "FCGR3A"   "SERPINA1" "RPL21"
+#>  [1] "LYZ"      "FTL"      "TYROBP"   "CST3"     "S100A9"   "IL32"    
+#>  [7] "TRAC"     "LTB"      "CD3D"     "IL7R"     "RPS27"    "RPS6"    
+#> [13] "RPL32"    "RPS29"    "RPL34"    "CD79A"    "HLA-DRA"  "CD74"    
+#> [19] "CD79B"    "HLA-DPA1" "CCL5"     "NKG7"     "CST7"     "JCHAIN"  
+#> [25] "LILRA4"   "IRF8"     "IRF7"     "C12orf75" "GNLY"     "CTSW"    
+#> [31] "GZMA"     "PRF1"     "RPL31"    "LST1"     "AIF1"     "SERPINA1"
+#> [37] "FCGR3A"
 
 plotGroupedHeatmap(sce,
                    features     = top_genes,
@@ -290,9 +297,9 @@ plotGroupedHeatmap(sce,
                    cluster_cols = FALSE)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
 
-### Supervised Annotation
+### Rule-based annotation
 
 This method of annotation uses pre-annotated data to label clusters or
 cells in a new dataset.
@@ -323,7 +330,42 @@ sce$ucell <- rownames(sc)[apply(sc, 2, which.max)]
 dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-15-1.png)
+
+``` r
+
+
+table(sce$kmeans,sce$ucell)
+#>     
+#>      B_cell CD14_Mono CD16_Mono cDC HSPC  NK pDC Plasma Platelet T_cell
+#>   1       1       675         7   0    0   3   0      0        0      1
+#>   2       0         2         0   0    1   1   0      0        0    632
+#>   3     594         3         1   0    0   0   0      0        0      3
+#>   4       1         4         0   0    0   9   0      0        2    500
+#>   5       0         5         0   0    1   0   0      0        0    263
+#>   6       0         2         0   1    2   1   0      0        0    388
+#>   7       1       122       112   7    0   2   1      1        1      2
+#>   8       0         0         0   0    0 168   0      0        0      9
+#>   9       0        12         1   0    1   2   0      0        0    439
+#>   10      0         0         0   0    0   0  32      3        0      0
+table(sce$multilevel,sce$ucell)
+#>    
+#>     B_cell CD14_Mono CD16_Mono cDC HSPC  NK pDC Plasma Platelet T_cell
+#>   1      2       797        29   6    0   5   1      1        1      2
+#>   2      0         3         0   1    2   1   0      0        0    478
+#>   3      0        13         1   0    1   0   0      0        0    991
+#>   4    595         3         1   0    1   0   0      0        0      3
+#>   5      0         5         0   0    1   9   0      0        1    547
+#>   6      0         0         0   0    0   0  32      3        0      0
+#>   7      0         0         0   0    0 169   0      0        0      7
+#>   8      0         4         0   0    0   2   0      0        0    208
+#>   9      0         0        90   1    0   0   0      0        1      1
+```
+
+### Supervised Annotation
+
+- Requires a high quality labelled reference.
+- Look for methods like CellTypist, SingleR etc..
 
 ### Reflection
 
@@ -332,6 +374,44 @@ dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 - How could the analysis have been done differently?
 - How does this impact the validity of the results?
 - What would have changed if there were cells from multiple samples?
+
+#### How might a data scientist approach this problem?
+
+1.  Understand how the data was generated.
+2.  Understand the type of analysis (exploratory, hypothesis generation,
+    vs. hypothesis testing).
+3.  Check the data structure, quality.
+4.  Decide on a clear and defensible modelling strategy.
+5.  Validate outputs. Big difference between ‘an output’ and ‘a correct
+    output’. Use domain expertise, independent datasets, stability and
+    reproducibility checks.
+6.  Communicate clearly. What claims can you make, and what claims can’t
+    you make, based on the data?
+
+#### Some considerations for analysis
+
+- Statistical thinking
+  - Data distributions
+  - Independence
+  - Multiple testing
+  - Assumptions
+- Computational thinking
+  - Scaling
+  - Seeds, reproducibility
+  - Algorithms
+- Communication, visualisation
+  - Model assumptions
+  - Uncertainty
+  - Informative vs. misleading plots
+- Tooling
+  - Choice of ecosystem
+  - Version control
+  - Documentation
+  - Dependency management (note to check number of packages used).
+- Ethics, integrity
+  - Reproducibility (again).
+  - Choice of reference.
+  - Patient privacy and consent.
 
 ``` r
 

@@ -56,7 +56,7 @@ options(repos = BiocManager::repositories())
 install.packages(c('remotes','usethis'))
 
 ## install workshop package (takes care of dependencies)
-remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=TRUE, upgrade=always)
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science",dependencies=TRUE, upgrade='always')
 
 ## Course notebooks (same release); answer the prompts, notebooks are in vignettes/
 usethis::use_course(
@@ -65,9 +65,9 @@ usethis::use_course(
 )
 
 ## Pre-download the dataset and check everything loads
-sce <- TENxPBMCData("pbmc4k")
+sce <- TENxPBMCData::TENxPBMCData("pbmc4k")
 sce <- muscData::Kang18_8vs8()
-pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scran",
+pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scrapper",
           "bluster", "dittoSeq", "BiocStyle")
 invisible(lapply(pkgs, library, character.only = TRUE))
 BiocManager::valid()
