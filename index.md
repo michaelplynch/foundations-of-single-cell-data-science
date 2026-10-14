@@ -81,9 +81,7 @@ message("Setup complete - see you at the workshop!")
 
 Tested on Bioconductor 3.23 and R Version 4.6.x.
 
-### Running through Docker
-
-## Running with Docker (alternative to a local install)
+### Running with Docker (alternative to a local install)
 
 Instead of installing packages locally, you can use the pre-built
 container. You’ll need [Docker
@@ -115,7 +113,7 @@ R
 
 - [Orchestrating Single-cell Analysis
   (OSCA)](https://bioconductor.org/books/release/OSCA/)
-- [Orchestrating Spatial Transcriptomic Analysis
+- [Orchestrating Spatial Transcriptomics Analysis
   (OSTA)](https://bioconductor.org/books/release/OSTA/), a related and
   upcoming research area.
 

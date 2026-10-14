@@ -169,13 +169,8 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Setup complete - see you at the workshop!"</span><span class="op">)</span></span></code></pre></div>
 <p>Tested on Bioconductor 3.23 and R Version 4.6.x.</p>
 <div class="section level3">
-<h3 id="running-through-docker">Running through Docker<a class="anchor" aria-label="anchor" href="#running-through-docker"></a>
+<h3 id="running-with-docker-alternative-to-a-local-install">Running with Docker (alternative to a local install)<a class="anchor" aria-label="anchor" href="#running-with-docker-alternative-to-a-local-install"></a>
 </h3>
-</div>
-</div>
-<div class="section level2">
-<h2 id="running-with-docker-alternative-to-a-local-install">Running with Docker (alternative to a local install)<a class="anchor" aria-label="anchor" href="#running-with-docker-alternative-to-a-local-install"></a>
-</h2>
 <p>Instead of installing packages locally, you can use the pre-built container. You’ll need <a href="https://www.docker.com/products/docker-desktop/" class="external-link">Docker Desktop</a> installed and running.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:latest</span></code></pre></div>
 <p>Then open <a href="http://localhost:8787" class="external-link uri">http://localhost:8787</a> in your browser and log in with username <code>rstudio</code> and password <code>bioc</code>. The notebooks are in the <code>vignettes/</code> folder.</p>
@@ -186,6 +181,7 @@
 <strong>The first run downloads several GB,</strong> so do it before the workshop.</li>
 <li><strong>Work is lost when the container stops.</strong></li>
 </ul>
+</div>
 </div>
 <div class="section level2">
 <h2 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
@@ -203,7 +199,7 @@
 <ul>
 <li><a href="https://bioconductor.org/books/release/OSCA/" class="external-link">Orchestrating Single-cell Analysis (OSCA)</a></li>
 <li>
-<a href="https://bioconductor.org/books/release/OSTA/" class="external-link">Orchestrating Spatial Transcriptomic Analysis (OSTA)</a>, a related and upcoming research area.</li>
+<a href="https://bioconductor.org/books/release/OSTA/" class="external-link">Orchestrating Spatial Transcriptomics Analysis (OSTA)</a>, a related and upcoming research area.</li>
 </ul>
 <p>Python</p>
 <ul>

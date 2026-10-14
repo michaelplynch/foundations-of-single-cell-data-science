@@ -116,6 +116,12 @@ colnames(sce)<-sce$Barcode
 
 ### Quality Control
 
+The sum of genes, number of nonzero genes, and & genes mapping to
+mitochondrial genes are typcial QC measures for this type of data.
+
+quickRnaQc() suggests values below (sum, number of genes) or above (&
+mito) 3 MADs are flagged.
+
 ``` r
 
 
@@ -140,8 +146,11 @@ Cells might have high or low counts due to technical reasons, retaining
 them might skew the analysis.
 
 You can also manually determine thresholds, and subset the object. In
-this case, cells with abnormally high counts (\>10,000 per cell) are
-removed.
+this case, I’ll demonstrate by flagging cells with abnormally high
+counts (\>10,000 per cell).
+
+This could be considered a naive approach to remove doublets (more than
+one cell captured).
 
 ``` r
 
@@ -264,24 +273,7 @@ adjustedRandIndex(sce$multilevel,sce$kmeans)
 #> [1] 0.7381909
 ```
 
-``` r
-
-genes<-c('CD4','CD3E','CD8A','FCGR3A','CD19','CD79A')
-
-genes %in% rownames(sce)
-#> [1] TRUE TRUE TRUE TRUE TRUE TRUE
-
-multi_dittoDimPlot(sce,reduction.use='TSNE',genes)
-```
-
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
-
-``` r
-
-head(rownames(sce))
-#> [1] "RP11-34P13.3"  "FAM138A"       "OR4F5"         "RP11-34P13.7" 
-#> [5] "RP11-34P13.8"  "RP11-34P13.14"
-```
+Now we’ve grouped cells, but we don’t know what their role is.
 
 ### Unsupervised Annotation
 
@@ -295,6 +287,7 @@ and function can be understood.
 markers<-scoreMarkers.se(sce,groups = sce$multilevel,order.by = TRUE)
 #> using unknown matrix fallback for 'HDF5ArraySeed'
 
+# extracting the top 5 genes from each cluster.
 top_genes <- unique(unlist(lapply(markers, function(df) {
   head(rownames(df)[order(df$cohens.d.mean, decreasing = TRUE)], 5)
 }), use.names = FALSE))
@@ -318,12 +311,20 @@ plotGroupedHeatmap(sce,
                    cluster_cols = FALSE)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
+
+The heatmap shows a gene signature associated with each cluster.
+Typically, manual annotation takes a lot more than five genes per
+cluster, and is carried out through consultation with relevant
+literature and experts. Below we’ll use known marker lists to identify
+cells, and compare to our clusters.
 
 ### Rule-based annotation
 
 This method of annotation uses known cell-type gene signatures to label
-clusters or cells in a new dataset.
+clusters or cells in a new dataset. It requires a priori knowledge of
+which cells we expect to see. It’s a simple approach which takes the
+highest scoring signature for each cell.
 
 ``` r
 
@@ -351,7 +352,7 @@ sce$ucell <- rownames(sc)[apply(sc, 2, which.max)]
 dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-15-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
 
 ``` r
 
@@ -402,10 +403,10 @@ table(sce$multilevel,sce$ucell)
 2.  Understand the type of analysis (exploratory, hypothesis generation,
     vs. hypothesis testing).
 3.  Check the data structure, quality.
-4.  Decide on a clear and defensible modelling strategy.
-5.  Validate outputs. Big difference between ‘an output’ and ‘a correct
-    output’. Use domain expertise, independent datasets, stability and
-    reproducibility checks.
+4.  **Decide on a clear and defensible modelling strategy.**
+5.  **Validate outputs.** Big difference between ‘an output’ and ‘a
+    correct output’. Use domain expertise, independent datasets,
+    stability and reproducibility checks.
 6.  Communicate clearly. What claims can you make, and what claims can’t
     you make, based on the data?
 

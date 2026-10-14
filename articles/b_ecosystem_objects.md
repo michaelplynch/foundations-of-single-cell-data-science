@@ -9,7 +9,7 @@ community of developers and data scientists.
 
 ## Why Bioconductor?
 
-- Analysis workflows are long and complex, an ecosystem for R packages
+- Analysis workflows are long and complex, an ecosystem of R packages
   for genomics data analysis facilitates reuse.
 - Common data structures allow interoperability between packages.
 - Package build system automates testing, ensures compatibility, and
@@ -58,14 +58,10 @@ between packages. These usually come in the form of data structures for
 storing different types of data. In this workshop, we’ll use the
 SingleCellExperiment class.
 
-We begin by loading in a public dataset from the TENxPBMCData
-Bioconductor package. The dataset contains approx. 4,000 cells from
-peripheral blood mononuclear cells (PBMCs). These are mostly immune
-cells.
-
 Data used are from the *4k PBMCs from a Healthy Donor* dataset released
 by 10x Genomics (2017), distributed via the TENxPBMCData Bioconductor
-package.
+package. The dataset contains approx. 4,000 cells from peripheral blood
+mononuclear cells (PBMCs). These are mostly immune cells.
 
 ``` r
 
@@ -104,6 +100,8 @@ to keep other information, for example:
 - each observation (cell) might need its patient ID, sequencing batch,
   quality metrics or cluster ID attached.
 
+Being able to access data from this object is crucial for analysis.
+
 ``` r
 
 
@@ -126,7 +124,7 @@ sce
 #> mainExpName: NULL
 #> altExpNames(0):
 
-counts(sce)[1:4,1:4]
+counts(sce)[1:4,1:4] # subsetting on genes and cells respectively
 #> <4 x 4> sparse DelayedMatrix object of type "integer":
 #>                 [,1] [,2] [,3] [,4]
 #> ENSG00000243485    0    0    0    0
@@ -134,7 +132,7 @@ counts(sce)[1:4,1:4]
 #> ENSG00000186092    0    0    0    0
 #> ENSG00000238009    0    0    0    0
 
-head(colData(sce))
+head(colData(sce)) # accessing cell metadata
 #> DataFrame with 6 rows and 11 columns
 #>        Sample            Barcode         Sequence   Library Cell_ranger_version
 #>   <character>        <character>      <character> <integer>         <character>
@@ -161,7 +159,7 @@ head(colData(sce))
 #> 5     2017-11-08
 #> 6     2017-11-08
 
-head(rowData(sce))
+head(rowData(sce)) # accessing gene metadata
 #> DataFrame with 6 rows and 3 columns
 #>                      ENSEMBL_ID   Symbol_TENx       Symbol
 #>                     <character>   <character>  <character>
@@ -173,16 +171,11 @@ head(rowData(sce))
 #> ENSG00000239906 ENSG00000239906 RP11-34P13.14           NA
 ```
 
-For convenience, column data (data describing the cells) can be accessed
-using the ‘\$’ operator.
+For convenience, column data (data describing the cells) can also be
+accessed using the ‘\$’ operator.
 
 ``` r
 
-
-table(sce$Individual)
-#> 
-#> HealthyDonor1 
-#>          4340
 
 table(sce$Individual)
 #> 
@@ -190,8 +183,12 @@ table(sce$Individual)
 #>          4340
 ```
 
-We can also store transformations of the raw data, e.g. normalised
-counts.
+We don’t always work with the raw counts. For example, normalised values
+reduce the impact of differences in sequencing depth, and are typically
+used for dimension reduction and clustering.
+
+We can store transformations of the raw data, e.g. normalised counts, in
+assays.
 
 ``` r
 
@@ -199,7 +196,7 @@ counts.
 assays(sce)
 #> List of length 1
 #> names(1): counts
-sce<-scrapper::normalizeRnaCounts.se(sce)
+sce<-scrapper::normalizeRnaCounts.se(sce) # can be access as logcounts(sce)
 #> using unknown matrix fallback for 'HDF5ArraySeed'
 assays(sce)
 #> List of length 2
@@ -222,7 +219,9 @@ measured on the same cells. For example,
 data measures gene and surface protein expression simultaneously.
 
 Why might we want to treat these separately rather than appending them
-to the main counts?
+to the main counts? Well, different distribution (bimodal for CITE-seq)
+mean different preprocessing, but storing them in the one object allows
+for joint analysis down the line.
 
 ``` r
 
@@ -233,9 +232,20 @@ altExpNames(sce) ## also expected to be empty for this workshop.
 
 ## Exercise
 
-- Can you extract basic summary statistics from the metadata?
+- Can you extract basic summary statistics from the metadata,
+  e.g. confirm how many individuals?
 - Can you extract the counts data?
 - Can you describe the counts data (e.g. distribution, sparsity)?
+
+``` r
+
+
+# use the object name, followed by $ to see what colData is stored.
+
+# counts can be extract using counts(object)
+
+# use hist() to visualise the count distribution of one gene, or one cell (not all at the same time!!)
+```
 
 ``` r
 
