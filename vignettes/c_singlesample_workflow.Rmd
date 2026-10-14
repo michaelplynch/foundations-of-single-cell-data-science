@@ -30,7 +30,6 @@ knitr::opts_chunk$set(
 
 library(dittoSeq)
 library(scater)
-library(bluster)
 library(TENxPBMCData)
 library(scrapper)
 library(mclust)
@@ -164,7 +163,7 @@ dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ````
 
 Here we compare two different clustering results.
-The adjusted rand index is pretty high, but there's still some noticable differences, which one do you trust?
+The adjusted rand index is moderate, and there's still some noticeable differences.
 
 ````{r}
 
