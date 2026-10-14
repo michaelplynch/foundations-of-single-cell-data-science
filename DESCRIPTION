@@ -12,19 +12,18 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Depends: 
+Suggests:
     scater,
     muscData,
     TENxPBMCData,
     knitr,
     rmarkdown,
     BiocStyle,
-    pkgdown,
     dittoSeq,
     SingleCellExperiment,
     scrapper,
     UCell,
     mclust
-Suggests: 
 URL: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 BugReports: https://github.com/michaelplynch/foundations-of-single-cell-data-science/issues/new/choose
 VignetteBuilder: knitr
