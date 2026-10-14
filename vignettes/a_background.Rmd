@@ -35,7 +35,7 @@ knitr::opts_chunk$set(
 - The reads are compared to a reference to determine which gene they represent.
 - Unique molecular identifiers (UMIs) ensure each molecule is counted only once.
 - Barcodes assign the UMIs back to cells.
-- A cell-by-gene count matrix is created, providing the starting point for downstream analyses such as quality control, clustering, and cell-type annotation.
+- A gene-by-cell count matrix is created, providing the starting point for downstream analyses such as quality control, clustering, and cell-type annotation.
 
 ````{r fig.cap = "RNA extracted from single cells can be measured and analysed.", out.width = '100%',fig.alt='Depiction of cells from humans, with each containing various gene counts in a cells by genes table, which is used for downstream analysis.'}
 
