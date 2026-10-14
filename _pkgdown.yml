@@ -9,3 +9,5 @@ home:
 
 navbar:
   bg: primary
+  structure:
+    left: [articles]
