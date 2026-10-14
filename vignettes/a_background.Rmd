@@ -22,10 +22,18 @@ knitr::opts_chunk$set(
 ## Single-cell RNA-seq
 
 - Single-cell data, as the name suggests, is RNA (gene expression) measured at the level of single cells.
-- The data is tabular, and represents a count of how many of each RNA was measured in each cell when the experiment was carried outl
+- The data is tabular, and represents a count of how many of each RNA was measured in each cell when the experiment was carried out.
 - Cells are dynamic, so think of it as a snapshot of the cells state at a moment in time.
 - Cells differentiate and specialise, meaning they have a hierarhical structure.
 
+## Data generation
+
+- Single cells are isolated from a tissue or blood sample, often using a microfluidics platform such as the 10x Genomics Chromium system.
+- Each cell is captured with a unique barcode, allowing molecules from that cell to be tracked throughout the experiment.
+- Cellular RNA is converted to cDNA and sequenced, generating millions of short sequencing reads made up of base pairs A, T, G, and C.
+- The reads are compared to a reference to determine which gene they represent.
+- Reads are assigned back to individual cells and genes using the cell barcodes and unique molecular identifiers (UMIs).
+- A gene-by-cell count matrix is created, providing the starting point for downstream analyses such as quality control, clustering, and cell type annotation.
 
 ````{r echo = TRUE, fig.cap = "RNA extracted from single cells can be measured and analysed.", out.width = '100%'}
 
