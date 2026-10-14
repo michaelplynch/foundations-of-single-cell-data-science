@@ -1,6 +1,7 @@
 # Foundations of single-cell data science
 
-This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop.
+This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to an audience with a background in data science, machine learning, and statistics.
+The workshop is delivered as an installable R package, with a rendered [html website](https://michaelplynch.github.io/foundations-of-single-cell-data-science/), and Docker container.
 An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## Broad Goals
@@ -12,7 +13,7 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 ## This is
 
-- a crash course in the key steps of a single-cell RNA-seq analyses.
+- a crash course in the key steps of a single-cell RNA-seq analysis.
 - a discussion on how to approach new problems generally in DS.
 - considerations for effective analyses.
 
@@ -31,7 +32,7 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 | Single-sample workflow         | c_singlesample_workflow.Rmd  | 60m  |
 | Reflection & Best Practices    |                              | 15m  |
 
-## Installation:
+## Installation
 
 Rendered pkgdown website available here: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 
@@ -57,7 +58,7 @@ usethis::use_course(
 )
 
 ## Pre-download the dataset and check everything loads
-sce <- TENxPBMCData("pbmc10k")
+sce <- TENxPBMCData("pbmc4k")
 sce <- muscData::Kang18_8vs8()
 pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scran",
           "bluster", "dittoSeq", "BiocStyle")
@@ -69,11 +70,7 @@ message("Setup complete - see you at the workshop!")
 
 Tested on Bioconductor 3.23 and R Version 4.6.x.
 
-### Description
-
-This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to students with a background in data science, machine learning, and statistics.
-
-### Pre-requisites
+## Pre-requisites
 
 * Basic knowledge of R syntax
 * Basic machine learning and statistics
@@ -81,9 +78,15 @@ This workshop introduces the basics of single-cell RNA sequencing (gene expressi
 
 ### Useful resources
 
-- https://bioconductor.org/books/release/OSCA/
-- https://bioconductor.org/books/release/OSTA/
+R
 
-### Participation
+- [Orchestrating Single-cell Analysis (OSCA)](https://bioconductor.org/books/release/OSCA/)
+- [Orchestrating spatial Transcriptomic Analysis (OSTA)](https://bioconductor.org/books/release/OSTA/), a related and upcoming research area.
+
+Python
+
+- [Single-cell best practices](https://www.sc-best-practices.org/)
+
+## Participation
 
 Interactive discussion on analyis strategy and results, follow-along coding, reflection on analysis strengths and limitations.
