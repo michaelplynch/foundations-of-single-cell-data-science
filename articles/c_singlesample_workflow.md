@@ -146,8 +146,8 @@ removed.
 ``` r
 
 
-sce$manualkeep<-sce$sum>10000
-multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='manualkeep')
+sce$keepmanual<-sce$sum>10000
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepmanual')
 ```
 
 ![](c_singlesample_workflow_files/figure-html/unnamed-chunk-7-1.png)
@@ -155,7 +155,7 @@ multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='manua
 ``` r
 
 
-sce<-sce[,!sce$manualkeep]
+sce<-sce[,!sce$keepmanual]
 ```
 
 ### Dimension Reduction

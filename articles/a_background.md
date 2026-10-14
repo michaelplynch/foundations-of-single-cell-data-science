@@ -27,7 +27,7 @@
 - Unique molecular identifiers (UMIs) ensure each molecule is counted
   only once.
 - Barcodes assign the UMIs back to cells.
-- A cell-by-gene count matrix is created, providing the starting point
+- A gene-by-cell count matrix is created, providing the starting point
   for downstream analyses such as quality control, clustering, and
   cell-type annotation.
 
@@ -50,6 +50,12 @@ Before diving into the hands-on coding, let’s consider
 - how could you preprocess the data?
 - what type of questions could you ask from the data?
 - how could you verify your interpretation of the data?
+
+Considerations:
+
+- Impact of experimental processing on data.
+- Analysis plan.
+- Validation plan.
 
 ``` r
 
