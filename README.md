@@ -60,8 +60,7 @@ usethis::use_course(
 ## Pre-download the dataset and check everything loads
 sce <- TENxPBMCData::TENxPBMCData("pbmc4k")
 sce <- muscData::Kang18_8vs8()
-pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scrapper",
-          "bluster", "dittoSeq", "BiocStyle")
+pkgs <- c("SingleCellExperiment", "scater", "scrapper", "dittoSeq", "BiocStyle","UCell","mclust")
 invisible(lapply(pkgs, library, character.only = TRUE))
 BiocManager::valid()
 message("Setup complete - see you at the workshop!")
