@@ -52,6 +52,12 @@ Before diving into the hands-on coding, let's consider
 - how could you verify your interpretation of the data?
 
 
+Considerations:
+
+- Impact of experimental processing on data.
+- Analysis plan.
+- Validation plan.
+
 ````{r}
 
 sessionInfo()
