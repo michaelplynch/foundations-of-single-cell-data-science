@@ -80,11 +80,30 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <li>Single-cell data, as the name suggests, is RNA (gene expression)
 measured at the level of single cells.</li>
 <li>The data is tabular, and represents a count of how many of each RNA
-was measured in each cell when the experiment was carried outl</li>
+was measured in each cell when the experiment was carried out.</li>
 <li>Cells are dynamic, so think of it as a snapshot of the cells state
 at a moment in time.</li>
 <li>Cells differentiate and specialise, meaning they have a hierarhical
 structure.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="data-generation">Data generation<a class="anchor" aria-label="anchor" href="#data-generation"></a>
+</h2>
+<ul>
+<li>Single cells are isolated from a tissue or blood sample, often using
+a microfluidics platform such as the 10x Genomics Chromium system.</li>
+<li>Each cell is captured with a unique barcode, allowing molecules from
+that cell to be tracked throughout the experiment.</li>
+<li>Cellular RNA is converted to cDNA and sequenced, generating millions
+of short sequencing reads made up of base pairs A, T, G, and C.</li>
+<li>The reads are compared to a reference to determine which gene they
+represent.</li>
+<li>Reads are assigned back to individual cells and genes using the cell
+barcodes and unique molecular identifiers (UMIs).</li>
+<li>A gene-by-cell count matrix is created, providing the starting point
+for downstream analyses such as quality control, clustering, and cell
+type annotation.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>

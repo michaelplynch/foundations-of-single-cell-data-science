@@ -57,7 +57,7 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="foundations-of-single-cell-data-science">Foundations of single-cell data science<a class="anchor" aria-label="anchor" href="#foundations-of-single-cell-data-science"></a>
 </h1></div>
-<p>This package contains the workshop material for the Foundations of Data Science CRT Single-cell and Bioconductor workshop. An emphasis will be placed on the how and why, not just the what, of each step.</p>
+<p>This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to an audience with a background in data science, machine learning, and statistics. The workshop is delivered as an installable R package, with a rendered <a href="https://michaelplynch.github.io/foundations-of-single-cell-data-science/">html website</a>, and Docker container. An emphasis will be placed on the how and why, not just the what, of each step.</p>
 <div class="section level2">
 <h2 id="broad-goals">Broad Goals<a class="anchor" aria-label="anchor" href="#broad-goals"></a>
 </h2>
@@ -72,7 +72,7 @@
 <h2 id="this-is">This is<a class="anchor" aria-label="anchor" href="#this-is"></a>
 </h2>
 <ul>
-<li>a crash course in the key steps of a single-cell RNA-seq analyses.</li>
+<li>a crash course in the key steps of a single-cell RNA-seq analysis.</li>
 <li>a discussion on how to approach new problems generally in DS.</li>
 <li>considerations for effective analyses.</li>
 </ul>
@@ -124,7 +124,7 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation:<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Rendered pkgdown website available here: <a href="https://michaelplynch.github.io/foundations-of-single-cell-data-science/" class="uri">https://michaelplynch.github.io/foundations-of-single-cell-data-science/</a></p>
 <p>Package note</p>
@@ -148,7 +148,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Pre-download the dataset and check everything loads</span></span>
-<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">TENxPBMCData</span><span class="op">(</span><span class="st">"pbmc10k"</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">TENxPBMCData</span><span class="op">(</span><span class="st">"pbmc4k"</span><span class="op">)</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">muscData</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/muscData/man/Kang18_8vs8.html" class="external-link">Kang18_8vs8</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">pkgs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SingleCellExperiment"</span>, <span class="st">"scuttle"</span>, <span class="st">"scater"</span>, <span class="st">"scran"</span>,</span>
 <span>          <span class="st">"bluster"</span>, <span class="st">"dittoSeq"</span>, <span class="st">"BiocStyle"</span><span class="op">)</span></span>
@@ -156,33 +156,34 @@
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/valid.html" class="external-link">valid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Setup complete - see you at the workshop!"</span><span class="op">)</span></span></code></pre></div>
 <p>Tested on Bioconductor 3.23 and R Version 4.6.x.</p>
-<div class="section level3">
-<h3 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
-</h3>
-<p>This workshop introduces the basics of single-cell RNA sequencing (gene expression) and a minimal analysis workflow to students with a background in data science, machine learning, and statistics.</p>
 </div>
-<div class="section level3">
-<h3 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
-</h3>
+<div class="section level2">
+<h2 id="pre-requisites">Pre-requisites<a class="anchor" aria-label="anchor" href="#pre-requisites"></a>
+</h2>
 <ul>
 <li>Basic knowledge of R syntax</li>
 <li>Basic machine learning and statistics</li>
 <li>Some previous data science/analysis experience</li>
 </ul>
-</div>
 <div class="section level3">
 <h3 id="useful-resources">Useful resources<a class="anchor" aria-label="anchor" href="#useful-resources"></a>
 </h3>
+<p>R</p>
 <ul>
-<li><a href="https://bioconductor.org/books/release/OSCA/" class="external-link uri">https://bioconductor.org/books/release/OSCA/</a></li>
-<li><a href="https://bioconductor.org/books/release/OSTA/" class="external-link uri">https://bioconductor.org/books/release/OSTA/</a></li>
+<li><a href="https://bioconductor.org/books/release/OSCA/" class="external-link">Orchestrating Single-cell Analysis (OSCA)</a></li>
+<li>
+<a href="https://bioconductor.org/books/release/OSTA/" class="external-link">Orchestrating spatial Transcriptomic Analysis (OSTA)</a>, a related and upcoming research area.</li>
+</ul>
+<p>Python</p>
+<ul>
+<li><a href="https://www.sc-best-practices.org/" class="external-link">Single-cell best practices</a></li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="participation">Participation<a class="anchor" aria-label="anchor" href="#participation"></a>
-</h3>
-<p>Interactive discussion on analyis strategy and results, follow-along coding, reflection on analysis strengths and limitations.</p>
 </div>
+<div class="section level2">
+<h2 id="participation">Participation<a class="anchor" aria-label="anchor" href="#participation"></a>
+</h2>
+<p>Interactive discussion on analyis strategy and results, follow-along coding, reflection on analysis strengths and limitations.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
