@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a_background.html">scRNA-seq background</a></li>
-    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">The SingleCellExperiment Object and EDA</a></li>
+    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecossytem and the SingleCellExperiment Object</a></li>
     <li><a class="dropdown-item" href="../articles/c_singlesample_workflow.html">scRNA-seq single-sample analysis</a></li>
     <li><a class="dropdown-item" href="../articles/d_multisample_workflow.html">scRNA-seq multi-sample analysis</a></li>
   </ul>
@@ -79,11 +79,14 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <ul>
 <li>Single-cell data, as the name suggests, is RNA (gene expression)
 measured at the level of single cells.</li>
-<li>The data is tabular, and represents a count of how many of each RNA
-was measured in each cell when the experiment was carried out.</li>
-<li>Cells are dynamic, so think of it as a snapshot of the cells state
+<li>The data is tabular, where rows are genes, columns are cells, and
+values represent a count of how many of each RNA was measured in each
+cell when the experiment was carried out.</li>
+<li>This count is not an absolute measurement, and is impacted by both
+experimental and biological factors.</li>
+<li>Cells are dynamic, so think of it as a snapshot of the cell’s state
 at a moment in time.</li>
-<li>Cells differentiate and specialise, meaning they have a hierarhical
+<li>Cells differentiate and specialise, meaning they have a hierarchical
 structure.</li>
 </ul>
 </div>
@@ -100,17 +103,16 @@ of short sequencing reads made up of base pairs A, T, G, and C.</li>
 <li>The reads are compared to a reference to determine which gene they
 represent.</li>
 <li>Reads are assigned back to individual cells and genes using the cell
-barcodes and unique molecular identifiers (UMIs).</li>
+barcodes and unique molecular identifiers (UMIs) respectively.</li>
 <li>A gene-by-cell count matrix is created, providing the starting point
 for downstream analyses such as quality control, clustering, and cell
 type annotation.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"images/single_cell_data.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="images/single_cell_data.png" class="r-plt" alt="RNA extracted from single cells can be measured and analysed." width="100%"><p class="caption">
+<img src="images/single_cell_data.png" class="r-plt" alt="Depiction of cells from humans, with each containing various gene counts in a cells by genes table, which is used for downstream analysis." width="100%"><p class="caption">
 RNA extracted from single cells can be measured and analysed.
 </p>
 </div>
@@ -118,11 +120,11 @@ RNA extracted from single cells can be measured and analysed.
 <div class="section level2">
 <h2 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
 </h2>
-<p>Before diving into the hands-on coding, consider</p>
+<p>Before diving into the hands-on coding, let’s consider</p>
 <ul>
-<li>How could you preprocess the data?</li>
-<li>What type of questions could you ask from the data?</li>
-<li>How could you verify your interpretation of the data?</li>
+<li>how could you preprocess the data?</li>
+<li>what type of questions could you ask from the data?</li>
+<li>how could you verify your interpretation of the data?</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>

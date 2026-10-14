@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>The SingleCellExperiment Object and EDA • foundationsSCDS</title>
+<title>Bioconductor Ecossytem and the SingleCellExperiment Object • foundationsSCDS</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The SingleCellExperiment Object and EDA">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Bioconductor Ecossytem and the SingleCellExperiment Object">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a_background.html">scRNA-seq background</a></li>
-    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">The SingleCellExperiment Object and EDA</a></li>
+    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecossytem and the SingleCellExperiment Object</a></li>
     <li><a class="dropdown-item" href="../articles/c_singlesample_workflow.html">scRNA-seq single-sample analysis</a></li>
     <li><a class="dropdown-item" href="../articles/d_multisample_workflow.html">scRNA-seq multi-sample analysis</a></li>
   </ul>
@@ -58,7 +58,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>The SingleCellExperiment Object and EDA</h1>
+      <h1>Bioconductor Ecossytem and the SingleCellExperiment Object</h1>
                         <h4 data-toc-skip class="author">Michael
 Lynch</h4>
             <address class="author_afil">
@@ -124,11 +124,34 @@ also ships some core infrastructure which improves interoperability
 between packages. These usually come in the form of data structures for
 storing different types of data. In this workshop, we’ll use the
 SingleCellExperiment class.</p>
+<p>We begin by loading in a public dataset from the TENxPBMCData
+Bioconductor package. The dataset contains approx. 4,000 cells from
+peripheral blood mononuclear cells (PBMCs). These are mostly immune
+cells.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu">TENxPBMCData</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/TENxPBMCData/man/TENxPBMCData.html" class="external-link">TENxPBMCData</a></span><span class="op">(</span><span class="st">'pbmc4k'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; see ?TENxPBMCData and browseVignettes('TENxPBMCData') for documentation</span></span>
-<span><span class="co">#&gt; loading from cache</span></span></code></pre></div>
+<span><span class="co">#&gt; loading from cache</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"TENxPBMCData"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite package 'TENxPBMCData' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Hansen KD, Risso D, Hicks S (2026). _TENxPBMCData: PBMC data from 10X</span></span>
+<span><span class="co">#&gt;   Genomics_. doi:10.18129/B9.bioc.TENxPBMCData</span></span>
+<span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.TENxPBMCData&gt;. R package version</span></span>
+<span><span class="co">#&gt;   1.30.0, &lt;https://bioconductor.org/packages/TENxPBMCData&gt;.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {TENxPBMCData: PBMC data from 10X Genomics},</span></span>
+<span><span class="co">#&gt;     author = {Kasper D. Hansen and Davide Risso and Stephanie Hicks},</span></span>
+<span><span class="co">#&gt;     year = {2026},</span></span>
+<span><span class="co">#&gt;     note = {R package version 1.30.0},</span></span>
+<span><span class="co">#&gt;     url = {https://bioconductor.org/packages/TENxPBMCData},</span></span>
+<span><span class="co">#&gt;     doi = {10.18129/B9.bioc.TENxPBMCData},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 <p>The SingleCellExperiment object keeps the different types of data
 relevant to our analysis neatly organised in one object. Each data point
 is associated with a feature and an observation, but we might also want

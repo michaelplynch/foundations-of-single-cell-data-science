@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a_background.html">scRNA-seq background</a></li>
-    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">The SingleCellExperiment Object and EDA</a></li>
+    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecossytem and the SingleCellExperiment Object</a></li>
     <li><a class="dropdown-item" href="../articles/c_singlesample_workflow.html">scRNA-seq single-sample analysis</a></li>
     <li><a class="dropdown-item" href="../articles/d_multisample_workflow.html">scRNA-seq multi-sample analysis</a></li>
   </ul>
@@ -77,9 +77,6 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">dittoSeq</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">scuttle</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/scater/" class="external-link">scater</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/MarioniLab/scran/" class="external-link">scran</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bluster</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/HelenaLC/muscData" class="external-link">muscData</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="data-loading">Data loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
@@ -88,7 +85,26 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/muscData/man/Kang18_8vs8.html" class="external-link">Kang18_8vs8</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; see ?muscData and browseVignettes('muscData') for documentation</span></span>
-<span><span class="co">#&gt; loading from cache</span></span></code></pre></div>
+<span><span class="co">#&gt; loading from cache</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"muscData"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; To cite package 'muscData' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Crowell H (2026). _muscData: Multi-sample multi-group scRNA-seq</span></span>
+<span><span class="co">#&gt;   data_. doi:10.18129/B9.bioc.muscData</span></span>
+<span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.muscData&gt;. R package version</span></span>
+<span><span class="co">#&gt;   1.26.0, &lt;https://bioconductor.org/packages/muscData&gt;.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {muscData: Multi-sample multi-group scRNA-seq data},</span></span>
+<span><span class="co">#&gt;     author = {Helena L. Crowell},</span></span>
+<span><span class="co">#&gt;     year = {2026},</span></span>
+<span><span class="co">#&gt;     note = {R package version 1.26.0},</span></span>
+<span><span class="co">#&gt;     url = {https://bioconductor.org/packages/muscData},</span></span>
+<span><span class="co">#&gt;     doi = {10.18129/B9.bioc.muscData},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>

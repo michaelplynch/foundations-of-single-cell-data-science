@@ -4,11 +4,14 @@
 
 - Single-cell data, as the name suggests, is RNA (gene expression)
   measured at the level of single cells.
-- The data is tabular, and represents a count of how many of each RNA
-  was measured in each cell when the experiment was carried out.
-- Cells are dynamic, so think of it as a snapshot of the cells state at
+- The data is tabular, where rows are genes, columns are cells, and
+  values represent a count of how many of each RNA was measured in each
+  cell when the experiment was carried out.
+- This count is not an absolute measurement, and is impacted by both
+  experimental and biological factors.
+- Cells are dynamic, so think of it as a snapshot of the cell’s state at
   a moment in time.
-- Cells differentiate and specialise, meaning they have a hierarhical
+- Cells differentiate and specialise, meaning they have a hierarchical
   structure.
 
 ## Data generation
@@ -22,7 +25,7 @@
 - The reads are compared to a reference to determine which gene they
   represent.
 - Reads are assigned back to individual cells and genes using the cell
-  barcodes and unique molecular identifiers (UMIs).
+  barcodes and unique molecular identifiers (UMIs) respectively.
 - A gene-by-cell count matrix is created, providing the starting point
   for downstream analyses such as quality control, clustering, and cell
   type annotation.
@@ -30,22 +33,22 @@
 ``` r
 
 
-
 knitr::include_graphics("images/single_cell_data.png")
 ```
 
-![RNA extracted from single cells can be measured and
-analysed.](images/single_cell_data.png)
+![Depiction of cells from humans, with each containing various gene
+counts in a cells by genes table, which is used for downstream
+analysis.](images/single_cell_data.png)
 
 RNA extracted from single cells can be measured and analysed.
 
 ## Exercise
 
-Before diving into the hands-on coding, consider
+Before diving into the hands-on coding, let’s consider
 
-- How could you preprocess the data?
-- What type of questions could you ask from the data?
-- How could you verify your interpretation of the data?
+- how could you preprocess the data?
+- what type of questions could you ask from the data?
+- how could you verify your interpretation of the data?
 
 ``` r
 

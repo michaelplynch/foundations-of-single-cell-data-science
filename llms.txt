@@ -33,7 +33,7 @@ just the what, of each step.
 |-----------------------------|-----------------------------|------|
 | Setting up the environment  |                             | 10m  |
 | Background and planning     | a_background.Rmd            | 15m  |
-| Bioc packages and object    | b_ecosystem_object.Rmd      | 15m  |
+| Bioc packages and object    | b_ecosystem_objects.Rmd     | 15m  |
 | Single-sample workflow      | c_singlesample_workflow.Rmd | 60m  |
 | Reflection & Best Practices |                             | 15m  |
 
@@ -42,9 +42,14 @@ just the what, of each step.
 Rendered pkgdown website available here:
 <https://michaelplynch.github.io/foundations-of-single-cell-data-science/>
 
-Package note
+The workshop can be installed locally using the below commands, from a
+fresh R session.
 
 ``` r
+
+
+## Check R version
+if (getRversion() < "4.6.0") stop("This workshop needs R 4.6.0 or later (you have ", getRversion(), "). Please update R and re-run.")
 
 ## install BiocManager
 if (!require("BiocManager", quietly = TRUE))
@@ -67,8 +72,7 @@ usethis::use_course(
 ## Pre-download the dataset and check everything loads
 sce <- TENxPBMCData::TENxPBMCData("pbmc4k")
 sce <- muscData::Kang18_8vs8()
-pkgs <- c("SingleCellExperiment", "scuttle", "scater", "scrapper",
-          "bluster", "dittoSeq", "BiocStyle")
+pkgs <- c("SingleCellExperiment", "scater", "scrapper", "dittoSeq", "BiocStyle","UCell","mclust")
 invisible(lapply(pkgs, library, character.only = TRUE))
 BiocManager::valid()
 message("Setup complete - see you at the workshop!")
@@ -80,15 +84,15 @@ Tested on Bioconductor 3.23 and R Version 4.6.x.
 
 - Basic knowledge of R syntax
 - Basic machine learning and statistics
-- Some previous data science/analysis experience
+- Previous data science/analysis experience
 
-### Useful resources
+## Useful resources
 
 R
 
 - [Orchestrating Single-cell Analysis
   (OSCA)](https://bioconductor.org/books/release/OSCA/)
-- [Orchestrating spatial Transcriptomic Analysis
+- [Orchestrating Spatial Transcriptomic Analysis
   (OSTA)](https://bioconductor.org/books/release/OSTA/), a related and
   upcoming research area.
 
@@ -98,7 +102,7 @@ Python
 
 ## Participation
 
-Interactive discussion on analyis strategy and results, follow-along
+Interactive discussion on analysis strategy and results, follow-along
 coding, reflection on analysis strengths and limitations.
 
 # 
@@ -109,8 +113,8 @@ coding, reflection on analysis strengths and limitations.
 
 - [scRNA-seq
   background](https://michaelplynch.github.io/foundations-of-single-cell-data-science/articles/a_background.md):
-- [The SingleCellExperiment Object and
-  EDA](https://michaelplynch.github.io/foundations-of-single-cell-data-science/articles/b_ecosystem_objects.md):
+- [Bioconductor Ecossytem and the SingleCellExperiment
+  Object](https://michaelplynch.github.io/foundations-of-single-cell-data-science/articles/b_ecosystem_objects.md):
 - [scRNA-seq single-sample
   analysis](https://michaelplynch.github.io/foundations-of-single-cell-data-science/articles/c_singlesample_workflow.md):
 - [scRNA-seq multi-sample

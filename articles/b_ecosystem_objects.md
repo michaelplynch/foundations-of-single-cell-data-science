@@ -1,4 +1,4 @@
-# The SingleCellExperiment Object and EDA
+# Bioconductor Ecossytem and the SingleCellExperiment Object
 
 ## Bioconductor
 
@@ -58,12 +58,36 @@ between packages. These usually come in the form of data structures for
 storing different types of data. In this workshop, we’ll use the
 SingleCellExperiment class.
 
+We begin by loading in a public dataset from the TENxPBMCData
+Bioconductor package. The dataset contains approx. 4,000 cells from
+peripheral blood mononuclear cells (PBMCs). These are mostly immune
+cells.
+
 ``` r
 
 
 sce<-TENxPBMCData::TENxPBMCData('pbmc4k')
 #> see ?TENxPBMCData and browseVignettes('TENxPBMCData') for documentation
 #> loading from cache
+
+citation("TENxPBMCData")
+#> To cite package 'TENxPBMCData' in publications use:
+#> 
+#>   Hansen KD, Risso D, Hicks S (2026). _TENxPBMCData: PBMC data from 10X
+#>   Genomics_. doi:10.18129/B9.bioc.TENxPBMCData
+#>   <https://doi.org/10.18129/B9.bioc.TENxPBMCData>. R package version
+#>   1.30.0, <https://bioconductor.org/packages/TENxPBMCData>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {TENxPBMCData: PBMC data from 10X Genomics},
+#>     author = {Kasper D. Hansen and Davide Risso and Stephanie Hicks},
+#>     year = {2026},
+#>     note = {R package version 1.30.0},
+#>     url = {https://bioconductor.org/packages/TENxPBMCData},
+#>     doi = {10.18129/B9.bioc.TENxPBMCData},
+#>   }
 ```
 
 The SingleCellExperiment object keeps the different types of data

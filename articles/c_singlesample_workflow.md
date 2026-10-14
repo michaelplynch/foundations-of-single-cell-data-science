@@ -4,10 +4,7 @@
 
 
 library(dittoSeq)
-library(scuttle)
 library(scater)
-library(scran)
-library(bluster)
 library(TENxPBMCData)
 library(scrapper)
 library(mclust)
@@ -28,6 +25,25 @@ cells.
 sce <- TENxPBMCData("pbmc4k")
 #> see ?TENxPBMCData and browseVignettes('TENxPBMCData') for documentation
 #> loading from cache
+
+citation("TENxPBMCData")
+#> To cite package 'TENxPBMCData' in publications use:
+#> 
+#>   Hansen KD, Risso D, Hicks S (2026). _TENxPBMCData: PBMC data from 10X
+#>   Genomics_. doi:10.18129/B9.bioc.TENxPBMCData
+#>   <https://doi.org/10.18129/B9.bioc.TENxPBMCData>. R package version
+#>   1.30.0, <https://bioconductor.org/packages/TENxPBMCData>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {TENxPBMCData: PBMC data from 10X Genomics},
+#>     author = {Kasper D. Hansen and Davide Risso and Stephanie Hicks},
+#>     year = {2026},
+#>     note = {R package version 1.30.0},
+#>     url = {https://bioconductor.org/packages/TENxPBMCData},
+#>     doi = {10.18129/B9.bioc.TENxPBMCData},
+#>   }
 ```
 
 Genes can be labelled in multiple different ways, including Ensembl IDs
@@ -167,7 +183,7 @@ sce<-runTsne.se(sce,reddim.type ='PCA')
 ```
 
 From the PCA and TSNE, we expect similar cell types to group together.
-Sometimes, technical effects can outweight biological effects, such as
+Sometimes, technical effects can outweigh biological effects, such as
 [batch
 effects](https://bioconductor.posit.co/packages/release/bioc/vignettes/batchelor/inst/doc/correction.html),
 but we won’t cover that today. We can confirm this using well-known gene
@@ -220,8 +236,7 @@ dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
 
 Here we compare two different clustering results. The adjusted rand
-index is pretty high, but there’s still some noticable differences,
-which one do you trust?
+index is moderate, and there’s still some noticeable differences.
 
 ``` r
 
@@ -375,7 +390,7 @@ table(sce$multilevel,sce$ucell)
 - How does this impact the validity of the results?
 - What would have changed if there were cells from multiple samples?
 
-#### How might a data scientist approach this problem?
+#### How might a data scientist approach this type of problem?
 
 1.  Understand how the data was generated.
 2.  Understand the type of analysis (exploratory, hypothesis generation,
@@ -447,49 +462,45 @@ sessionInfo()
 #>  [7] rhdf5_2.56.1                DelayedArray_0.38.2        
 #>  [9] SparseArray_1.12.3          S4Arrays_1.12.1            
 #> [11] abind_1.4-8                 Matrix_1.7-6               
-#> [13] bluster_1.22.0              scran_1.40.0               
-#> [15] scater_1.40.2               scuttle_1.22.0             
-#> [17] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
-#> [19] Biobase_2.72.0              GenomicRanges_1.64.0       
-#> [21] Seqinfo_1.2.0               IRanges_2.46.0             
-#> [23] S4Vectors_0.50.3            BiocGenerics_0.58.1        
-#> [25] generics_0.1.4              MatrixGenerics_1.24.0      
-#> [27] matrixStats_1.5.0           dittoSeq_1.24.0            
-#> [29] ggplot2_4.0.3               BiocStyle_2.40.0           
+#> [13] scater_1.40.2               scuttle_1.22.0             
+#> [15] SingleCellExperiment_1.34.0 SummarizedExperiment_1.42.0
+#> [17] Biobase_2.72.0              GenomicRanges_1.64.0       
+#> [19] Seqinfo_1.2.0               IRanges_2.46.0             
+#> [21] S4Vectors_0.50.3            BiocGenerics_0.58.1        
+#> [23] generics_0.1.4              MatrixGenerics_1.24.0      
+#> [25] matrixStats_1.5.0           dittoSeq_1.24.0            
+#> [27] ggplot2_4.0.3               BiocStyle_2.40.0           
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] DBI_1.3.0            httr2_1.3.0          gridExtra_2.3.1     
-#>   [4] rlang_1.3.0          magrittr_2.0.5       otel_0.2.0          
-#>   [7] RSQLite_3.53.3       ggridges_0.5.7       compiler_4.6.1      
-#>  [10] png_0.1-9            systemfonts_1.3.2    vctrs_0.7.3         
-#>  [13] crayon_1.5.3         pkgconfig_2.0.3      fastmap_1.2.0       
-#>  [16] dbplyr_2.6.0         XVector_0.52.0       labeling_0.4.3      
-#>  [19] rmarkdown_2.32       ggbeeswarm_0.7.3     ragg_1.5.2          
-#>  [22] purrr_1.2.2          bit_4.6.0            xfun_0.61           
-#>  [25] cachem_1.1.0         beachmat_2.28.0      jsonlite_2.0.0      
-#>  [28] blob_1.3.0           rhdf5filters_1.24.1  Rhdf5lib_2.0.0      
-#>  [31] BiocParallel_1.46.0  irlba_2.4.1          parallel_4.6.1      
-#>  [34] cluster_2.1.8.3      R6_2.6.1             bslib_0.12.0        
-#>  [37] RColorBrewer_1.1-3   limma_3.68.5         jquerylib_0.1.4     
-#>  [40] Rcpp_1.1.2           bookdown_0.48        knitr_1.52          
-#>  [43] igraph_2.3.4         tidyselect_1.2.1     yaml_2.3.12         
-#>  [46] viridis_0.6.5        codetools_0.2-20     curl_8.0.0          
-#>  [49] lattice_0.22-9       tibble_3.3.1         KEGGREST_1.52.2     
-#>  [52] withr_3.0.3          S7_0.2.2             evaluate_1.0.5      
-#>  [55] desc_1.4.3           BiocFileCache_3.2.0  Biostrings_2.80.2   
-#>  [58] ExperimentHub_3.2.2  filelock_1.0.3       pillar_1.11.1       
-#>  [61] BiocManager_1.30.27  BiocVersion_3.23.1   scales_1.4.0        
-#>  [64] glue_1.8.1           metapod_1.20.0       pheatmap_1.0.13     
-#>  [67] tools_4.6.1          AnnotationHub_4.2.2  data.table_1.18.6.1 
-#>  [70] BiocNeighbors_2.6.0  ScaledMatrix_1.20.0  locfit_1.5-9.12     
-#>  [73] fs_2.1.0             cowplot_1.2.0        grid_4.6.1          
-#>  [76] AnnotationDbi_1.74.0 edgeR_4.10.5         colorspace_2.1-4    
-#>  [79] beeswarm_0.4.0       BiocSingular_1.28.1  vipor_0.4.7         
-#>  [82] cli_3.6.6            rsvd_1.0.5           rappdirs_0.3.4      
-#>  [85] textshaping_1.0.5    viridisLite_0.4.3    dplyr_1.2.1         
-#>  [88] gtable_0.3.6         sass_0.4.10          digest_0.6.39       
-#>  [91] ggrepel_0.9.8        dqrng_0.4.1          htmlwidgets_1.6.4   
-#>  [94] farver_2.1.2         memoise_2.0.1        htmltools_0.5.9     
-#>  [97] pkgdown_2.2.1        lifecycle_1.0.5      httr_1.4.9          
-#> [100] statmod_1.5.2        bit64_4.8.6
+#>  [1] DBI_1.3.0            gridExtra_2.3.1      httr2_1.3.0         
+#>  [4] rlang_1.3.0          magrittr_2.0.5       otel_0.2.0          
+#>  [7] ggridges_0.5.7       compiler_4.6.1       RSQLite_3.53.3      
+#> [10] png_0.1-9            systemfonts_1.3.2    vctrs_0.7.3         
+#> [13] crayon_1.5.3         pkgconfig_2.0.3      fastmap_1.2.0       
+#> [16] dbplyr_2.6.0         XVector_0.52.0       labeling_0.4.3      
+#> [19] rmarkdown_2.32       ggbeeswarm_0.7.3     ragg_1.5.2          
+#> [22] purrr_1.2.2          bit_4.6.0            xfun_0.61           
+#> [25] cachem_1.1.0         beachmat_2.28.0      jsonlite_2.0.0      
+#> [28] blob_1.3.0           rhdf5filters_1.24.1  Rhdf5lib_2.0.0      
+#> [31] BiocParallel_1.46.0  irlba_2.4.1          parallel_4.6.1      
+#> [34] R6_2.6.1             bslib_0.12.0         RColorBrewer_1.1-3  
+#> [37] jquerylib_0.1.4      Rcpp_1.1.2           bookdown_0.48       
+#> [40] knitr_1.52           tidyselect_1.2.1     yaml_2.3.12         
+#> [43] viridis_0.6.5        codetools_0.2-20     curl_8.0.0          
+#> [46] lattice_0.22-9       tibble_3.3.1         KEGGREST_1.52.2     
+#> [49] withr_3.0.3          S7_0.2.2             evaluate_1.0.5      
+#> [52] desc_1.4.3           BiocFileCache_3.2.0  Biostrings_2.80.2   
+#> [55] ExperimentHub_3.2.2  filelock_1.0.3       pillar_1.11.1       
+#> [58] BiocManager_1.30.27  BiocVersion_3.23.1   scales_1.4.0        
+#> [61] glue_1.8.1           pheatmap_1.0.13      tools_4.6.1         
+#> [64] AnnotationHub_4.2.2  data.table_1.18.6.1  BiocNeighbors_2.6.0 
+#> [67] ScaledMatrix_1.20.0  fs_2.1.0             cowplot_1.2.0       
+#> [70] grid_4.6.1           AnnotationDbi_1.74.0 colorspace_2.1-4    
+#> [73] beeswarm_0.4.0       BiocSingular_1.28.1  vipor_0.4.7         
+#> [76] cli_3.6.6            rsvd_1.0.5           rappdirs_0.3.4      
+#> [79] textshaping_1.0.5    viridisLite_0.4.3    dplyr_1.2.1         
+#> [82] gtable_0.3.6         sass_0.4.10          digest_0.6.39       
+#> [85] ggrepel_0.9.8        htmlwidgets_1.6.4    farver_2.1.2        
+#> [88] memoise_2.0.1        htmltools_0.5.9      pkgdown_2.2.1       
+#> [91] lifecycle_1.0.5      httr_1.4.9           bit64_4.8.6
 ```
