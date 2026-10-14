@@ -29,7 +29,7 @@ They foster an inclusive and collaborative community of developers and data scie
 
 ## Why Bioconductor?
 
-- Analysis workflows are long and complex, an ecosystem for R packages for genomics data analysis facilitates reuse.
+- Analysis workflows are long and complex, an ecosystem of R packages for genomics data analysis facilitates reuse.
 - Common data structures allow interoperability between packages.
 - Package build system automates testing, ensures compatibility, and improves reproducibility.
 - Community events and forums improve collaboration.
@@ -68,12 +68,10 @@ As well as hosting, testing, and distributing packages, Bioconductor also ships 
 These usually come in the form of data structures for storing different types of data.
 In this workshop, we'll use the SingleCellExperiment class.
 
-We begin by loading in a public dataset from the TENxPBMCData Bioconductor package.
-The dataset contains approx. 4,000 cells from peripheral blood mononuclear cells (PBMCs).
-These are mostly immune cells.
-
 Data used are from the *4k PBMCs from a Healthy Donor* dataset released by 10x Genomics (2017),
 distributed via the TENxPBMCData Bioconductor package.
+The dataset contains approx. 4,000 cells from peripheral blood mononuclear cells (PBMCs).
+These are mostly immune cells.
 
 ````{r}
 
@@ -89,40 +87,43 @@ Each data point is associated with a feature and an observation, but we might al
 - each feature (gene) can be named using different conventions, or have different aliases.
 - each observation (cell) might need its patient ID, sequencing batch, quality metrics or cluster ID attached.
 
+Being able to access data from this object is crucial for analysis.
+
 ````{r}
 
 class(sce)
 
 sce
 
-counts(sce)[1:4,1:4]
+counts(sce)[1:4,1:4] # subsetting on genes and cells respectively
 
-head(colData(sce))
+head(colData(sce)) # accessing cell metadata
 
-head(rowData(sce))
+head(rowData(sce)) # accessing gene metadata
 
 ````
 
-For convenience, column data (data describing the cells) can be accessed using the '$' operator.
+For convenience, column data (data describing the cells) can also be accessed using the '$' operator.
 
 ````{r}
 
 table(sce$Individual)
 
-table(sce$Individual)
-
 ````
 
+We don't always work with the raw counts.
+For example, normalised values reduce the impact of differences in sequencing depth, and are typically used for dimension reduction and clustering.
 
-We can also store transformations of the raw data, e.g. normalised counts.
+We can store transformations of the raw data, e.g. normalised counts, in assays.
 
 ````{r}
 
 assays(sce)
-sce<-scrapper::normalizeRnaCounts.se(sce)
+sce<-scrapper::normalizeRnaCounts.se(sce) # can be access as logcounts(sce)
 assays(sce)
 
 ````
+
 Aaaand we can also store embeddings of the data, such as from PCA, TSNE or UMAP.
 
 ````{r}
@@ -135,6 +136,7 @@ Finally, we can store alternative experiments, or modalities, which were measure
 For example, [CITE-seq](https://emea.illumina.com/techniques/sequencing/rna-sequencing/cite-seq.html) data measures gene and surface protein expression simultaneously.
 
 Why might we want to treat these separately rather than appending them to the main counts?
+Well, different distribution (bimodal for CITE-seq) mean different preprocessing, but storing them in the one object allows for joint analysis down the line.
 
 ````{r}
 
@@ -144,11 +146,17 @@ altExpNames(sce) ## also expected to be empty for this workshop.
 
 ## Exercise
 
-- Can you extract basic summary statistics from the metadata?
+- Can you extract basic summary statistics from the metadata, e.g. confirm how many individuals?
 - Can you extract the counts data?
 - Can you describe the counts data (e.g. distribution, sparsity)?
 
 ````{r}
+
+# use the object name, followed by $ to see what colData is stored.
+
+# counts can be extract using counts(object)
+
+# use hist() to visualise the count distribution of one gene, or one cell (not all at the same time!!)
 
 
 ````
