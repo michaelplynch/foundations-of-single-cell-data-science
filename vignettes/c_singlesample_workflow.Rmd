@@ -80,6 +80,24 @@ colnames(sce)<-sce$Barcode
 
 ````
 
+Different gene annotations don't always have 1:1 mappings.
+Let's check and remove duplicate genes first.
+
+````{r}
+
+## How many gene symbols appear more than once?
+dups <- duplicated(rowData(sce)$Symbol_TENx)
+sum(dups)
+rowData(sce)$Symbol_TENx[dups]
+
+## Use symbols as row names, adding the Ensembl ID only where a symbol is duplicated
+rownames(sce) <- scuttle::uniquifyFeatureNames(rowData(sce)$ENSEMBL_ID, rowData(sce)$Symbol_TENx)
+
+## Confirm the row names are now unique (should print 0)
+anyDuplicated(rownames(sce))
+
+````
+
 ## Quality Control
 
 
