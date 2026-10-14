@@ -68,6 +68,10 @@ As well as hosting, testing, and distributing packages, Bioconductor also ships 
 These usually come in the form of data structures for storing different types of data.
 In this workshop, we'll use the SingleCellExperiment class.
 
+We begin by loading in a public dataset from the TENxPBMCData Bioconductor package.
+The dataset contains approx. 4,000 cells from peripheral blood mononuclear cells (PBMCs).
+These are mostly immune cells.
+
 ````{r}
 
 sce<-TENxPBMCData::TENxPBMCData('pbmc4k')
