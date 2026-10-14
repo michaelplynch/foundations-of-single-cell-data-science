@@ -1,5 +1,5 @@
 Package: foundationsSCDS
-Title: Single-cell & Bioconductor Workshop repo for Foundations of Data Science CRT 
+Title: Single-cell & Bioconductor Workshop repo for Foundations of Data Science CRT
 Version: 0.9.0
 Authors@R: 
     person(given = "Michael",
