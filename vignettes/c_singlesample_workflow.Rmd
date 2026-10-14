@@ -132,7 +132,7 @@ sce<-runTsne.se(sce,reddim.type ='PCA')
 ````
 
 From the PCA and TSNE, we expect similar cell types to group together.
-Sometimes, technical effects can outweight biological effects, such as [batch effects](https://bioconductor.posit.co/packages/release/bioc/vignettes/batchelor/inst/doc/correction.html), but we won't cover that today.
+Sometimes, technical effects can outweigh biological effects, such as [batch effects](https://bioconductor.posit.co/packages/release/bioc/vignettes/batchelor/inst/doc/correction.html), but we won't cover that today.
 We can confirm this using well-known gene markers CD3E (T cells), CD163 (myeloid cells) and CD19 (B cells).
 
 ````{r}
@@ -260,7 +260,7 @@ table(sce$multilevel,sce$ucell)
 - What would have changed if there were cells from multiple samples?
 
 
-### How might a data scientist approach this problem?
+### How might a data scientist approach this type of problem?
 
 1. Understand how the data was generated.
 2. Understand the type of analysis (exploratory, hypothesis generation, vs. hypothesis testing).
