@@ -14,8 +14,7 @@ Roxygen: list(markdown = TRUE)
 Depends: 
     scater,
     muscData,
-    TENxPBMCData
-Suggests: 
+    TENxPBMCData,
     knitr,
     rmarkdown,
     BiocStyle,
@@ -25,6 +24,7 @@ Suggests:
     scrapper,
     UCell,
     mclust
+Suggests: 
 URL: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 BugReports: https://github.com/michaelplynch/foundations-of-single-cell-data-science/issues/new/choose
 VignetteBuilder: knitr
