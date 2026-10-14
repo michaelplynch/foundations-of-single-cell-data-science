@@ -201,8 +201,8 @@ check and remove duplicate genes first.</p>
 <div class="section level3">
 <h3 id="quality-control">Quality Control<a class="anchor" aria-label="anchor" href="#quality-control"></a>
 </h3>
-<p>The sum of genes, number of nonzero genes, and &amp; genes mapping to
-mitochondrial genes are typcial QC measures for this type of data.</p>
+<p>The sum of genes, number of nonzero genes, and % counts mapping to
+mitochondrial genes are typical QC measures for this type of data.</p>
 <p>quickRnaQc() suggests values below (sum, number of genes) or above
 (&amp; mito) 3 MADs are flagged.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -227,12 +227,12 @@ counts (&gt;10,000 per cell).</p>
 than one cell captured).</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">sce</span><span class="op">$</span><span class="va">keepmanual</span><span class="op">&lt;-</span><span class="va">sce</span><span class="op">$</span><span class="va">sum</span><span class="op">&gt;</span><span class="fl">10000</span></span>
+<span><span class="va">sce</span><span class="op">$</span><span class="va">keepmanual</span><span class="op">&lt;-</span><span class="va">sce</span><span class="op">$</span><span class="va">sum</span><span class="op">&lt;</span><span class="fl">10000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/dittoSeq/man/multi_dittoPlot.html" class="external-link">multi_dittoPlot</a></span><span class="op">(</span><span class="va">sce</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sum'</span>,<span class="st">'detected'</span>,<span class="st">'subset.proportion.mito'</span><span class="op">)</span>,group.by<span class="op">=</span><span class="st">'keepmanual'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="c_singlesample_workflow_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="100%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">sce</span><span class="op">&lt;-</span><span class="va">sce</span><span class="op">[</span>,<span class="op">!</span><span class="va">sce</span><span class="op">$</span><span class="va">keepmanual</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">sce</span><span class="op">&lt;-</span><span class="va">sce</span><span class="op">[</span>,<span class="va">sce</span><span class="op">$</span><span class="va">keepmanual</span><span class="op">]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="dimension-reduction">Dimension Reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>

@@ -145,8 +145,8 @@ anyDuplicated(rownames(sce))
 
 ### Quality Control
 
-The sum of genes, number of nonzero genes, and & genes mapping to
-mitochondrial genes are typcial QC measures for this type of data.
+The sum of genes, number of nonzero genes, and % counts mapping to
+mitochondrial genes are typical QC measures for this type of data.
 
 quickRnaQc() suggests values below (sum, number of genes) or above (&
 mito) 3 MADs are flagged.
@@ -184,7 +184,7 @@ one cell captured).
 ``` r
 
 
-sce$keepmanual<-sce$sum>10000
+sce$keepmanual<-sce$sum<10000
 multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepmanual')
 ```
 
@@ -193,7 +193,7 @@ multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepm
 ``` r
 
 
-sce<-sce[,!sce$keepmanual]
+sce<-sce[,sce$keepmanual]
 ```
 
 ### Dimension Reduction
