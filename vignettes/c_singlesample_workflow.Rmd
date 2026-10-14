@@ -100,14 +100,14 @@ In this case, cells with abnormally high counts (>10,000 per cell) are removed.
 
 ````{r}
 
-sce$manualkeep<-sce$sum>10000
-multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='manualkeep')
+sce$keepmanual<-sce$sum>10000
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepmanual')
 
 ````
 
 ````{r}
 
-sce<-sce[,!sce$manualkeep]
+sce<-sce[,!sce$keepmanual]
 
 ````
 
