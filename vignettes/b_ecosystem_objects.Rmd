@@ -9,7 +9,7 @@ output:
     toc: true
     toc_float: true
 vignette: >
-  %\VignetteIndexEntry{Bioconductor Ecossytem and the SingleCellExperiment Object}
+  %\VignetteIndexEntry{Bioconductor Ecosystem and the SingleCellExperiment Object}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
