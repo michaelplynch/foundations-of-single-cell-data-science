@@ -30,14 +30,24 @@ knitr::opts_chunk$set(
 ## Data generation
 
 - Single cells are isolated from a tissue or blood sample, often using a microfluidics platform such as the 10x Genomics Chromium system.
-- Each cell is captured with a unique barcode, allowing molecules from that cell to be tracked throughout the experiment.
+- Each cell is captured in an oil droplet with a unique barcoded bead, allowing molecules from that cell to be tracked throughout the experiment.
 - Cellular RNA is converted to cDNA and sequenced, generating millions of short sequencing reads made up of base pairs A, T, G, and C.
 - The reads are compared to a reference to determine which gene they represent.
 - Unique molecular identifiers (UMIs) ensure each molecule is counted only once.
 - Barcodes assign the UMIs back to cells.
 - A gene-by-cell count matrix is created, providing the starting point for downstream analyses such as quality control, clustering, and cell-type annotation.
 
-````{r fig.cap = "RNA extracted from single cells can be measured and analysed.", out.width = '100%',fig.alt='Depiction of cells from humans, with each containing various gene counts in a cells by genes table, which is used for downstream analysis.'}
+Technical artefacts
+
+- RNA-seq is harsh on cells, some cell types handle this better than others.
+- Some droplets contain no cells.
+- Some droplets contain multiple cells.
+- Ambient RNA from dead cells also gets captured.
+
+We won't get into detail on all of these, but they are important to be aware of.
+
+
+````{r echo=FALSE, fig.cap = "RNA extracted from single cells can be measured and analysed.", out.width = '100%',fig.alt='Depiction of cells from humans, with each containing various gene counts in a genes by cells table, which is used for downstream analysis.'}
 
 knitr::include_graphics("images/single_cell_data.png")
 
@@ -47,19 +57,11 @@ knitr::include_graphics("images/single_cell_data.png")
 
 Before diving into the hands-on coding, let's consider
 
-- how could you preprocess the data?
-- what type of questions could you ask from the data?
-- how could you verify your interpretation of the data?
-
+- what might exploratory data analysis look like?
+- how would the technical artefacts mentioned impact analysis?
 
 Considerations:
 
 - Impact of experimental processing on data.
 - Analysis plan.
 - Validation plan.
-
-````{r}
-
-sessionInfo()
-
-````
