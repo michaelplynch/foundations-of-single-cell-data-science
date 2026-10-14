@@ -28,7 +28,7 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 |--------------------------------|------------------------------|------|
 | Setting up the environment     |                              | 10m  |
 | Background and planning        | a_background.Rmd             | 15m  |
-| Bioc packages and object       | b_ecosystem_object.Rmd       | 15m  |
+| Bioc packages and object       | b_ecosystem_objects.Rmd       | 15m  |
 | Single-sample workflow         | c_singlesample_workflow.Rmd  | 60m  |
 | Reflection & Best Practices    |                              | 15m  |
 
@@ -78,14 +78,14 @@ Tested on Bioconductor 3.23 and R Version 4.6.x.
 
 * Basic knowledge of R syntax
 * Basic machine learning and statistics
-* Some previous data science/analysis experience
+* Previous data science/analysis experience
 
-### Useful resources
+## Useful resources
 
 R
 
 - [Orchestrating Single-cell Analysis (OSCA)](https://bioconductor.org/books/release/OSCA/)
-- [Orchestrating spatial Transcriptomic Analysis (OSTA)](https://bioconductor.org/books/release/OSTA/), a related and upcoming research area.
+- [Orchestrating Spatial Transcriptomic Analysis (OSTA)](https://bioconductor.org/books/release/OSTA/), a related and upcoming research area.
 
 Python
 
@@ -93,4 +93,4 @@ Python
 
 ## Participation
 
-Interactive discussion on analyis strategy and results, follow-along coding, reflection on analysis strengths and limitations.
+Interactive discussion on analysis strategy and results, follow-along coding, reflection on analysis strengths and limitations.
