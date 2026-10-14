@@ -8,35 +8,28 @@ library(scuttle)
 library(muscData)
 ```
 
-## Data loading
+## Multi-sample Single-cell RNA-seq in Bioconductor
+
+Multi-sample scRNA-seq analysis broadly follows the same analysis step
+as for single-sample, but there are some key differences. The process is
+well described in
+[OSCA](https://bioconductor.org/books/release/OSCA.multisample/).
+
+Below, a demo multi-sample dataset is loaded, containing single-cell
+data from 8 matched lupus patients before and after IFN stimulation,
+which can be used for self-directed learning. \## Data loading
 
 ``` r
 
 
+# find out more about the dataset
+?Kang18_8vs8
+
 sce<-Kang18_8vs8()
 #> see ?muscData and browseVignettes('muscData') for documentation
 #> loading from cache
-
-citation("muscData")
-#> To cite package 'muscData' in publications use:
-#> 
-#>   Crowell H (2026). _muscData: Multi-sample multi-group scRNA-seq
-#>   data_. doi:10.18129/B9.bioc.muscData
-#>   <https://doi.org/10.18129/B9.bioc.muscData>. R package version
-#>   1.26.0, <https://bioconductor.org/packages/muscData>.
-#> 
-#> A BibTeX entry for LaTeX users is
-#> 
-#>   @Manual{,
-#>     title = {muscData: Multi-sample multi-group scRNA-seq data},
-#>     author = {Helena L. Crowell},
-#>     year = {2026},
-#>     note = {R package version 1.26.0},
-#>     url = {https://bioconductor.org/packages/muscData},
-#>     doi = {10.18129/B9.bioc.muscData},
-#>   }
 ```
 
-## Analysis
+### Analysis
 
 The rest is up to you :)

@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a_background.html">scRNA-seq background</a></li>
-    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecossytem and the SingleCellExperiment Object</a></li>
+    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecosystem and the SingleCellExperiment Object</a></li>
     <li><a class="dropdown-item" href="../articles/c_singlesample_workflow.html">scRNA-seq single-sample analysis</a></li>
     <li><a class="dropdown-item" href="../articles/d_multisample_workflow.html">scRNA-seq multi-sample analysis</a></li>
   </ul>
@@ -204,15 +204,16 @@ removed.</p>
 <div class="section level3">
 <h3 id="dimension-reduction">Dimension Reduction<a class="anchor" aria-label="anchor" href="#dimension-reduction"></a>
 </h3>
-<p>This dataset contain information about 33694 genes. Many of these are
-uninformative, and other may correlate. Dimension reduction methods such
-as PCA compress the features space, reduce noise, and improve
+<p>This dataset contains information about 33,694 genes. Many of these
+are uninformative, and others may correlate. Dimension reduction methods
+such as PCA compress the features space, reduce noise, and improve
 computational efficiency.</p>
 <p>Normalisation reduces the effect of sequencing depth. Log
 transformation compresses the data and prevents highly expressed genes
 from dominating downstream analysis.</p>
-<p>PCA is a linear transformatino, TSNE (and UMAP, not shown) is
-non-linear, and use mostly for visualising.</p>
+<p>PCA is a linear transformation, TSNE (t-distributed stochastic
+neighbour embedding) (and UMAP, not shown) is non-linear, and use mostly
+for visualising.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/scrapper/man/normalizeRnaCounts.se.html" class="external-link">normalizeRnaCounts.se</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
@@ -260,7 +261,8 @@ cells.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dittoSeq/man/dittoDimPlot.html" class="external-link">dittoDimPlot</a></span><span class="op">(</span><span class="va">sce</span>,reduction.use <span class="op">=</span> <span class="st">'TSNE'</span>,<span class="st">'kmeans'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png" class="r-plt" alt="" width="100%"></p>
 <p>Here we compare two different clustering results. The adjusted rand
-index is moderate, and there’s still some noticeable differences.</p>
+index (ARI) is moderate, and there are still some noticeable
+differences.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sce</span><span class="op">$</span><span class="va">multilevel</span>,<span class="va">sce</span><span class="op">$</span><span class="va">kmeans</span><span class="op">)</span></span>
@@ -328,8 +330,8 @@ type and function can be understood.</p>
 <div class="section level3">
 <h3 id="rule-based-annotation">Rule-based annotation<a class="anchor" aria-label="anchor" href="#rule-based-annotation"></a>
 </h3>
-<p>This method of annotation uses pre-annotated data to label clusters
-or cells in a new dataset.</p>
+<p>This method of annotation uses known cell-type gene signatures to
+label clusters or cells in a new dataset.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/carmonalab/UCell" class="external-link">UCell</a></span><span class="op">)</span></span>
@@ -449,7 +451,8 @@ you make, based on the data?</li>
 <li>Choice of ecosystem</li>
 <li>Version control</li>
 <li>Documentation</li>
-<li>Dependency management (note to check number of packages used).</li>
+<li>Dependency management (how many packages does each notebook pull in,
+directly and indirectly?).</li>
 </ul>
 </li>
 <li>Ethics, integrity

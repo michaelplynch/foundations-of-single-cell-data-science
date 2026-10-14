@@ -24,11 +24,12 @@
   of short sequencing reads made up of base pairs A, T, G, and C.
 - The reads are compared to a reference to determine which gene they
   represent.
-- Reads are assigned back to individual cells and genes using the cell
-  barcodes and unique molecular identifiers (UMIs) respectively.
-- A gene-by-cell count matrix is created, providing the starting point
-  for downstream analyses such as quality control, clustering, and cell
-  type annotation.
+- Unique molecular identifiers (UMIs) ensure each molecule is counted
+  only once.
+- Barcodes assign the UMIs back to cells.
+- A cell-by-gene count matrix is created, providing the starting point
+  for downstream analyses such as quality control, clustering, and
+  cell-type annotation.
 
 ``` r
 

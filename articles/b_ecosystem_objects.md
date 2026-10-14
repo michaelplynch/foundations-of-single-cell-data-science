@@ -1,4 +1,4 @@
-# Bioconductor Ecossytem and the SingleCellExperiment Object
+# Bioconductor Ecosystem and the SingleCellExperiment Object
 
 ## Bioconductor
 

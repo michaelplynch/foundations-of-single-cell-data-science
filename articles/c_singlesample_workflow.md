@@ -156,17 +156,18 @@ sce<-sce[,!sce$manualkeep]
 
 ### Dimension Reduction
 
-This dataset contain information about 33694 genes. Many of these are
-uninformative, and other may correlate. Dimension reduction methods such
-as PCA compress the features space, reduce noise, and improve
+This dataset contains information about 33,694 genes. Many of these are
+uninformative, and others may correlate. Dimension reduction methods
+such as PCA compress the features space, reduce noise, and improve
 computational efficiency.
 
 Normalisation reduces the effect of sequencing depth. Log transformation
 compresses the data and prevents highly expressed genes from dominating
 downstream analysis.
 
-PCA is a linear transformatino, TSNE (and UMAP, not shown) is
-non-linear, and use mostly for visualising.
+PCA is a linear transformation, TSNE (t-distributed stochastic neighbour
+embedding) (and UMAP, not shown) is non-linear, and use mostly for
+visualising.
 
 ``` r
 
@@ -236,7 +237,8 @@ dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
 
 Here we compare two different clustering results. The adjusted rand
-index is moderate, and there’s still some noticeable differences.
+index (ARI) is moderate, and there are still some noticeable
+differences.
 
 ``` r
 
@@ -316,8 +318,8 @@ plotGroupedHeatmap(sce,
 
 ### Rule-based annotation
 
-This method of annotation uses pre-annotated data to label clusters or
-cells in a new dataset.
+This method of annotation uses known cell-type gene signatures to label
+clusters or cells in a new dataset.
 
 ``` r
 
@@ -422,7 +424,8 @@ table(sce$multilevel,sce$ucell)
   - Choice of ecosystem
   - Version control
   - Documentation
-  - Dependency management (note to check number of packages used).
+  - Dependency management (how many packages does each notebook pull in,
+    directly and indirectly?).
 - Ethics, integrity
   - Reproducibility (again).
   - Choice of reference.

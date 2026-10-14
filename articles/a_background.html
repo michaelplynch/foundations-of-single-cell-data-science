@@ -34,7 +34,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a_background.html">scRNA-seq background</a></li>
-    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecossytem and the SingleCellExperiment Object</a></li>
+    <li><a class="dropdown-item" href="../articles/b_ecosystem_objects.html">Bioconductor Ecosystem and the SingleCellExperiment Object</a></li>
     <li><a class="dropdown-item" href="../articles/c_singlesample_workflow.html">scRNA-seq single-sample analysis</a></li>
     <li><a class="dropdown-item" href="../articles/d_multisample_workflow.html">scRNA-seq multi-sample analysis</a></li>
   </ul>
@@ -102,11 +102,12 @@ that cell to be tracked throughout the experiment.</li>
 of short sequencing reads made up of base pairs A, T, G, and C.</li>
 <li>The reads are compared to a reference to determine which gene they
 represent.</li>
-<li>Reads are assigned back to individual cells and genes using the cell
-barcodes and unique molecular identifiers (UMIs) respectively.</li>
-<li>A gene-by-cell count matrix is created, providing the starting point
-for downstream analyses such as quality control, clustering, and cell
-type annotation.</li>
+<li>Unique molecular identifiers (UMIs) ensure each molecule is counted
+only once.</li>
+<li>Barcodes assign the UMIs back to cells.</li>
+<li>A cell-by-gene count matrix is created, providing the starting point
+for downstream analyses such as quality control, clustering, and
+cell-type annotation.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
