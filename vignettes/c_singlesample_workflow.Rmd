@@ -85,17 +85,26 @@ is.mito <- grep('^MT-',rownames(sce),value = T)
 is.mito
 
 sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
-sce<-sce[,sce$keep] ## suggested thresholds
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keep')
+sce<-sce[,sce$keep] ## autosuggested thresholds
 
 ````
 
 Cells might have high or low counts due to technical reasons, retaining them might skew the analysis.
 
+You can also manually determine thresholds, and subset the object.
+In this case, cells with abnormally high counts (>10,000 per cell) are removed.
+
 ````{r}
 
-multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='Individual')
+sce$manualkeep<-sce$sum>10000
+multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='manualkeep')
 
-sce<-sce[,sce$subset.proportion.mito<0.1 & sce$sum<20000]
+````
+
+````{r}
+
+sce<-sce[,!sce$manualkeep]
 
 ````
 
@@ -114,13 +123,9 @@ PCA is a linear transformatino, TSNE (and UMAP, not shown) is non-linear, and us
 
 sce<-normalizeRnaCounts.se(sce)
 
-set.seed(1)
 sce <- chooseRnaHvgs.se(sce, top = 1000)
-
-set.seed(1)
 sce<-runPca.se(sce, features=rowData(sce)$hvg,number=100)
 
-set.seed(1)
 sce<-runTsne.se(sce,reddim.type ='PCA')
 
 ````
@@ -203,7 +208,7 @@ plotGroupedHeatmap(sce,
 
 ````
 
-## Supervised Annotation
+## Rule-based annotation
 
 This method of annotation uses pre-annotated data to label clusters or cells in a new dataset.
 
@@ -233,6 +238,18 @@ dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 
 ````
 
+````{r}
+
+table(sce$kmeans,sce$ucell)
+table(sce$multilevel,sce$ucell)
+
+````
+
+## Supervised Annotation
+
+- Requires a high quality labelled reference.
+- Look for methods like CellTypist, SingleR etc..
+
 ## Reflection
 
 - What assumptions did we make?
@@ -240,6 +257,41 @@ dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 - How could the analysis have been done differently?
 - How does this impact the validity of the results?
 - What would have changed if there were cells from multiple samples?
+
+
+### How might a data scientist approach this problem?
+
+1. Understand how the data was generated.
+2. Understand the type of analysis (exploratory, hypothesis generation, vs. hypothesis testing).
+3. Check the data structure, quality.
+4. Decide on a clear and defensible modelling strategy.
+5. Validate outputs. Big difference between 'an output' and 'a correct output'. Use domain expertise, independent datasets, stability and reproducibility checks.
+6. Communicate clearly. What claims can you make, and what claims can't you make, based on the data?
+
+### Some considerations for analysis
+
+- Statistical thinking
+  - Data distributions
+  - Independence
+  - Multiple testing
+  - Assumptions
+- Computational thinking
+  - Scaling
+  - Seeds, reproducibility
+  - Algorithms
+- Communication, visualisation
+  - Model assumptions
+  - Uncertainty
+  - Informative vs. misleading plots
+- Tooling
+  - Choice of ecosystem
+  - Version control
+  - Documentation
+  - Dependency management (note to check number of packages used).
+- Ethics, integrity
+  - Reproducibility (again).
+  - Choice of reference.
+  - Patient privacy and consent.
 
 ````{r}
 
