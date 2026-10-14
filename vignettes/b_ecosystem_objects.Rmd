@@ -1,5 +1,5 @@
 ---
-title: "Bioconductor Ecossytem and the SingleCellExperiment Object"
+title: "Bioconductor Ecosystem and the SingleCellExperiment Object"
 author:
   - name: Michael Lynch
     affiliation: School of Medicine, University of Limerick
