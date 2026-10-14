@@ -94,3 +94,10 @@ Python
 ## Participation
 
 Interactive discussion on analysis strategy and results, follow-along coding, reflection on analysis strengths and limitations.
+
+## Data
+Data used are from the *4k PBMCs from a Healthy Donor* dataset released by 10x Genomics (2017),
+distributed via the TENxPBMCData Bioconductor package, and from Kang HM, et al. (2018). Multiplexed droplet single-cell RNA-sequencing using
+natural genetic variation. *Nature Biotechnology* 36:89–94. [doi:10.1038/nbt.4042](https://doi.org/10.1038/nbt.4042).
+PBMCs from 8 lupus patients, control and IFN-β stimulated, distributed via the muscData Bioconductor package.
+
