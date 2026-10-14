@@ -36,9 +36,14 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 Rendered pkgdown website available here: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 
-Package note
+The workshop can be installed locally using the below commands, from a fresh R session.
+
 
 ```r
+
+## Check R version
+if (getRversion() < "4.6.0") stop("This workshop needs R 4.6.0 or later (you have ", getRversion(), "). Please update R and re-run.")
+
 ## install BiocManager
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
