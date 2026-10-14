@@ -101,7 +101,7 @@ anyDuplicated(rownames(sce))
 ## Quality Control
 
 
-The sum of genes, number of nonzero genes, and & genes mapping to mitochondrial genes are typcial QC measures for this type of data.
+The sum of genes, number of nonzero genes, and % counts mapping to mitochondrial genes are typical QC measures for this type of data.
 
 quickRnaQc() suggests values below (sum, number of genes) or above (& mito) 3 MADs are flagged.
 
@@ -125,14 +125,14 @@ This could be considered a naive approach to remove doublets (more than one cell
 
 ````{r}
 
-sce$keepmanual<-sce$sum>10000
+sce$keepmanual<-sce$sum<10000
 multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepmanual')
 
 ````
 
 ````{r}
 
-sce<-sce[,!sce$keepmanual]
+sce<-sce[,sce$keepmanual]
 
 ````
 
