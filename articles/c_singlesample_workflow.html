@@ -29,7 +29,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
@@ -90,6 +89,9 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 Bioconductor package. The dataset contains approx. 4,000 cells from
 peripheral blood mononuclear cells (PBMCs). These are mostly immune
 cells.</p>
+<p>Data used are from the <em>4k PBMCs from a Healthy Donor</em> dataset
+released by 10x Genomics (2017), distributed via the TENxPBMCData
+Bioconductor package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/TENxPBMCData/man/TENxPBMCData.html" class="external-link">TENxPBMCData</a></span><span class="op">(</span><span class="st">"pbmc4k"</span><span class="op">)</span></span>

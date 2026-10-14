@@ -29,7 +29,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
@@ -86,7 +85,15 @@ step as for single-sample, but there are some key differences. The
 process is well described in <a href="https://bioconductor.org/books/release/OSCA.multisample/" class="external-link">OSCA</a>.</p>
 <p>Below, a demo multi-sample dataset is loaded, containing single-cell
 data from 8 matched lupus patients before and after IFN stimulation,
-which can be used for self-directed learning. ## Data loading</p>
+which can be used for self-directed learning.</p>
+<div class="section level3">
+<h3 id="data-loading">Data loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
+</h3>
+<p>Data used are from Kang HM, et al. (2018). Multiplexed droplet
+single-cell RNA-sequencing using natural genetic variation. <em>Nature
+Biotechnology</em> 36:89–94. <a href="https://doi.org/10.1038/nbt.4042" class="external-link">doi:10.1038/nbt.4042</a>. PBMCs
+from 8 lupus patients, control and IFN-β stimulated, distributed via the
+muscData Bioconductor package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># find out more about the dataset</span></span>
@@ -95,6 +102,7 @@ which can be used for self-directed learning. ## Data loading</p>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/muscData/man/Kang18_8vs8.html" class="external-link">Kang18_8vs8</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; see ?muscData and browseVignettes('muscData') for documentation</span></span>
 <span><span class="co">#&gt; loading from cache</span></span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h3>

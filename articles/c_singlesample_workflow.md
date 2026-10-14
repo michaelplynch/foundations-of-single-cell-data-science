@@ -19,6 +19,10 @@ Bioconductor package. The dataset contains approx. 4,000 cells from
 peripheral blood mononuclear cells (PBMCs). These are mostly immune
 cells.
 
+Data used are from the *4k PBMCs from a Healthy Donor* dataset released
+by 10x Genomics (2017), distributed via the TENxPBMCData Bioconductor
+package.
+
 ``` r
 
 

@@ -29,13 +29,14 @@ just the what, of each step.
 
 ## Workshop breakdown
 
-| Activity                    | Notebook                    | Time |
-|-----------------------------|-----------------------------|------|
-| Setting up the environment  |                             | 10m  |
-| Background and planning     | a_background.Rmd            | 15m  |
-| Bioc packages and object    | b_ecosystem_objects.Rmd     | 15m  |
-| Single-sample workflow      | c_singlesample_workflow.Rmd | 60m  |
-| Reflection & Best Practices |                             | 15m  |
+| Activity                    | Notebook                    | Time          |
+|-----------------------------|-----------------------------|---------------|
+| Setting up the environment  |                             | 10m           |
+| Background and planning     | a_background.Rmd            | 15m           |
+| Bioc packages and object    | b_ecosystem_objects.Rmd     | 15m           |
+| Single-sample workflow      | c_singlesample_workflow.Rmd | 60m           |
+| Reflection & Best Practices | c_singlesample_workflow.Rmd | 15m           |
+| Multi-sample workflow       | d_multisample_workflow.Rmd  | self-directed |
 
 ## Installation
 
@@ -55,7 +56,7 @@ if (getRversion() < "4.6.0") stop("This workshop needs R 4.6.0 or later (you hav
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
-options(repos = BiocManager::repositories())
+options(repos = BiocManager::repositories(version="3.23"))
 
 ## install remotes
 install.packages(c('remotes','usethis'))
@@ -79,6 +80,28 @@ message("Setup complete - see you at the workshop!")
 ```
 
 Tested on Bioconductor 3.23 and R Version 4.6.x.
+
+### Running through Docker
+
+## Running with Docker (alternative to a local install)
+
+Instead of installing packages locally, you can use the pre-built
+container. You’ll need [Docker
+Desktop](https://www.docker.com/products/docker-desktop/) installed and
+running.
+
+``` bash
+docker run --rm -p 8787:8787 -e PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:latest
+```
+
+Then open <http://localhost:8787> in your browser and log in with
+username `rstudio` and password `bioc`. The notebooks are in the
+`vignettes/` folder.
+
+- **Apple Silicon Macs (M1–M4):** add `--platform linux/amd64` after
+  `docker run`.
+- **The first run downloads several GB,** so do it before the workshop.
+- **Work is lost when the container stops.**
 
 ## Pre-requisites
 
