@@ -114,6 +114,35 @@ rownames(sce)<-rowData(sce)$Symbol_TENx
 colnames(sce)<-sce$Barcode
 ```
 
+Different gene annotations don’t always have 1:1 mappings. Let’s check
+and remove duplicate genes first.
+
+``` r
+
+
+## How many gene symbols appear more than once?
+dups <- duplicated(rowData(sce)$Symbol_TENx)
+sum(dups)
+#> [1] 34
+rowData(sce)$Symbol_TENx[dups]
+#>  [1] "FAM231C"        "PIK3R3"         "RGS5"           "ATRIP"         
+#>  [5] "CYB561D2"       "PRICKLE2-AS1"   "CFAP99"         "MATR3"         
+#>  [9] "ECSCR"          "BLOC1S5"        "PRICKLE4"       "RAET1E-AS1"    
+#> [13] "PABPC1L2B-AS1"  "PGM5-AS1"       "RABL6"          "TIMM10B"       
+#> [17] "C11orf71"       "AKR1C3"         "CCDC7"          "LINC00864"     
+#> [21] "TMBIM4"         "LINC01481"      "SPATA13"        "C1QTNF9B-AS1"  
+#> [25] "SERPINA3"       "IGHV2-70"       "C17orf100"      "TMEM256-PLSCR3"
+#> [29] "TBC1D26"        "CRHR1"          "FBF1"           "CAPS"          
+#> [33] "LINC01297"      "LINC01422"
+
+## Use symbols as row names, adding the Ensembl ID only where a symbol is duplicated
+rownames(sce) <- scuttle::uniquifyFeatureNames(rowData(sce)$ENSEMBL_ID, rowData(sce)$Symbol_TENx)
+
+## Confirm the row names are now unique (should print 0)
+anyDuplicated(rownames(sce))
+#> [1] 0
+```
+
 ### Quality Control
 
 The sum of genes, number of nonzero genes, and & genes mapping to
@@ -135,7 +164,7 @@ sce<-quickRnaQc.se(sce,subsets = list(mito=c(is.mito)))
 multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keep')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-6-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-7-1.png)
 
 ``` r
 
@@ -159,7 +188,7 @@ sce$keepmanual<-sce$sum>10000
 multi_dittoPlot(sce,c('sum','detected','subset.proportion.mito'),group.by='keepmanual')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-7-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-8-1.png)
 
 ``` r
 
@@ -209,14 +238,14 @@ markers CD3E (T cells), CD163 (myeloid cells) and CD19 (B cells).
 dittoDimPlot(sce,reduction.use = 'TSNE',c('CD3E','CD163','CD19'))
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-1.png)
 
 ``` r
 
 dittoPlot(sce,c('CD3E','CD163','CD19'),group.by='Individual',slot='logcounts')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-10-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
 
 ### Clustering
 
@@ -240,14 +269,14 @@ sce<-clusterKmeans.se(sce,reddim.type = 'PCA',k=10,output.name = 'kmeans')
 dittoDimPlot(sce,reduction.use = 'TSNE','multilevel')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-1.png)
 
 ``` r
 
 dittoDimPlot(sce,reduction.use = 'TSNE','kmeans')
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-11-2.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-12-2.png)
 
 Here we compare two different clustering results. The adjusted rand
 index (ARI) is moderate, and there are still some noticeable
@@ -311,7 +340,7 @@ plotGroupedHeatmap(sce,
                    cluster_cols = FALSE)
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-13-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
 
 The heatmap shows a gene signature associated with each cluster.
 Typically, manual annotation takes a lot more than five genes per
@@ -352,7 +381,7 @@ sce$ucell <- rownames(sc)[apply(sc, 2, which.max)]
 dittoDimPlot(sce, "ucell", reduction.use = "TSNE")
 ```
 
-![](c_singlesample_workflow_files/figure-html/unnamed-chunk-14-1.png)
+![](c_singlesample_workflow_files/figure-html/unnamed-chunk-15-1.png)
 
 ``` r
 
