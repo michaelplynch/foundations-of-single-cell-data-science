@@ -1,5 +1,5 @@
 ---
-title: "The SingleCellExperiment Object and EDA"
+title: "Bioconductor Ecossytem and the SingleCellExperiment Object"
 author:
   - name: Michael Lynch
     affiliation: School of Medicine, University of Limerick
@@ -9,7 +9,7 @@ output:
     toc: true
     toc_float: true
 vignette: >
-  %\VignetteIndexEntry{singlecellexperiment object}
+  %\VignetteIndexEntry{Bioconductor Ecossytem and the SingleCellExperiment Object}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -71,6 +71,8 @@ In this workshop, we'll use the SingleCellExperiment class.
 ````{r}
 
 sce<-TENxPBMCData::TENxPBMCData('pbmc4k')
+
+citation("TENxPBMCData")
 
 ````
 

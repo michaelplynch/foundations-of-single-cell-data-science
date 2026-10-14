@@ -10,7 +10,7 @@ output:
     toc_depth: 3
     toc_float: true
 vignette: >
-  %\VignetteIndexEntry{scRNA-seq workshop}
+  %\VignetteIndexEntry{scRNA-seq single-sample analysis}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -34,6 +34,7 @@ library(bluster)
 library(TENxPBMCData)
 library(scrapper)
 library(mclust)
+
 ````
 
 # Single-cell RNA-seq in Bioconductor
@@ -48,6 +49,8 @@ These are mostly immune cells.
 ````{r}
 
 sce <- TENxPBMCData("pbmc4k")
+
+citation("TENxPBMCData")
 
 ````
 
