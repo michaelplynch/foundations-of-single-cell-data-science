@@ -2,12 +2,12 @@
 
 ## Bioconductor ecosystem and objects
 
-## Learning goal
+### Learning goal
 
 Navigate the Bioconductor ecosystem and work confidently with the
 SingleCellExperiment object.
 
-## Learning objectives
+### Learning objectives
 
 By the end of this notebook you should be able to:
 
@@ -25,7 +25,7 @@ develop and share open-source software for precise and repeatable
 analysis of biological data. They foster an inclusive and collaborative
 community of developers and data scientists.
 
-## Why Bioconductor?
+### Why Bioconductor?
 
 - Analysis workflows are long and complex, an ecosystem of R packages
   for genomics data analysis facilitates reuse.
@@ -42,7 +42,7 @@ You can:
   [contribute](https://contributions.bioconductor.org/bioconductor-package-submissions.html)
   your own R packages for genomics analysis.
 
-## Accessing Bioconductor packages
+### Accessing Bioconductor packages
 
 You might typically install a package from CRAN through
 [`install.packages()`](https://rdrr.io/r/utils/install.packages.html).
@@ -248,7 +248,7 @@ altExpNames(sce) ## also expected to be empty for this workshop.
 #> character(0)
 ```
 
-## Exercise
+### Exercise
 
 - Can you extract basic summary statistics from the metadata,
   e.g. confirm how many individuals?

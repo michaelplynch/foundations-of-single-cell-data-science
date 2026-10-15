@@ -10,7 +10,7 @@ library(muscData)
 
 ## Multi-sample Single-cell RNA-seq in Bioconductor
 
-Multi-sample scRNA-seq analysis broadly follows the same analysis step
+Multi-sample scRNA-seq analysis broadly follows the same analysis steps
 as for single-sample, but there are some key differences. The process is
 well described in
 [OSCA](https://bioconductor.org/books/release/OSCA.multisample/).

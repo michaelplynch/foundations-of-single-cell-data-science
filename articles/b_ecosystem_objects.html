@@ -75,16 +75,15 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <div class="section level2">
 <h2 id="bioconductor-ecosystem-and-objects">Bioconductor ecosystem and objects<a class="anchor" aria-label="anchor" href="#bioconductor-ecosystem-and-objects"></a>
 </h2>
-</div>
-<div class="section level2">
-<h2 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
-</h2>
+<div class="section level3">
+<h3 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
+</h3>
 <p>Navigate the Bioconductor ecosystem and work confidently with the
 SingleCellExperiment object.</p>
 </div>
-<div class="section level2">
-<h2 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
-</h2>
+<div class="section level3">
+<h3 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h3>
 <p>By the end of this notebook you should be able to:</p>
 <ol style="list-style-type: decimal">
 <li>Explain why Bioconductor uses shared data structures, and how its
@@ -104,9 +103,9 @@ which aims to develop and share open-source software for precise and
 repeatable analysis of biological data. They foster an inclusive and
 collaborative community of developers and data scientists.</p>
 </div>
-<div class="section level2">
-<h2 id="why-bioconductor">Why Bioconductor?<a class="anchor" aria-label="anchor" href="#why-bioconductor"></a>
-</h2>
+<div class="section level3">
+<h3 id="why-bioconductor">Why Bioconductor?<a class="anchor" aria-label="anchor" href="#why-bioconductor"></a>
+</h3>
 <ul>
 <li>Analysis workflows are long and complex, an ecosystem of R packages
 for genomics data analysis facilitates reuse.</li>
@@ -123,9 +122,9 @@ packages.</li>
 your own R packages for genomics analysis.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="accessing-bioconductor-packages">Accessing Bioconductor packages<a class="anchor" aria-label="anchor" href="#accessing-bioconductor-packages"></a>
-</h2>
+<div class="section level3">
+<h3 id="accessing-bioconductor-packages">Accessing Bioconductor packages<a class="anchor" aria-label="anchor" href="#accessing-bioconductor-packages"></a>
+</h3>
 <p>You might typically install a package from CRAN through
 <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code>. Bioconductor packages are hosted
 elsewhere and have a different mechanism for installing.</p>
@@ -295,9 +294,9 @@ object allows for joint analysis down the line.</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/altExps.html" class="external-link">altExpNames</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span> <span class="co">## also expected to be empty for this workshop.</span></span>
 <span><span class="co">#&gt; character(0)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h2>
+<div class="section level3">
+<h3 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
+</h3>
 <ul>
 <li>Can you extract basic summary statistics from the metadata,
 e.g. confirm how many individuals?</li>
@@ -374,6 +373,7 @@ e.g. confirm how many individuals?</li>
 <span><span class="co">#&gt; [61] lattice_0.22-9       AnnotationHub_4.2.2  png_0.1-9           </span></span>
 <span><span class="co">#&gt; [64] memoise_2.0.1        bslib_0.12.0         Rcpp_1.1.2          </span></span>
 <span><span class="co">#&gt; [67] xfun_0.61            fs_2.1.0             pkgconfig_2.0.3</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -167,10 +167,11 @@ anyDuplicated(rownames(sce))
 
 ### Quality Control
 
-The sum of genes, number of nonzero genes, and % counts mapping to
-mitochondrial genes are typical QC measures for this type of data.
+The sum of counts per cell, number of nonzero genes per cell, and %
+counts mapping to mitochondrial genes are typical QC measures for this
+type of data.
 
-quickRnaQc() suggests values below (sum, number of genes) or above (&
+quickRnaQc() suggests values below (sum, number of genes) or above (\$
 mito) 3 MADs are flagged.
 
 ``` r
@@ -230,7 +231,7 @@ compresses the data and prevents highly expressed genes from dominating
 downstream analysis.
 
 PCA is a linear transformation, TSNE (t-distributed stochastic neighbour
-embedding) (and UMAP, not shown) is non-linear, and use mostly for
+embedding) (and UMAP, not shown) is non-linear, and used mostly for
 visualisation.
 
 TSNE and UMAP are non-linear embeddings, so distances between, and
