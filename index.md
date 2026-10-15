@@ -72,7 +72,7 @@ usethis::use_course(
 
 ## Pre-download the dataset and check everything loads
 sce <- TENxPBMCData::TENxPBMCData("pbmc4k")
-sce <- muscData::Kang18_8vs8()
+#sce <- muscData::Kang18_8vs8()
 pkgs <- c("SingleCellExperiment", "scater", "scrapper", "dittoSeq", "BiocStyle","UCell","mclust")
 invisible(lapply(pkgs, library, character.only = TRUE))
 BiocManager::valid()

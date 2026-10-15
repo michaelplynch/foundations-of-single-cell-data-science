@@ -66,7 +66,7 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
       </address>
                   
       
-      <small class="dont-index">Source: <a href="https://github.com/michaelplynch/foundations-of-single-cell-data-science/blob/1.0.0/vignettes/d_multisample_workflow.Rmd" class="external-link"><code>vignettes/d_multisample_workflow.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/michaelplynch/foundations-of-single-cell-data-science/blob/devel/vignettes/d_multisample_workflow.Rmd" class="external-link"><code>vignettes/d_multisample_workflow.Rmd</code></a></small>
       <div class="d-none name"><code>d_multisample_workflow.Rmd</code></div>
     </div>
 
@@ -83,9 +83,9 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <p>Multi-sample scRNA-seq analysis broadly follows the same analysis
 steps as for single-sample, but there are some key differences. The
 process is well described in <a href="https://bioconductor.org/books/release/OSCA.multisample/" class="external-link">OSCA</a>.</p>
-<p>Below, a demo multi-sample dataset is loaded, containing single-cell
-data from 8 matched lupus patients before and after IFN stimulation,
-which can be used for self-directed learning.</p>
+<p>Below, a demo multi-sample dataset is suggested, containing
+single-cell data from 8 matched lupus patients before and after IFN
+stimulation, which can be used for self-directed learning.</p>
 <div class="section level3">
 <h3 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
 </h3>
@@ -118,11 +118,9 @@ muscData Bioconductor package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># find out more about the dataset</span></span>
-<span><span class="op">?</span><span class="va">Kang18_8vs8</span></span>
-<span></span>
-<span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/muscData/man/Kang18_8vs8.html" class="external-link">Kang18_8vs8</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; see ?muscData and browseVignettes('muscData') for documentation</span></span>
-<span><span class="co">#&gt; loading from cache</span></span></code></pre></div>
+<span><span class="co">#?Kang18_8vs8</span></span>
+<span><span class="co"># load the dataset</span></span>
+<span><span class="co">#sce&lt;-Kang18_8vs8()</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>

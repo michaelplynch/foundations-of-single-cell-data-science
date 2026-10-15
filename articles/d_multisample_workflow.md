@@ -15,7 +15,7 @@ as for single-sample, but there are some key differences. The process is
 well described in
 [OSCA](https://bioconductor.org/books/release/OSCA.multisample/).
 
-Below, a demo multi-sample dataset is loaded, containing single-cell
+Below, a demo multi-sample dataset is suggested, containing single-cell
 data from 8 matched lupus patients before and after IFN stimulation,
 which can be used for self-directed learning.
 
@@ -50,11 +50,9 @@ muscData Bioconductor package.
 
 
 # find out more about the dataset
-?Kang18_8vs8
-
-sce<-Kang18_8vs8()
-#> see ?muscData and browseVignettes('muscData') for documentation
-#> loading from cache
+#?Kang18_8vs8
+# load the dataset
+#sce<-Kang18_8vs8()
 ```
 
 ### Analysis
