@@ -62,11 +62,11 @@ options(repos = BiocManager::repositories(version="3.23"))
 install.packages(c('remotes','usethis'))
 
 ## install workshop package (takes care of dependencies)
-remotes::install_github("michaelplynch/foundations-of-single-cell-data-science@0.9.0",dependencies=TRUE, upgrade='always')
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science@1.0.0",dependencies=TRUE, upgrade='always')
 
 ## Course notebooks (same release); answer the prompts, notebooks are in vignettes/
 usethis::use_course(
-  "https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/0.9.0.zip",
+  "https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/1.0.0.zip",
   destdir = "~"
 )
 
