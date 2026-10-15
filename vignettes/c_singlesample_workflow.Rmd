@@ -38,6 +38,20 @@ library(mclust)
 
 # Single-cell RNA-seq in Bioconductor
 
+## Learning goal
+
+Carry out a minimal single-sample scRNA-seq analysis, and critically evaluate the choices made along the way.
+
+## Learning objectives
+
+By the end of this notebook you should be able to:
+
+1. Harmonise gene identifiers and resolve duplicated gene symbols.
+2. Calculate per-cell QC metrics, apply data-driven (MAD-based) and manual thresholds, and justify the cells removed.
+3. Explain the purpose of normalisation, feature selection and dimension reduction, and interpret a t-SNE plot with appropriate caution.
+4. Cluster cells using two methods (graph-based and k-means) and quantify their agreement with the adjusted Rand index.
+5. Annotate clusters using marker genes and signature scoring, and compare the annotations with the clusters.
+6. Identify the assumptions and parameter choices that affect the results, and suggest how to validate them.
 
 ## Data Loading
 
@@ -145,7 +159,9 @@ Dimension reduction methods such as PCA compress the features space, reduce nois
 Normalisation reduces the effect of sequencing depth.
 Log transformation compresses the data and prevents highly expressed genes from dominating downstream analysis.
 
-PCA is a linear transformation, TSNE (t-distributed stochastic neighbour embedding) (and UMAP, not shown) is non-linear, and use mostly for visualising.
+PCA is a linear transformation, TSNE (t-distributed stochastic neighbour embedding) (and UMAP, not shown) is non-linear, and use mostly for visualisation.
+
+TSNE and UMAP are non-linear embeddings, so distances between, and locations of, cells should be interpreted with caution.
 
 ````{r}
 

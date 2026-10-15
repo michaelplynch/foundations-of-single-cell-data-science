@@ -22,7 +22,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Bioconductor
+## Bioconductor ecosystem and objects
+
+## Learning goal
+
+Navigate the Bioconductor ecosystem and work confidently with the SingleCellExperiment object.
+
+## Learning objectives
+
+By the end of this notebook you should be able to:
+
+1. Explain why Bioconductor uses shared data structures, and how its packages are installed and versioned.
+2. Load a public single-cell dataset from a Bioconductor data package.
+3. Access and subset the main parts of a SingleCellExperiment: assays, `colData`, `rowData`, `reducedDims` and `altExps`.
+4. Store a transformation of the data (normalised counts) alongside the raw counts, and explain why both are kept.
+5. Summarise the count matrix, for example library sizes and sparsity.
 
 [Bioconductor](https://www.bioconductor.org/) is a project which aims to develop and share open-source software for precise and repeatable analysis of biological data.
 They foster an inclusive and collaborative community of developers and data scientists.
