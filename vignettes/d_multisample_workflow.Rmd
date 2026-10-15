@@ -62,9 +62,9 @@ PBMCs from 8 lupus patients, control and IFN-β stimulated, distributed via the 
 ````{r}
 
 # find out more about the dataset
-?Kang18_8vs8
-
-sce<-Kang18_8vs8()
+#?Kang18_8vs8
+# load the datasetß
+#sce<-Kang18_8vs8()
 
 ````
 
