@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Bioconductor ecosystem and objects
+# Bioconductor ecosystem and objects
 
 ## Learning goal
 
