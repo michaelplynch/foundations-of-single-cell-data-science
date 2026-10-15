@@ -1,4 +1,4 @@
-# Foundations of single-cell data science
+# Foundations of Single-cell Data Science
 
 This workshop introduces the basics of single-cell RNA sequencing (gene
 expression) and a minimal analysis workflow to an audience with a
@@ -8,7 +8,7 @@ website](https://michaelplynch.github.io/foundations-of-single-cell-data-science
 and Docker container. An emphasis will be placed on the how and why, not
 just the what, of each step.
 
-## Broad Goals
+## Broad goals
 
 - Understand the structure of single-cell RNA-seq data.
 - Access the Bioconductor ecosystem.
