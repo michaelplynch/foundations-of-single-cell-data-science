@@ -19,6 +19,24 @@ Below, a demo multi-sample dataset is loaded, containing single-cell
 data from 8 matched lupus patients before and after IFN stimulation,
 which can be used for self-directed learning.
 
+### Learning goal
+
+Using [OSCA](https://bioconductor.org/books/release/OSCA.multisample/)
+multi-sample chapter as a reference, adapt and extend the single-sample
+workflow to data with multiple donors and conditions.
+
+### Learning objectives
+
+By working through this notebook you should be able to:
+
+1.  Describe the structure of a multi-sample, multi-condition experiment
+    (donors, conditions and how they are paired).
+2.  Adapt QC and clustering to multiple samples, and check for donor or
+    batch effects.
+3.  Explain why donors, not individual cells, are the unit of
+    replication when comparing conditions, and outline a pseudobulk
+    differential expression approach.
+
 ### Data loading
 
 Data used are from Kang HM, et al. (2018). Multiplexed droplet

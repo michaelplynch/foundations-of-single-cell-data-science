@@ -73,8 +73,33 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
     
     
 <div class="section level2">
-<h2 id="single-cell-rna-seq">Single-cell RNA-seq<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq"></a>
+<h2 id="single-cell-rna-seq-background">Single-cell RNA-seq background<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq-background"></a>
 </h2>
+<div class="section level3">
+<h3 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
+</h3>
+<p>Understand what single-cell RNA-seq data represents, how it is
+generated, and how that shapes the way we analyse it.</p>
+</div>
+<div class="section level3">
+<h3 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h3>
+<p>By the end of this notebook you should be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Describe what a gene-by-cell count matrix represents, and explain
+why the counts are relative rather than absolute measurements.</li>
+<li>Outline the main steps of droplet-based data generation: cell
+capture, cell barcodes, UMIs, sequencing, alignment and counting.</li>
+<li>Identify common technical artefacts (empty droplets, doublets,
+ambient RNA, stressed or dying cells) and predict how each might show up
+in the data.</li>
+<li>Sketch an analysis and validation plan for a new dataset before
+writing any code.</li>
+</ol>
+</div>
+<div class="section level3">
+<h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
+</h3>
 <ul>
 <li>Single-cell data, as the name suggests, is RNA (gene expression)
 measured at the level of single cells.</li>
@@ -89,9 +114,9 @@ at a moment in time.</li>
 structure.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="data-generation">Data generation<a class="anchor" aria-label="anchor" href="#data-generation"></a>
-</h2>
+<div class="section level3">
+<h3 id="data-generation">Data generation<a class="anchor" aria-label="anchor" href="#data-generation"></a>
+</h3>
 <ul>
 <li>Single cells are isolated from a tissue or blood sample, often using
 a microfluidics platform such as the 10x Genomics Chromium system.</li>
@@ -125,9 +150,9 @@ RNA extracted from single cells can be measured and analysed.
 </p>
 </div>
 </div>
-<div class="section level2">
-<h2 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
-</h2>
+<div class="section level3">
+<h3 id="exercise">Exercise<a class="anchor" aria-label="anchor" href="#exercise"></a>
+</h3>
 <p>Before diving into the hands-on coding, let’s consider</p>
 <ul>
 <li>what might exploratory data analysis look like?</li>
@@ -139,6 +164,7 @@ RNA extracted from single cells can be measured and analysed.
 <li>Analysis plan.</li>
 <li>Validation plan.</li>
 </ul>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

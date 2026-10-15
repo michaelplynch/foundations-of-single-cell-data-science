@@ -1,6 +1,24 @@
 # Bioconductor Ecosystem and the SingleCellExperiment Object
 
-## Bioconductor
+## Bioconductor ecosystem and objects
+
+## Learning goal
+
+Navigate the Bioconductor ecosystem and work confidently with the
+SingleCellExperiment object.
+
+## Learning objectives
+
+By the end of this notebook you should be able to:
+
+1.  Explain why Bioconductor uses shared data structures, and how its
+    packages are installed and versioned.
+2.  Load a public single-cell dataset from a Bioconductor data package.
+3.  Access and subset the main parts of a SingleCellExperiment: assays,
+    `colData`, `rowData`, `reducedDims` and `altExps`.
+4.  Store a transformation of the data (normalised counts) alongside the
+    raw counts, and explain why both are kept.
+5.  Summarise the count matrix, for example library sizes and sparsity.
 
 [Bioconductor](https://www.bioconductor.org/) is a project which aims to
 develop and share open-source software for precise and repeatable
@@ -294,7 +312,7 @@ sessionInfo()
 #> [10] KEGGREST_1.52.2      RSQLite_3.53.3       magrittr_2.0.5      
 #> [13] compiler_4.6.1       rlang_1.3.0          sass_0.4.10         
 #> [16] tools_4.6.1          yaml_2.3.12          knitr_1.52          
-#> [19] htmlwidgets_1.6.4    bit_4.6.0            curl_8.0.0          
+#> [19] htmlwidgets_1.6.4    bit_4.6.0            curl_8.1.0          
 #> [22] withr_3.0.3          purrr_1.2.2          desc_1.4.3          
 #> [25] grid_4.6.1           ExperimentHub_3.2.2  beachmat_2.28.0     
 #> [28] Rhdf5lib_2.0.0       cli_3.6.6            crayon_1.5.3        

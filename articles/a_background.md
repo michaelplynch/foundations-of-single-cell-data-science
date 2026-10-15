@@ -1,6 +1,27 @@
 # scRNA-seq background
 
-## Single-cell RNA-seq
+## Single-cell RNA-seq background
+
+### Learning goal
+
+Understand what single-cell RNA-seq data represents, how it is
+generated, and how that shapes the way we analyse it.
+
+### Learning objectives
+
+By the end of this notebook you should be able to:
+
+1.  Describe what a gene-by-cell count matrix represents, and explain
+    why the counts are relative rather than absolute measurements.
+2.  Outline the main steps of droplet-based data generation: cell
+    capture, cell barcodes, UMIs, sequencing, alignment and counting.
+3.  Identify common technical artefacts (empty droplets, doublets,
+    ambient RNA, stressed or dying cells) and predict how each might
+    show up in the data.
+4.  Sketch an analysis and validation plan for a new dataset before
+    writing any code.
+
+### Background
 
 - Single-cell data, as the name suggests, is RNA (gene expression)
   measured at the level of single cells.
@@ -14,7 +35,7 @@
 - Cells differentiate and specialise, meaning they have a hierarchical
   structure.
 
-## Data generation
+### Data generation
 
 - Single cells are isolated from a tissue or blood sample, often using a
   microfluidics platform such as the 10x Genomics Chromium system.
@@ -49,7 +70,7 @@ analysis.](images/single_cell_data.png)
 
 RNA extracted from single cells can be measured and analysed.
 
-## Exercise
+### Exercise
 
 Before diving into the hands-on coding, let’s consider
 

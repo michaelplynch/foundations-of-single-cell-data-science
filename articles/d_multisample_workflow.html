@@ -87,6 +87,27 @@ process is well described in <a href="https://bioconductor.org/books/release/OSC
 data from 8 matched lupus patients before and after IFN stimulation,
 which can be used for self-directed learning.</p>
 <div class="section level3">
+<h3 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
+</h3>
+<p>Using <a href="https://bioconductor.org/books/release/OSCA.multisample/" class="external-link">OSCA</a>
+multi-sample chapter as a reference, adapt and extend the single-sample
+workflow to data with multiple donors and conditions.</p>
+</div>
+<div class="section level3">
+<h3 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h3>
+<p>By working through this notebook you should be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Describe the structure of a multi-sample, multi-condition experiment
+(donors, conditions and how they are paired).</li>
+<li>Adapt QC and clustering to multiple samples, and check for donor or
+batch effects.</li>
+<li>Explain why donors, not individual cells, are the unit of
+replication when comparing conditions, and outline a pseudobulk
+differential expression approach.</li>
+</ol>
+</div>
+<div class="section level3">
 <h3 id="data-loading">Data loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
 </h3>
 <p>Data used are from Kang HM, et al. (2018). Multiplexed droplet

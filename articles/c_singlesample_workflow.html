@@ -83,6 +83,31 @@ Limerick<br><a class="author_email" href="mailto:#"></a><a href="mailto:michael.
 <h2 id="single-cell-rna-seq-in-bioconductor">Single-cell RNA-seq in Bioconductor<a class="anchor" aria-label="anchor" href="#single-cell-rna-seq-in-bioconductor"></a>
 </h2>
 <div class="section level3">
+<h3 id="learning-goal">Learning goal<a class="anchor" aria-label="anchor" href="#learning-goal"></a>
+</h3>
+<p>Carry out a minimal single-sample scRNA-seq analysis, and critically
+evaluate the choices made along the way.</p>
+</div>
+<div class="section level3">
+<h3 id="learning-objectives">Learning objectives<a class="anchor" aria-label="anchor" href="#learning-objectives"></a>
+</h3>
+<p>By the end of this notebook you should be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Harmonise gene identifiers and resolve duplicated gene symbols.</li>
+<li>Calculate per-cell QC metrics, apply data-driven (MAD-based) and
+manual thresholds, and justify the cells removed.</li>
+<li>Explain the purpose of normalisation, feature selection and
+dimension reduction, and interpret a t-SNE plot with appropriate
+caution.</li>
+<li>Cluster cells using two methods (graph-based and k-means) and
+quantify their agreement with the adjusted Rand index.</li>
+<li>Annotate clusters using marker genes and signature scoring, and
+compare the annotations with the clusters.</li>
+<li>Identify the assumptions and parameter choices that affect the
+results, and suggest how to validate them.</li>
+</ol>
+</div>
+<div class="section level3">
 <h3 id="data-loading">Data Loading<a class="anchor" aria-label="anchor" href="#data-loading"></a>
 </h3>
 <p>We begin by loading in a public dataset from the TENxPBMCData
@@ -246,7 +271,9 @@ transformation compresses the data and prevents highly expressed genes
 from dominating downstream analysis.</p>
 <p>PCA is a linear transformation, TSNE (t-distributed stochastic
 neighbour embedding) (and UMAP, not shown) is non-linear, and use mostly
-for visualising.</p>
+for visualisation.</p>
+<p>TSNE and UMAP are non-linear embeddings, so distances between, and
+locations of, cells should be interpreted with caution.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">sce</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/scrapper/man/normalizeRnaCounts.se.html" class="external-link">normalizeRnaCounts.se</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
@@ -552,7 +579,7 @@ directly and indirectly?).</li>
 <span><span class="co">#&gt; [34] R6_2.6.1             bslib_0.12.0         RColorBrewer_1.1-3  </span></span>
 <span><span class="co">#&gt; [37] jquerylib_0.1.4      Rcpp_1.1.2           bookdown_0.48       </span></span>
 <span><span class="co">#&gt; [40] knitr_1.52           tidyselect_1.2.1     yaml_2.3.12         </span></span>
-<span><span class="co">#&gt; [43] viridis_0.6.5        codetools_0.2-20     curl_8.0.0          </span></span>
+<span><span class="co">#&gt; [43] viridis_0.6.5        codetools_0.2-20     curl_8.1.0          </span></span>
 <span><span class="co">#&gt; [46] lattice_0.22-9       tibble_3.3.1         KEGGREST_1.52.2     </span></span>
 <span><span class="co">#&gt; [49] withr_3.0.3          S7_0.2.2             evaluate_1.0.5      </span></span>
 <span><span class="co">#&gt; [52] desc_1.4.3           BiocFileCache_3.2.0  Biostrings_2.80.2   </span></span>

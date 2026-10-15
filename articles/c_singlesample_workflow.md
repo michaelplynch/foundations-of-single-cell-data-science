@@ -12,6 +12,28 @@ library(mclust)
 
 ## Single-cell RNA-seq in Bioconductor
 
+### Learning goal
+
+Carry out a minimal single-sample scRNA-seq analysis, and critically
+evaluate the choices made along the way.
+
+### Learning objectives
+
+By the end of this notebook you should be able to:
+
+1.  Harmonise gene identifiers and resolve duplicated gene symbols.
+2.  Calculate per-cell QC metrics, apply data-driven (MAD-based) and
+    manual thresholds, and justify the cells removed.
+3.  Explain the purpose of normalisation, feature selection and
+    dimension reduction, and interpret a t-SNE plot with appropriate
+    caution.
+4.  Cluster cells using two methods (graph-based and k-means) and
+    quantify their agreement with the adjusted Rand index.
+5.  Annotate clusters using marker genes and signature scoring, and
+    compare the annotations with the clusters.
+6.  Identify the assumptions and parameter choices that affect the
+    results, and suggest how to validate them.
+
 ### Data Loading
 
 We begin by loading in a public dataset from the TENxPBMCData
@@ -209,7 +231,10 @@ downstream analysis.
 
 PCA is a linear transformation, TSNE (t-distributed stochastic neighbour
 embedding) (and UMAP, not shown) is non-linear, and use mostly for
-visualising.
+visualisation.
+
+TSNE and UMAP are non-linear embeddings, so distances between, and
+locations of, cells should be interpreted with caution.
 
 ``` r
 
@@ -523,7 +548,7 @@ sessionInfo()
 #> [34] R6_2.6.1             bslib_0.12.0         RColorBrewer_1.1-3  
 #> [37] jquerylib_0.1.4      Rcpp_1.1.2           bookdown_0.48       
 #> [40] knitr_1.52           tidyselect_1.2.1     yaml_2.3.12         
-#> [43] viridis_0.6.5        codetools_0.2-20     curl_8.0.0          
+#> [43] viridis_0.6.5        codetools_0.2-20     curl_8.1.0          
 #> [46] lattice_0.22-9       tibble_3.3.1         KEGGREST_1.52.2     
 #> [49] withr_3.0.3          S7_0.2.2             evaluate_1.0.5      
 #> [52] desc_1.4.3           BiocFileCache_3.2.0  Biostrings_2.80.2   
