@@ -55,11 +55,11 @@ options(repos = BiocManager::repositories(version="3.23"))
 install.packages(c('remotes','usethis'))
 
 ## install workshop package (takes care of dependencies)
-remotes::install_github("michaelplynch/foundations-of-single-cell-data-science@1.0.0",dependencies=TRUE, upgrade='always')
+remotes::install_github("michaelplynch/foundations-of-single-cell-data-science@1.0.1",dependencies=TRUE, upgrade='always')
 
 ## Course notebooks (same release); answer the prompts, notebooks are in vignettes/
 usethis::use_course(
-  "https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/1.0.0.zip",
+  "https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/1.0.1.zip",
   destdir = "~"
 )
 
@@ -82,7 +82,7 @@ Instead of installing packages locally, you can use the pre-built container. You
 [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
 
 ```bash
-docker run --rm -p 8787:8787 -e PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:1.0.0
+docker run --rm -p 8787:8787 -e PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:1.0.1
 ```
 
 Then open http://localhost:8787 in your browser and log in with username `rstudio` and password `bioc`.
