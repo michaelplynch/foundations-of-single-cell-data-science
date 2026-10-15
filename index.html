@@ -155,7 +155,7 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"michaelplynch/foundations-of-single-cell-data-science@1.0.0"</span>,dependencies<span class="op">=</span><span class="cn">TRUE</span>, upgrade<span class="op">=</span><span class="st">'always'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Course notebooks (same release); answer the prompts, notebooks are in vignettes/</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/usethis/man/zip-utils.html" class="external-link">use_course</a></span><span class="op">(</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/zip-utils.html" class="external-link">use_course</a></span><span class="op">(</span></span>
 <span>  <span class="st">"https://github.com/michaelplynch/foundations-of-single-cell-data-science/archive/refs/tags/1.0.0.zip"</span>,</span>
 <span>  destdir <span class="op">=</span> <span class="st">"~"</span></span>
 <span><span class="op">)</span></span>
@@ -172,7 +172,7 @@
 <h3 id="running-with-docker-alternative-to-a-local-install">Running with Docker (alternative to a local install)<a class="anchor" aria-label="anchor" href="#running-with-docker-alternative-to-a-local-install"></a>
 </h3>
 <p>Instead of installing packages locally, you can use the pre-built container. You’ll need <a href="https://www.docker.com/products/docker-desktop/" class="external-link">Docker Desktop</a> installed and running.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:latest</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:1.0.0</span></code></pre></div>
 <p>Then open <a href="http://localhost:8787" class="external-link uri">http://localhost:8787</a> in your browser and log in with username <code>rstudio</code> and password <code>bioc</code>. The notebooks are in the <code>vignettes/</code> folder.</p>
 <ul>
 <li>

@@ -89,7 +89,7 @@ Desktop](https://www.docker.com/products/docker-desktop/) installed and
 running.
 
 ``` bash
-docker run --rm -p 8787:8787 -e PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:latest
+docker run --rm -p 8787:8787 -e PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:1.0.0
 ```
 
 Then open <http://localhost:8787> in your browser and log in with
