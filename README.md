@@ -37,8 +37,23 @@ An emphasis will be placed on the how and why, not just the what, of each step.
 
 Rendered pkgdown website available here: https://michaelplynch.github.io/foundations-of-single-cell-data-science/
 
-The workshop can be installed locally using the below commands, from a fresh R session.
+### Option 1: Use Orchestra in your browser
 
+You can run this workshop in your browser, with the required packages
+and data already installed. You will need a Google account.
+
+1. Go to [Orchestra workshop templates](https://app.orchestraplatform.org/templates)
+   and sign in with your Google account.
+2. Find **Foundations of Data Science CRT Bioconductor Single-cell**.
+3. Click **Launch** to start your session, or **Connect** if you
+   already have a session running.
+
+If you use Orchestra, you can skip the local installation and Docker
+instructions below.
+
+### Option 2: Install locally
+
+The workshop can be installed locally using the below commands, from a fresh R session.
 
 ```r
 
@@ -76,7 +91,7 @@ message("Setup complete - see you at the workshop!")
 Tested on Bioconductor 3.23 and R Version 4.6.x.
 
 
-### Running with Docker (alternative to a local install)
+### Option 3: Use Docker
 
 Instead of installing packages locally, you can use the pre-built container. You'll need
 [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running.
