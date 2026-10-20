@@ -328,5 +328,5 @@ sessionInfo()
 #> [58] httr2_1.3.0          textshaping_1.0.5    evaluate_1.0.5      
 #> [61] lattice_0.22-9       AnnotationHub_4.2.2  png_0.1-9           
 #> [64] memoise_2.0.1        bslib_0.12.0         Rcpp_1.1.2          
-#> [67] xfun_0.61            fs_2.1.0             pkgconfig_2.0.3
+#> [67] xfun_0.62            fs_2.1.0             pkgconfig_2.0.3
 ```

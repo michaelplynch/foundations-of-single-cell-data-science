@@ -136,6 +136,20 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Rendered pkgdown website available here: <a href="https://michaelplynch.github.io/foundations-of-single-cell-data-science/" class="uri">https://michaelplynch.github.io/foundations-of-single-cell-data-science/</a></p>
+<div class="section level3">
+<h3 id="option-1-use-orchestra-in-your-browser">Option 1: Use Orchestra in your browser<a class="anchor" aria-label="anchor" href="#option-1-use-orchestra-in-your-browser"></a>
+</h3>
+<p>You can run this workshop in your browser, with the required packages and data already installed. You will need a Google account.</p>
+<ol style="list-style-type: decimal">
+<li>Go to <a href="https://app.orchestraplatform.org/templates" class="external-link">Orchestra workshop templates</a> and sign in with your Google account.</li>
+<li>Find <strong>Foundations of Data Science CRT Bioconductor Single-cell</strong>.</li>
+<li>Click <strong>Launch</strong> to start your session, or <strong>Connect</strong> if you already have a session running.</li>
+</ol>
+<p>If you use Orchestra, you can skip the local installation and Docker instructions below.</p>
+</div>
+<div class="section level3">
+<h3 id="option-2-install-locally">Option 2: Install locally<a class="anchor" aria-label="anchor" href="#option-2-install-locally"></a>
+</h3>
 <p>The workshop can be installed locally using the below commands, from a fresh R session.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -168,8 +182,9 @@
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/valid.html" class="external-link">valid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Setup complete - see you at the workshop!"</span><span class="op">)</span></span></code></pre></div>
 <p>Tested on Bioconductor 3.23 and R Version 4.6.x.</p>
+</div>
 <div class="section level3">
-<h3 id="running-with-docker-alternative-to-a-local-install">Running with Docker (alternative to a local install)<a class="anchor" aria-label="anchor" href="#running-with-docker-alternative-to-a-local-install"></a>
+<h3 id="option-3-use-docker">Option 3: Use Docker<a class="anchor" aria-label="anchor" href="#option-3-use-docker"></a>
 </h3>
 <p>Instead of installing packages locally, you can use the pre-built container. You’ll need <a href="https://www.docker.com/products/docker-desktop/" class="external-link">Docker Desktop</a> installed and running.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> PASSWORD=bioc ghcr.io/michaelplynch/foundations-of-single-cell-data-science:1.0.1</span></code></pre></div>

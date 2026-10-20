@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/michaelplynch/foundations-of-single-cell-data-science/blob/1.0.1/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/michaelplynch/foundations-of-single-cell-data-science/blob/devel/DESCRIPTION)
 
 Lynch M (2026). *foundationsSCDS: Single-cell & Bioconductor Workshop
 repo for Foundations of Data Science CRT*. R package version 1.0.1,
